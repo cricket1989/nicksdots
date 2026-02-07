@@ -1,0 +1,22 @@
+# Sensitive files
+*_history
+*.log
+*.swp
+*.swo
+*~
+
+# SSH keys and secrets
+*.pem
+*.key
+id_*
+known_hosts
+
+# Vim temporary files
+.netrwhist
+
+# macOS
+.DS_Store
+
+# Backup files
+*.backup
+*.bak
