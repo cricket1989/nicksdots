@@ -1,0 +1,37 @@
+MenuBar=Disabled
+
+[General]
+OpenNewTabAfterLastTab=true
+ShowFullPath=true
+Version=202
+ViewPropsTimestamp=2026,1,18,20,58,14.604
+
+[IconsMode]
+PreviewSize=48
+
+[KFileDialog Settings]
+Places Icons Auto-resize=true
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[MainWindow][Toolbar mainToolBar]
+IconSize=16
+ToolButtonStyle=IconOnly
+
+[PlacesPanel]
+IconSize=-1
+
+[PreviewSettings]
+Plugins=ffmpegthumbnailer,appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,glycin-svg,svgthumbnail
+
+[Search]
+Location=Everywhere
+
+[Toolbar mainToolBar]
+IconSize=16
+ToolButtonStyle=IconOnly
+
+[UiSettings]
+ColorScheme=DankMatugen

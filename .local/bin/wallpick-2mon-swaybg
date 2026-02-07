@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Change these to your real outputs
+MON1="DP-3"
+MON2="DP-2"
+
+WALLDIR="$HOME/Pictures/Wallpapers"
+THEME="fullscreen-preview.rasi"
+
+# Kill any existing swaybg so the new ones take over cleanly
+pkill -x swaybg 2>/dev/null || true
+
+pick_for_output() {
+  local IMAGE="$1"
+
+  PREVIEW=true rofi \
+    -theme "$THEME" \
+    -show filebrowser \
+    -filebrowser-directory "$WALLDIR/" \
+    -filebrowser-command "swaybg -o \"$IMAGE\" -i" \
+    >/dev/null
+
+matugen image "$1"
+}
+
+# First monitor
+pick_for_output "$MON1" || true
+
+# Second monitor right after
+pick_for_output "$MON2" || true

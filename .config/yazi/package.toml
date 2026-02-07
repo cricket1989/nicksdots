@@ -1,0 +1,94 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "d1c8baa"
+hash = "435a2af56ecfb3d05755fd5e24977d8b"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "d1c8baa"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "d1c8baa"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
+
+[[plugin.deps]]
+use = "boydaihungst/file-extra-metadata"
+rev = "116a460"
+hash = "e65cd1dea5feb9ca58c33b870ca3070"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:zoxide"
+rev = "e07bf41"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[flavor.deps]]
+use = "kalidyasin/yazi-flavors:tokyonight-night"
+rev = "fa19b40"
+hash = "648270973268682226755084692d6dfc"
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "8e6296f"
+hash = "d9da921c3bd37ba32ee27a8a7a40461f"
+
+[[flavor.deps]]
+use = "ficd0/ashen:ashen"
+rev = "02662b8"
+hash = "65b56e9ee65dd33eec62d6ca4209611b"
+
+[[flavor.deps]]
+use = "Miuzarte/synthwave84"
+rev = "865bef9"
+hash = "598126216cc2ab55f98955788f0eb3f3"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "ca61658"
+hash = "8eabb4e88096f10905a6df62cfaadbf4"
+
+[[flavor.deps]]
+use = "dangooddd/kanagawa"
+rev = "04985d1"
+hash = "c69a63981e254a3a06a11c2bf0e6af1d"
+
+[[flavor.deps]]
+use = "marcosvnmelo/kanagawa-dragon"
+rev = "4905527"
+hash = "35929fa6d7ecf291d3d39e58167e7770"
+
+[[flavor.deps]]
+use = "kmlupreti/ayu-dark"
+rev = "648a178"
+hash = "97124aae31cd2a5cae41c93f804996a5"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-dark"
+rev = "28e1977"
+hash = "bc4620db89cf55bd91906c239f8fa1a8"
+
+[[flavor.deps]]
+use = "tomer-ben-david/neon"
+rev = "50f2e60"
+hash = "d23c566ce5c46db6dd854bf75df426e6"
+
+[[flavor.deps]]
+use = "hankertrix/bluloco-yazi:bluloco-dark"
+rev = "dc47a6d"
+hash = "aaa55b7bf1fa60e9da0df36e0771b610"
+
+[[flavor.deps]]
+use = "6ruby1/eldritch"
+rev = "7b5bf34"
+hash = "d73a2192b13f0267461d5424a7f10cd1"
+
+[[flavor.deps]]
+use = "AdithyanA2005/nord"
+rev = "bdf0bd4"
+hash = "816970e00d643d3e8213b430d2148aec"

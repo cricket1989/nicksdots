@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+alacritty --class focusclock -e tty-clock -s -u -c -x -C 1   &
+PID=$!
+
+sleep 1500
+kill $PID
+notify-send "Focus session complete"

@@ -1,0 +1,33 @@
+{
+  "dankActions": {
+    "enabled": false,
+    "variants": []
+  },
+  "appShortcut": {
+    "enabled": false
+  },
+  "displaySettings": {
+    "enabled": true
+  },
+  "lyricsOnPanel": {
+    "enabled": true
+  },
+  "sessionPower": {
+    "enabled": true
+  },
+  "dankHooks": {
+    "enabled": true,
+    "wallpaperPath": ""
+  },
+  "dankHyprlandWindows": {
+    "enabled": true
+  },
+  "wallpaperDiscovery": {
+    "enabled": true,
+    "lastWallpaperUsed": "wallhaven.cc",
+    "api_unsplash": "sIkw7hbdWHwwHzcETE-Avv7_3bM49lKo5IHdTKRgobw",
+    "api_wallhavencc": "OqcUl2S4byEQhdCGYCbQ2uU0SQYWY7wJ",
+    "api_pexels": "HQnhD5ooU2q3NWLKkum65dBbjB2yzGmi2m1pskP1v1m8nDgL9m8u6Ony",
+    "downloadLocation": "/home/nick/Pictures/Wallpapers2"
+  }
+}

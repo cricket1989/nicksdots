@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MUSIC_DIR="${HOME}/Music/MPD/YouTube"
+mkdir -p "$MUSIC_DIR"
+
+# Ask for URL
+URL="$(
+  rofi -dmenu -p "YouTube URL" -i \
+    -mesg "Paste a YouTube/playlist URL and press Enter"
+)"
+
+# Cancel if empty
+[[ -z "${URL// }" ]] && exit 0
+
+notify() {
+  command -v notify-send >/dev/null 2>&1 && notify-send "yt-dlp" "$1" || true
+}
+
+notify "Starting download…"
+
+# Download best audio -> mp3, embed metadata/thumb if possible
+yt-dlp --no-mtime --embed-thumbnail --add-metadata \
+  -f bestaudio -x --audio-format opus \
+  -o "${MUSIC_DIR}/%(artist)s/%(album)s/%(title)s [%(id)s].%(ext)s" \
+  "$URL"
+
+notify "Download finished. Updating MPD…"
+
+# Update MPD database (ignore if mpc/mpd not running)
+if command -v mpc >/dev/null 2>&1; then
+  mpc update "YouTube" >/dev/null 2>&1 || true
+fi
+
+notify "Done ✅ Saved to: ${MUSIC_DIR}"

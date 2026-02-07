@@ -1,0 +1,2 @@
+2026-01-23T20:49:22 exception: Failed to open "/home/nick/.config/mpd/state": No such file or directory
+2026-01-24T14:59:11 exception: Failed to create /home/nick/.config/mpd/state: No such file or directory

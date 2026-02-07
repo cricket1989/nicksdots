@@ -1,0 +1,7 @@
+"custom/weather": {
+"format": "{text}°",
+"tooltip": true,
+"interval": 3600,
+"exec": "wttrbar --location \"Pontiac\" --fahrenheit --main-indicator FeelsLikeF",
+"return-type": "json"
+}
