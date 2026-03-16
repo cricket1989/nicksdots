@@ -1,0 +1,26 @@
+(defpoll cava_line :interval "100ms"
+  "bash -lc '~/.config/eww/scripts/cava-bars.sh | head -n 1'")
+
+(defwindow control_center
+  :monitor 0
+  :geometry (geometry :anchor "top right" :x "18px" :y "18px" :width "420px" :height "560px")
+  :stacking "fg"
+  :exclusive false
+  :focusable true
+  (cc_root))
+
+(defwidget cc_root []
+  (box :class "cc-root" :orientation "v" :space-evenly false :spacing 12
+    (box :class "cc-header" :orientation "h" :space-evenly false
+      (label :class "cc-title" :text "ORBITAL CONTROL")
+      (label :class "cc-sub" :text "SYS/COMMS/AUDIO"))
+    (box :class "cc-panel" :orientation "v" :spacing 10
+      (label :class "cc-panel-title" :text "AUDIO SPECTRUM")
+      (box :class "cc-viz-frame"
+        (label :class "cc-viz" :text cava_line)))
+    (box :class "cc-panel" :orientation "v" :spacing 10
+      (label :class "cc-panel-title" :text "QUICK TOGGLES")
+      (box :class "cc-toggles" :orientation "h" :spacing 10
+        (button :class "cc-btn" :onclick "sh -lc 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'" "MUTE")
+        (button :class "cc-btn" :onclick "sh -lc 'playerctl play-pause'" "PLAY")
+        (button :class "cc-btn" :onclick "sh -lc 'nmcli networking off || nmcli networking on'" "NET")))))

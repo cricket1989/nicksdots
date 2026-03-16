@@ -1,0 +1,15 @@
+/* Miasma */
+
+@define-color surface              #1e1f1c;
+@define-color surface_variant      #2a2c28;
+
+@define-color on_surface           #c2c2b0;
+@define-color on_surface_variant   #a5a58d;
+
+@define-color outline              #4a4c46;
+
+@define-color primary              #b7b77b;
+@define-color secondary            #8f9d6a;
+@define-color tertiary             #a69f6b;
+
+@define-color error                #c06a6a;

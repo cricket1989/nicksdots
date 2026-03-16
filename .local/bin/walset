@@ -7,12 +7,16 @@
 # -- To learn how to make something like this yourself, check out https://sane1090x.gumroad.com/l/hypraccelerator -- #
 
 # Directory containing wallpapers
-WALL_DIR="$HOME/Pictures/Wallpapers"
+WALL_DIRS=(
+  "$HOME/Pictures/walls/"
+  "$HOME/Pictures/Wallpapers/"
+  "$HOME/Pictures/Wall/"
+)
 
 # Current directory (to cd back to)
 CWD="$(pwd)"
 
-cd "$WALL_DIR" || exit 1
+cd "${WALL_DIRS[0]}" || exit 1
 
 # Handle spaces in filenames
 IFS=$'\n'

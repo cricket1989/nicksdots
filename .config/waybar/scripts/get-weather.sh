@@ -3,7 +3,7 @@
 # weather info from wttr. https://github.com/chubin/wttr.in
 # Remember to add city
 
-city=Detroit
+city=Pontiac
 cachedir=~/.cache/rbn
 cachefile=${0##*/}-$1
 
@@ -34,7 +34,7 @@ weather=($(cat $cachedir/$cachefile))
 IFS=$SAVEIFS
 
 #temperature=$(echo ${weather[2]} | sed -E 's/([[:digit:]])\.\./\1 to /g')
-temperature=$(curl -s "https://wttr.in/${Detroit}?format=%t" | sed 's/+//')
+temperature=$(curl -s "https://wttr.in/${Pontiac}?format=%t" | sed 's/+//')
 
 #echo ${weather[1]##*,}
 

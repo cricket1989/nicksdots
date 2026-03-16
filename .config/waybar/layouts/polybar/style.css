@@ -1,0 +1,95 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  border: none;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(0,0,0,0); /* transparent base for blur */
+}
+
+/* Forest palette (tweak if you want) */
+@define-color base rgba(15,21,23,0.88);
+@define-color a    rgba(20, 32, 24, 0.70);
+@define-color b    rgba(24, 44, 30, 0.75);
+@define-color c    rgba(32, 58, 38, 0.78);
+@define-color d    rgba(40, 72, 46, 0.80);
+@define-color text #DCE7D6;
+@define-color dim  #A9B7A5;
+@define-color glow rgba(122, 184, 112, 0.30);
+@define-color line rgba(122, 184, 112, 0.95);
+
+/* Outer “floating pill” containers */
+.modules-left, .modules-center, .modules-right {
+  background: @base;
+  border-radius: 16px;
+  padding: 6px 10px;
+  margin: 6px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Segment blocks */
+#custom-launcher { background: @a; color: @text; padding: 6px 12px; border-radius: 12px; margin-right: 6px; transition: 180ms ease; }
+
+#workspaces { background: @b; padding: 2px 6px; border-radius: 12px; margin: 0 6px; }
+#network    { background: @c; color: @text; padding: 6px 10px; border-radius: 12px; margin: 0 6px; transition: 180ms ease; }
+
+#cpu        { background: @a; color: @text; padding: 6px 10px; border-radius: 12px; margin: 0 6px; transition: 180ms ease; }
+#memory     { background: @b; color: @text; padding: 6px 10px; border-radius: 12px; margin: 0 6px; transition: 180ms ease; }
+#pulseaudio { background: @c; color: @text; padding: 6px 10px; border-radius: 12px; margin: 0 6px; transition: 180ms ease; }
+#battery    { background: @d; color: @text; padding: 6px 10px; border-radius: 12px; margin: 0 6px; transition: 180ms ease; }
+#tray       { background: @b; padding: 6px 10px; border-radius: 12px; margin: 0 6px; }
+#clock      { background: @a; color: @text; padding: 6px 10px; border-radius: 12px; margin-left: 6px; }
+
+/* Hover glow */
+#custom-launcher:hover, #network:hover, #cpu:hover, #memory:hover, #pulseaudio:hover, #battery:hover, #clock:hover {
+  box-shadow: 0 0 0 2px @glow, 0 10px 24px rgba(0,0,0,0.35);
+ 
+}
+
+/* Workspaces: underline active */
+#workspaces button {
+  background: transparent;
+  color: @dim;
+  padding: 6px 10px;
+  margin: 0 4px;
+  border-radius: 10px;
+  transition: 160ms ease;
+}
+#workspaces button.active {
+  color: @text;
+  background: rgba(0,0,0,0.12);
+  box-shadow: inset 0 -3px 0 0 @line;
+}
+#workspaces button:hover {
+  background: rgba(122, 184, 112, 0.12);
+  color: @text;
+}
+
+/* Powerline separators — color them to “flow” between segment backgrounds */
+#custom-sep1 { color: @b; margin: 0 2px; } /* launcher(a) -> workspaces(b) */
+#custom-sep2 { color: @c; margin: 0 2px; } /* workspaces(b) -> network(c) */
+#custom-sep3 { color: @b; margin: 0 2px; } /* cpu(a) -> memory(b) */
+#custom-sep4 { color: @c; margin: 0 2px; } /* memory(b) -> volume(c) */
+#custom-sep5 { color: @d; margin: 0 2px; } /* volume(c) -> battery(d) */
+#custom-sep6 { color: @b; margin: 0 2px; } /* battery(d) -> tray(b) */
+
+/* Center MPD block: two-line + progress */
+#custom-mpd {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 12px;
+  color: @text;
+  border-radius: 12px;
+}
+#custom-mpd * {
+  font-size: 12px;
+}
+
+#custom-launcher:hover, #network:hover, #cpu:hover, #memory:hover, #pulseaudio:hover, #battery:hover, #clock:hover {
+  box-shadow: 0 0 0 2px rgba(122, 184, 112, 0.30), 0 10px 24px rgba(0,0,0,0.35);
+}
+#custom-mpd:hover {
+  box-shadow: 0 0 0 2px rgba(122, 184, 112, 0.30), 0 10px 24px rgba(0,0,0,0.35);
+}

@@ -1,0 +1,18 @@
+/* Base */
+@define-color bar_bg #000000;
+@define-color fg     #e5e5e5;
+@define-color dim    #8a8a8a;
+
+/* Segment backgrounds (edit these to “tighten” the look) */
+@define-color segA #0f1712; /* launcher / cpu / clock */
+@define-color segB #142016; /* workspaces / memory / tray */
+@define-color segC #1a2b1c; /* network / volume */
+@define-color segD #214028; /* battery */
+
+/* Accents */
+@define-color accent  #7ab870; /* forest green */
+@define-color accent2 #4aa07a; /* teal-green */
+
+/* Active workspace */
+@define-color active_fg @accent;
+@define-color active_underline @accent;

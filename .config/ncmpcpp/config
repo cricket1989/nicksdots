@@ -12,14 +12,14 @@
 ## ncmpcpp.
 ##
 #
-#ncmpcpp_directory = ~/.config/ncmpcpp
+ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-#lyrics_directory = ~/.lyrics
+lyrics_directory = ~/.lyrics
 #
 ##### connection settings #####
 #
@@ -36,6 +36,9 @@
 #mpd_music_dir = ~/music
 #
 #mpd_crossfade_time = 5
+execute_on_song_change = "~/.config/ncmpcpp/cover_obs.sh"
+
+
 #
 # Exclude pattern for random song action
 # http://www.boost.org/doc/libs/1_46_1/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html
@@ -54,42 +57,50 @@
 # --- Visualizer (ncmpcpp 0.10.1) ---
 visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
-visualizer_in_stereo = "yes"
+visualizer_in_stereo = "no"
 visualizer_type = "spectrum"
 visualizer_look = "▮▮"
-visualizer_fps = "60"
+visualizer_fps = "30"
 system_encoding = "UTF-8"
 
 # --- Colors ---
 discard_colors_if_item_is_selected = "yes"
 
-header_window_color = "white"
+header_window_color = "blue"
 volume_color = "red"
-state_line_color = "green"
+state_line_color = "blue"
 state_flags_color = "red"
-main_window_color = "red"
+main_window_color = "blue"
 
 # visualizer bars
-color1 = "white"
-color2 = "red"
+color1 = "blue"
+color2 = "cyan"
 
-progressbar_color = "black"
-progressbar_elapsed_color = "white"
-statusbar_color = "white"
+progressbar_color = "white"
+progressbar_elapsed_color = "blue"
+statusbar_color = "cyan"
 
 # --- Current item highlight ---
 #current_item_color = "red"
 ##current_item_prefix = " "
-c#urrent_item_suffix = " "
+#urrent_item_suffix = " "
 
 # --- Bar / Song line ---
 song_status_format = "{%a - }{%t - }{%b}"
 progressbar_look = "▃▃▃"
 
-# --- General ---
-header_visibility = "yes"
-statusbar_visibility = "no"
-
+# --- Generql ---
+header_visibility = "no"
+statusbar_visibility = "yes"
+statusbar_time_color = "blue:b"
+#
+player_state_color = "red:b"
+#
+alternative_ui_separator_color = "black:b"
+#
+window_border_color = "white"
+#
+active_window_border = "blue"
 
 
 # Stereo ON

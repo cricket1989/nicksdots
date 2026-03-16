@@ -1,0 +1,26 @@
+#!/bin/bash
+
+case "$1" in
+github)
+    chromium --new-tab https://github.com
+    ;;
+reddit)
+    chromium --new-tab https://reddit.com
+    ;;
+youtube)
+    chromium --new-tab https://youtube.com
+    ;;
+spotify)
+    chromium --new-tab https://open.spotify.com
+    ;;
+chatgpt)
+    chromium --new-tab https://chat.openai.com
+    ;;
+mail)
+    chromium --new-tab https://mail.google.com
+    ;;
+*)
+    chromium
+    ;;
+esac
+

@@ -1,0 +1,86 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 24,
+  "margin-top":4,
+  "margin-bottom":4,
+  "margin-left": 4,
+  "margin-right": 4,
+
+  "modules-left": [
+    "custom/launcher",
+    "custom/sep_a_b",
+    "hyprland/workspaces",
+    "custom/sep_b_c",
+    "network"
+  ],
+
+  "modules-center": [
+    "custom/mpd"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "custom/sep_a_b_r",
+    "memory",
+    "custom/sep_b_c_r",
+    "pulseaudio",
+    "custom/sep_c_d_r",
+    "battery",
+    "custom/sep_d_b_r",
+    "tray",
+    "custom/sep_b_a_r",
+    "clock"
+  ],
+
+  "custom/launcher": {
+    "format": "󰣇",
+    "on-click": "rofi -show drun",
+    "tooltip": false
+  },
+
+  "custom/sep_a_b":   { "format": "", "tooltip": false },
+  "custom/sep_b_c":   { "format": "", "tooltip": false },
+  "custom/sep_a_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_c_r": { "format": "", "tooltip": false },
+  "custom/sep_c_d_r": { "format": "", "tooltip": false },
+  "custom/sep_d_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_a_r": { "format": "", "tooltip": false },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "persistent-workspaces": { "*": 5 }
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "㊙  {essid}",
+    "format-disconnected": "㊙  Offline",
+    "interval": 5
+  },
+
+  "cpu": { "format": "㊙  {usage}%", "interval": 5 },
+  "memory": { "format": "㊙  {used:0.1f}G", "interval": 5 },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "󰖁  Muted",
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+  "tray": { "spacing": 8 },
+
+  "clock": { "format": "㊙  {:%a, %d %b  %I:%M %p}" },
+
+  "custom/mpd": {
+    "exec": "~/.config/waybar/scripts/mpd.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "mpc toggle",
+    "on-click-right": "kitty -e ncmpcpp",
+    "on-scroll-up": "mpc volume +5",
+    "on-scroll-down": "mpc volume -5"
+  }
+}

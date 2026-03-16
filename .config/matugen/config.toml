@@ -1,8 +1,13 @@
 [config.wallpaper]
-command = "waypaper"
-arguments = ["--wallpaper"]
-set = false
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
 
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/colors/matugen.conf'
+post_hook = 'kill -SIGUSR1 $(pgrep kitty)'
 
 [templates.kvantum_kvconfig]
 input_path = '/home/nick/.config/matugen/templates/kvantum-colors.kvconfig'
@@ -36,17 +41,17 @@ input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors/colors.css'
 
 [templates.rofi]
-input_path = '~/.config/matugen/templates/rofi-colors.rasi'
-output_path = '~/.config/rofi/launchers/shared/matugen.rasi'
+input_path = '~/.config/matugen/templates/rofi.rasi'
+output_path = '~/.config/rofi/launchers/type-7/style-3.rasi'
+
+[templates.hyprbars]
+input_path = "~/.config/matugen/templates/hyprbars.conf"
+output_path = "~/.config/hypr/matugen/hyprbars.conf"
+post_hook = "hyprctl reload"
 
 [templates.alacritty]
 input_path = '~/.config/matugen/templates/alacritty.toml'
 output_path = '~/.config/alacritty/colors.toml'
-
-[templates.kitty]
-input_path = '~/.config/matugen/templates/kitty-colors.conf'
-output_path = '~/.config/kitty/colors.conf'
-post_hook = 'pkill -USR1 kitty 2>/dev/null || true'
 
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/matugen-gtk.css'
@@ -73,4 +78,3 @@ output_path = '~/.config/yazi/theme.toml'
 [templates.quickshell]
 input_path = '/home/nick/.config/matugen/templates/quickshell.qml'
 output_path = '~/.config/quickshell/Colors.qml'
-

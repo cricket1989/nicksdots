@@ -1,0 +1,532 @@
+@import url("/home/nick/.config/waybar/colors/matugen-waybar.css");
+/* Monokai Monster Waybar old @import url("/home/nick/.config/waybar/colors/matugen-waybar.css");*/
+
+@define-color bg0         rgba(39, 40, 34, 0.00);
+@define-color panel       rgba(39, 40, 34, 0.90);
+@define-color panel_hi    rgba(49, 51, 42, 0.96);
+@define-color panel_text  #f8f8f2;
+@define-color muted       rgba(248, 248, 242, 0.55);
+
+@define-color border      rgba(117, 113, 94, 0.65);
+@define-color stroke      rgba(248, 248, 242, 0.15);
+
+@define-color btn_bg      rgba(68, 71, 58, 0.75);
+@define-color btn_text    #f8f8f2;
+
+@define-color pink        #f92672;
+@define-color green       #a6e22e;
+@define-color yellow      #e6db74;
+@define-color orange      #fd971f;
+@define-color purple      #ae81ff;
+@define-color cyan        #66d9ef;
+@define-color red         #ff6188;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Nasalization", "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 12px;
+  min-height: 0;
+  font-weight: 700;
+}
+
+window#waybar {
+  background: @bg0;
+  color: @panel_text;
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+/* Main pill modules */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  background: @panel;
+  color: @panel_text;
+  padding: 4px 10px;
+  margin: 0 4px;
+  border-radius: 12px;
+  border: 1px solid @border;
+  box-shadow: inset 0 -2px 0 0 @stroke;
+}
+
+/* Tighter icon pills */
+#custom-os_button,
+#custom-notification,
+#custom-hypridle,
+#custom-pacman,
+#cpu,
+#pulseaudio,
+#network {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 0 2px;
+  border-radius: 10px;
+}
+
+/* Hover */
+#hyprland-workspaces:hover,
+#workspaces:hover,
+#custom-os_button:hover,
+#clock:hover,
+#custom-weather:hover,
+#custom-notification:hover,
+#custom-hypridle:hover,
+#tray:hover,
+#cpu:hover,
+#pulseaudio:hover,
+#network:hover,
+#custom-pacman:hover,
+#custom-media:hover,
+#custom-mpd:hover {
+  background: @panel_hi;
+}
+
+/* Workspace font safety */
+#hyprland-workspaces button,
+#workspaces button,
+#hyprland-workspaces,
+#workspaces {
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Noto Sans Symbols2", sans-serif;
+}
+
+/* Workspace buttons */
+#hyprland-workspaces button,
+#workspaces button {
+  padding: 4px 10px;
+  margin: 0 3px;
+  border-radius: 10px;
+  border: 1px solid rgba(248, 248, 242, 0.08);
+  background: @btn_bg;
+  color: @btn_text;
+  transition: 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: alpha(@purple, 0.22);
+  color: @purple;
+  border: 1px solid alpha(@purple, 0.75);
+  box-shadow: inset 0 -2px 0 0 @purple;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: alpha(@cyan, 0.18);
+  color: @cyan;
+  border: 1px solid alpha(@cyan, 0.70);
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  background: alpha(@pink, 0.18);
+  color: @pink;
+  border: 1px solid alpha(@pink, 0.80);
+  box-shadow: inset 0 -2px 0 0 @pink;
+}
+
+/* Loud per-module accents */
+#custom-os_button {
+  color: @orange;
+  border-color: alpha(@orange, 0.65);
+  box-shadow: inset 0 -2px 0 0 @orange;
+}
+
+#custom-notification {
+  color: @pink;
+  border-color: alpha(@pink, 0.65);
+  box-shadow: inset 0 -2px 0 0 @pink;
+}
+
+#custom-weather {
+  color: @cyan;
+  border-color: alpha(@cyan, 0.65);
+  box-shadow: inset 0 -2px 0 0 @cyan;
+}
+
+#custom-media {
+  color: @yellow;
+  border-color: alpha(@yellow, 0.60);
+  box-shadow: inset 0 -2px 0 0 @yellow;
+}
+
+#custom-mpd {
+  color: @purple;
+  border-color: alpha(@purple, 0.65);
+  box-shadow: inset 0 -2px 0 0 @purple;
+}
+
+#custom-hypridle {
+  color: @pink;
+  border-color: alpha(@pink, 0.60);
+  box-shadow: inset 0 -2px 0 0 @pink;
+}
+
+#cpu {
+  color: @green;
+  border-color: alpha(@green, 0.65);
+  box-shadow: inset 0 -2px 0 0 @green;
+}
+
+#pulseaudio {
+  color: @yellow;
+  border-color: alpha(@yellow, 0.65);
+  box-shadow: inset 0 -2px 0 0 @yellow;
+}
+
+#network {
+  color: @green;
+  border-color: alpha(@green, 0.65);
+  box-shadow: inset 0 -2px 0 0 @green;
+}
+
+#custom-pacman {
+  color: @purple;
+  border-color: alpha(@purple, 0.65);
+  box-shadow: inset 0 -2px 0 0 @purple;
+}
+
+#clock {
+  color: @orange;
+  border-color: alpha(@orange, 0.70);
+  box-shadow: inset 0 -2px 0 0 @orange;
+}
+
+/* State classes */
+#pulseaudio.muted {
+  color: @muted;
+  border-color: rgba(117, 113, 94, 0.45);
+  box-shadow: inset 0 -2px 0 0 rgba(117, 113, 94, 0.45);
+}
+
+#network.disconnected {
+  color: @red;{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 4,
+
+"modules-left": [
+  "custom/os_button",
+  "custom/media"
+],
+
+"modules-center": [
+  "custom/notification",
+  "hyprland/workspaces",
+  "custom/hypridle"
+],
+
+"modules-right": [
+  "tray",
+  "pulseaudio",
+  "network",
+  "custom/weather",
+  "cpu",
+  "custom/pacman",
+  "clock"
+]
+
+  "custom/os_button": {
+    "format": "( ⼹ )",
+    "on-click": "pkill rofi || /home/nick/.local/share/rofi/scripts/LauncherN1.sh",
+    "tooltip": false
+  },
+
+  "clock": {
+    "format": "┋ {:%R %d.%m.%Y} ┋",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffd866'><b>{}</b></span>",
+        "days": "<span color='#f92672'><b>{}</b></span>",
+        "weeks": "<span color='#66d9ef'><b>W{}</b></span>",
+        "weekdays": "<span color='#a6e22e'><b>{}</b></span>",
+        "today": "<span color='#ae81ff'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+      "on-click": "shift_up"
+    }
+  },
+
+  "custom/weather": {
+    "format": "┇ {}° ┇",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --location Rochester_Hills --fahrenheit --main-indicator FeelsLikeF",
+    "return-type": "json",
+    "on-click": "kitty --title monokai-weather -e sh -lc 'curl -s wttr.in/Rochester_Hills?0 | less -R'",
+    "on-click-right": "pkill -SIGRTMIN+8 waybar || pkill -RTMIN+8 waybar",
+    "on-click-middle": "xdg-open 'https://wttr.in/Rochester_Hills'",
+    "tooltip-format": "Left: forecast popup\nMiddle: browser forecast\nRight: refresh module"
+  },
+
+  "custom/mpd": {
+    "format": "(  🯸🯶🯸{icon} )",
+    "return-type": "json",
+    "interval": 2,
+    "exec": "~/.config/waybar/scripts/mpd-status.sh",
+    "on-click": "~/.config/waybar/scripts/mpd-toggle.sh",
+    "on-click-right": "mpc -q toggle",
+    "on-click-middle": "kitty --title mpd-now -e sh -lc 'mpc status; echo; read -n 1 -rsp \"Press any key to close...\"'",
+    "on-scroll-up": "mpc -q next",
+    "on-scroll-down": "mpc -q prev",
+    "tooltip": true
+  },
+
+  "custom/media": {
+    "return-type": "json",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/media.sh",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "tooltip": true
+  },
+
+  "custom/notification": {
+    "tooltip": true,
+    "tooltip-format": "Left: notification script\nMiddle: panel\nRight: Do Not Disturb",
+    "format": "(⼑ {})",
+    "format-icons": {
+      "notification": "<span foreground='#f92672'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='#f92672'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#f92672'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#f92672'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "/home/nick/.local/bin/notifications-toggle.sh",
+    "on-click-middle": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "all-outputs": false,
+    "disable-scroll": false,
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "󰙯",
+      "6": "󰎄",
+      "7": "󰋩",
+      "8": "󰊠",
+      "9": "󰭹",
+      "urgent": "",
+      "default": "󰮯"
+    },
+    "on-click": "activate",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "on-scroll-up": "hyprctl dispatch workspace e-1"
+  },
+
+  "custom/hypridle": {
+    "format": "(🡅{} )",
+    "return-type": "json",
+    "interval": 2,
+    "exec": "bash ~/.config/waybar/scripts/hypridle-status.sh",
+    "on-click": "bash ~/.config/waybar/scripts/hypridle-toggle.sh",
+    "on-click-right": "kitty --title hypridle-status -e systemctl --user status hypridle --no-pager -l",
+    "tooltip": true
+  },
+
+  "custom/pacman": {
+    "format": "(🡇 {})",
+    "interval": 900,
+    "exec": "bash -lc 'checkupdates 2>/dev/null | wc -l || echo 0'",
+    "on-click": "/home/nick/.local/bin/update-system",
+    "on-click-right": "kitty --title pacman-updates -e bash -lc 'checkupdates 2>/dev/null || true; echo; read -n 1 -rsp \"Press any key to close...\"'",
+    "tooltip-format": "{} updates available"
+  },
+
+  "cpu": {
+    "format": "(ᚸ {usage}% )",
+    "interval": 2,
+    "tooltip": true,
+    "on-click": "kitty --title btop -e btop"
+  },
+
+  "pulseaudio": {
+    "format": "({icon}  {volume}%)",
+    "format-bluetooth": "(󰂱  {volume}%)",
+    "format-muted": "(󰖁 mute)",
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-middle": "kitty --title audio-status -e sh -lc 'wpctl status; echo; read -n 1 -rsp \"Press any key to close...\"'",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "┋ {icon} {essid} ({signalStrength}%) ┋",
+    "format-ethernet": "┋  {ipaddr} ┋",
+    "format-linked": "┋ 󰈀 {ifname} ┋",
+    "format-disconnected": "┋ 󰌙 offline ┋",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}\nGateway: {gwaddr}",
+    "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}/{cidr}\nGateway: {gwaddr}",
+    "tooltip-format-disconnected": "No network connection",
+    "on-click": "kitty --title nmtui -e nmtui",
+    "on-click-right": "nm-connection-editor",
+    "on-click-middle": "nmcli device wifi rescan"
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 4
+  }
+}
+  border-color: alpha(@red, 0.70);
+  box-shadow: inset 0 -2px 0 0 @red;
+}
+
+#custom-mpd.on  { color: @green; }
+#custom-mpd.off { color: @muted; }
+
+#custom-media.playing { color: @yellow; }
+#custom-media.paused  { color: @panel_text; }
+#custom-media.stopped { color: @muted; }
+
+#tray {
+  letter-spacing: 0.5px;
+}
+
+#tray > .item {
+  padding: 0 4px;
+}
+
+label.module {
+  letter-spacing: 1.8px;
+}
+
+#clock {
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+tooltip {
+  background: rgba(39, 40, 34, 0.96);
+  color: @panel_text;
+  border: 1px solid @border;
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+tooltip label {
+  color: @panel_text;
+  letter-spacing: 0.3px;
+}
+/* =================================================
+   Layout rebalance + hard slab fix
+   ================================================= */
+
+#custom-weather,
+#cpu,
+#custom-pacman,
+#network,
+#pulseaudio,
+#clock,
+#custom-media,
+#custom-notification,
+#custom-hypridle,
+#custom-os_button,
+#custom-mpd,
+#tray,
+#hyprland-workspaces,
+#workspaces {
+  background-color: @panel;
+  background-image: none;
+  opacity: 1;
+  border: 1px solid @border;
+}
+
+#custom-weather,
+#cpu,
+#custom-pacman {
+  background-color: rgba(39, 40, 34, 0.94);
+}
+
+#custom-weather {
+  color: @cyan;
+  border-color: alpha(@cyan, 0.65);
+  box-shadow: inset 0 -2px 0 0 @cyan;
+}
+
+#cpu {
+  color: @green;
+  border-color: alpha(@green, 0.65);
+  box-shadow: inset 0 -2px 0 0 @green;
+}
+
+#custom-pacman {
+  color: @purple;
+  border-color: alpha(@purple, 0.65);
+  box-shadow: inset 0 -2px 0 0 @purple;
+}
+
+/* denser spacing */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  padding: 4px 10px;
+  margin: 0 2px;
+}

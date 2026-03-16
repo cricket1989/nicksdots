@@ -1,0 +1,88 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "margin-top": 8,
+  "margin-left": 12,
+  "margin-right": 12,
+
+  "modules-left": [
+    "custom/launcher",
+    "custom/sep_a_b",
+    "hyprland/workspaces",
+    "custom/sep_b_c",
+    "network"
+  ],
+
+  "modules-center": [
+    "custom/mpd"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "custom/sep_a_b_r",
+    "memory",
+    "custom/sep_b_c_r",
+    "pulseaudio",
+    "custom/sep_c_d_r",
+    "battery",
+    "custom/sep_d_b_r",
+    "tray",
+    "custom/sep_b_a_r",
+    "clock"
+  ],
+
+  "custom/launcher": {
+    "format": "󰣇",
+    "on-click": "pkill rofi || rofi -show drun -theme /home/nick/.local/share/rofi/themes/futuristic/style.rasi",
+    "tooltip": false
+  },
+
+  "custom/sep_a_b":   { "format": "", "tooltip": false },
+  "custom/sep_b_c":   { "format": "", "tooltip": false },
+  "custom/sep_a_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_c_r": { "format": "", "tooltip": false },
+  "custom/sep_c_d_r": { "format": "", "tooltip": false },
+  "custom/sep_d_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_a_r": { "format": "", "tooltip": false },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "persistent-workspaces": { "*": 10 }
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "  {essid}",
+    "format-disconnected": "󰖪  Offline",
+    "interval": 5
+  },
+
+  "cpu": { "format": "  {usage}%", "interval": 5 },
+  "memory": { "format": "󰍛  {used:0.1f}G", "interval": 5 },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "󰖁  Muted",
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+
+  "battery": { "format": "{capacity}% " },
+
+  "tray": { "spacing": 8 },
+
+  "clock": { "format": "  {:%a, %d %b  %I:%M %p}" },
+
+  "custom/mpd": {
+    "exec": "~/.config/waybar/scripts/mpd.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "mpc toggle",
+    "on-click-right": "kitty -e ncmpcpp",
+    "on-scroll-up": "mpc volume +5",
+    "on-scroll-down": "mpc volume -5"
+  }
+}

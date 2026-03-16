@@ -18,7 +18,6 @@ pick_for_output() {
     -theme "$THEME" \
     -show filebrowser \
     -filebrowser-directory "$WALLDIR/" \
-    -filebrowser-command "swaybg -o \"$IMAGE\" -i" \
     >/dev/null
 
 matugen image "$1"
@@ -27,5 +26,4 @@ matugen image "$1"
 # First monitor
 pick_for_output "$MON1" || true
 
-# Second monitor right after
-pick_for_output "$MON2" || true
+

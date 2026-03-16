@@ -1,0 +1,107 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 0,
+
+  "modules-left": [
+    "custom/launcher",
+    "custom/sep_a_b_r",
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "custom/mpd"
+  ],
+
+  "modules-right": [
+    "custom/sep_b_c_r",
+    "tray",
+    "custom/sep_b_c_r",
+
+    "pulseaudio",
+    "custom/sep_c_d_r",
+
+    "custom/bluetooth",
+    "custom/sep_d_b_r",
+
+    "custom/wttr",
+    "custom/sep_d_b_r",
+
+    "network",
+    "custom/sep_d_b_r",
+
+    "cpu",
+    "custom/sep_b_a_r",
+
+    "memory"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "persistent-workspaces": { "*": 4 }
+  },
+
+  "tray": {
+    "spacing": 8
+  },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "  muted",
+    "on-click": "pavucontrol"
+  },
+
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀  {ipaddr}",
+    "format-disconnected": "󰤮  down",
+    "tooltip": true
+  },
+
+  "cpu": {
+    "format": "  {usage}%",
+    "tooltip": true
+  },
+
+  "memory": {
+    "format": "  {percentage}%",
+    "tooltip": true
+  },
+
+  "custom/launcher": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "/home/nick/.config/rofi/scripts/launcher_t1"
+  },
+
+  "custom/mpd": {
+    "exec": "~/.config/waybar/scripts/mpd.sh",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": true
+  },
+
+  "custom/wttr": {
+    "exec": "~/.config/waybar/scripts/wttr.sh",
+    "return-type": "json",
+    "interval": 600,
+    "tooltip": true,
+    "on-click": "xdg-open 'https://wttr.in'"
+  },
+
+  "custom/bluetooth": {
+    "exec": "~/.config/waybar/scripts/bluetooth.sh",
+    "return-type": "json",
+    "interval": 5,
+    "tooltip": true,
+    "on-click": "blueman-manager"
+  },
+
+  "custom/sep_a_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_c_r": { "format": "", "tooltip": false },
+  "custom/sep_c_d_r": { "format": "", "tooltip": false },
+  "custom/sep_d_b_r": { "format": "", "tooltip": false },
+  "custom/sep_b_a_r": { "format": "", "tooltip": false }
+}

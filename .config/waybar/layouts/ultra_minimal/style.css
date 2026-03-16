@@ -1,5 +1,8 @@
+
+@import "/home/nick/.config/waybar/colors/matugen-waybar.css";
+
 * {
-  font-size: 17px;
+  font-size: 14px;
   font-family: 'SF Pro Display', 'JetBrainsMono Nerd Font Propo', sans-serif;
   font-weight: 500;
 }
@@ -9,12 +12,15 @@ window#waybar {
 }
 
 #network,
-#pulseaudio,
+#pulseaudio{
+  color: @tertiary;
+}
 #battery {
   margin: 0 25px 0 0;
 }
 
 #custom-time {
+  color: @primary_fixed_dim;
   margin-left: 25px;
   font-weight: 600;
 }
@@ -28,7 +34,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: #e8eaed;
+  background-color: @secondary;
   color: #121212;
   border-radius: 100px;
   padding: 0px 20px 0px 20px;
@@ -41,7 +47,7 @@ window#waybar {
 
 #clock {
   font-weight: 600;
-  background-color: #e8eaed;
+  background-color: @tertiary;
   color: #121212;
   padding: 2px 10px;
   margin: 4px 0 4px 0;
@@ -51,4 +57,5 @@ window#waybar {
 
 #custom-media {
   font-weight: 700;
+  color: @secondary;
 }

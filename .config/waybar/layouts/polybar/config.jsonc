@@ -1,0 +1,84 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 10,
+  "margin-left": 14,
+  "margin-right": 14,
+
+  "modules-left": [
+    "custom/launcher",
+    "custom/sep1",
+    "hyprland/workspaces",
+    "custom/sep2",
+    "network"
+  ],
+
+  "modules-center": [
+    "custom/mpd"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "custom/sep3",
+    "memory",
+    "custom/sep4",
+    "pulseaudio",
+    "custom/sep5",
+    "battery",
+    "custom/sep6",
+    "tray",
+    "clock"
+  ],
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip": false
+  },
+
+  "custom/sep1": { "format": "", "tooltip": false },
+  "custom/sep2": { "format": "", "tooltip": false },
+  "custom/sep3": { "format": "", "tooltip": false },
+  "custom/sep4": { "format": "", "tooltip": false },
+  "custom/sep5": { "format": "", "tooltip": false },
+  "custom/sep6": { "format": "", "tooltip": false },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "persistent-workspaces": { "*": 5 }
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "  {essid}",
+    "format-disconnected": "󰖪  Offline",
+    "interval": 5
+  },
+
+  "cpu": { "format": "  {usage}%", "interval": 5 },
+  "memory": { "format": "󰍛  {used:0.1f}G", "interval": 5 },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "󰖁  Muted",
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+
+  "battery": { "format": "{capacity}% " },
+
+  "tray": { "spacing": 8 },
+
+  "clock": { "format": "  {:%a %d %b  %I:%M %p}" },
+
+  "custom/mpd": {
+    "exec": "~/.local/bin/waybar-mpd.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "mpc toggle",
+    "on-click-right": "kitty -e ncmpcpp"
+  }
+}

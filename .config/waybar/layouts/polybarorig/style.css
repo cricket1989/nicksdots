@@ -1,0 +1,57 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  border: none;
+}
+
+window#waybar {
+  background: rgba(24, 19, 32, 0.88);
+  border-radius: 14px;
+  padding: 4px 10px;
+  margin: 6px 0px;
+}
+
+#custom-launcher {
+  background: rgba(42, 42, 55, 0.8);
+  padding: 6px 12px;
+  margin: 0 6px;
+  border-radius: 12px;
+  color: #7E9CD8;
+}
+
+#custom-launcher:hover {
+  background: rgba(126, 156, 216, 0.2);
+}
+
+#workspaces button {
+  background: transparent;
+  color: #7E9CD8;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+#workspaces button.active {
+  background: rgba(126, 156, 216, 0.2);
+  color: #DCD7BA;
+}
+
+#network,
+#cpu,
+#memory,
+#pulseaudio,
+#battery,
+#clock {
+  background: rgba(42, 42, 55, 0.7);
+  padding: 6px 10px;
+  margin: 0 6px;
+  border-radius: 12px;
+  color: #DCD7BA;
+}
+
+#mpd {
+  background: rgba(34, 50, 73, 0.80);
+  padding: 6px 18px;
+  border-radius: 16px;
+  color: #98BB6C;
+  font-weight: bold;
+}

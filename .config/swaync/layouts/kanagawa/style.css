@@ -1,0 +1,118 @@
+/* ─────────────────────────────────────────────
+   SwayNC — Tokyo Night Moon (80% transparent)
+   ───────────────────────────────────────────── */
+
+/* --- Palette (Tokyo Night Moon-ish) --- */
+@define-color bg0 rgba(26, 27, 38, 0.80);   /* #1a1b26 @ 80% */
+@define-color bg1 rgba(31, 35, 53, 0.80);   /* #1f2335 @ 80% */
+@define-color bg2 rgba(36, 40, 59, 0.80);   /* #24283b @ 80% */
+
+@define-color fg0 #c0caf5;
+@define-color fg1 #a9b1d6;
+@define-color muted #565f89;
+
+@define-color blue   #7aa2f7;
+@define-color cyan   #7dcfff;
+@define-color purple #bb9af7;
+@define-color green  #73daca;
+@define-color yellow #e0af68;
+@define-color red    #f7768e;
+
+@define-color border rgba(59, 66, 97, 0.65); /* #3b4261 @ 65% */
+@define-color shadow rgba(0, 0, 0, 0.35);
+
+/* --- Global --- */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Noto Color Emoji";
+  font-size: 12px;
+}
+
+/* --- Main control center container --- */
+.control-center {
+  background: @bg0;
+  color: @fg0;
+  border: 1px solid @border;
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 30px 0 @shadow;
+}
+
+/* --- Top spacing between widgets --- */
+.control-center > box {
+  spacing: 10px;
+}
+
+/* --- Title row (Notifications + clear all button) --- */
+.title {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.title label {
+  color: @fg0;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.title button {
+  background: rgba(122, 162, 247, 0.18);
+  color: @blue;
+  border: 1px solid rgba(122, 162, 247, 0.35);
+  border-radius: 12px;
+  padding: 6px 10px;
+}
+
+.title button:hover {
+  background: rgba(122, 162, 247, 0.26);
+}
+
+/* --- Label widget (your "Overwatch") --- */
+.widget-label {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.widget-label label {
+  color: @purple;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+/* --- Buttons grid container --- */
+.widget-buttons-grid {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+/* Each button */
+.widget-buttons-grid button {
+  background: rgba(36, 40, 59, 0.55);
+  border: 1px solid rgba(59, 66, 97, 0.55);
+  border-radius: 14px;
+  padding: 10px 0;
+  margin: 4px;
+  color: @fg0;
+  transition: all 140ms ease;
+}
+
+/* Hover */
+.widget-buttons-grid button:hover {
+  background: rgba(122, 162, 247, 0.20);
+  border-color: rgba(122, 162, 247, 0.40);
+  color: @blue;
+}
+
+/* “Active” / toggled feel (best-effort; depends on SwayNC build) */
+.widget-buttons-grid button:checked,
+.widget-buttons-grid button.active {
+  background: rgba(125

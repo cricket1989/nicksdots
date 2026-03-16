@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SESSION="musicdash"
+CONF="/home/nick/.config/ncmpcpp/tmux-music.conf"
+
+# If session exists, rebuild it clean
+tmux has-session -t "$SESSION" 2>/dev/null && tmux kill-session -t "$SESSION"
+
+# Create session + apply layout
+tmux new-session -d -s "$SESSION"
+tmux source-file "$CONF"
+
+# If we're already inside tmux, switch client; otherwise attach.
+if [[ -n "${TMUX-}" ]]; then
+  tmux switch-client -t "$SESSION"
+else
+  tmux attach -t "$SESSION"
+fi

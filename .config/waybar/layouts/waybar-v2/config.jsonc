@@ -1,8 +1,9 @@
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "top",
     "margin-bottom": 14,
     "modules-left": [
+        "custom/launcher",
         "cpu",
         "memory",
         "backlight"
@@ -12,25 +13,16 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "battery",
         "network",
         "pulseaudio"
     ],
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": [
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            "󰁹"
-        ]
-    },
+    "custom/launcher": {
+    "format": "󰣇",
+    "tooltip": false,
+    "on-click": "rofi -show drun",
+    "on-click-right": "rofi -show run"
+  },
+
     "clock": {
         "format-alt": "{:%a, %d. %b  %H:%M}"
     },
@@ -38,7 +30,7 @@
         "format": "{name}",
         "persistent-workspaces": {
             "*": 5, // 5 workspaces by default on every monitor
-            "HDMI-A-1": 3 // but only three on HDMI-A-1
+            "DP-2": 3 // but only three on DP-2
         }
     },
     "hyprland/window": {

@@ -1,0 +1,14 @@
+/* Kyoto Kanagawa (warm gold + plum accents) */
+@define-color background-darker rgba(22, 22, 29, 235); /* sumi ink w/ alpha */
+@define-color background rgba(31, 31, 40, 235);
+@define-color selection rgba(42, 42, 55, 235);
+
+@define-color foreground #DCD7BA; /* fuji white */
+@define-color comment    #727169;
+
+@define-color background #16161e;
+@define-color surface #1a1b26;
+@define-color foreground #c0caf5;
+@define-color primary #7aa2f7;
+@define-color secondary #bb9af7;
+@define-color outline #3b4261;

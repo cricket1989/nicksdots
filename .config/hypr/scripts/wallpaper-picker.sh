@@ -7,7 +7,7 @@ STATE_FILE="${HOME}/.cache/current-wallpaper"
 # ==========================================
 
 
-
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
 die() { notify-send "Wallpaper" "Error: $*"; exit 1; }
 info() { notify-send "Wallpaper" "$*"; }

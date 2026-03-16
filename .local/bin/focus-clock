@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alacritty --class focusclock -e tty-clock -s -t -c -x -b -B -C 1\n &
+alacritty --class focusclock -e tty-clock -s -t -c -x -b -B -C 5\n &
 PID=$!
 
 sleep 1500

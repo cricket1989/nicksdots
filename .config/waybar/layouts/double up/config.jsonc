@@ -1,0 +1,138 @@
+{
+  "layer": "top",
+  "position": "top",
+
+  "modules-left": [
+    "custom/menuApp",
+    "custom/walls",
+    "custom/switcher",
+    "custom/music",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "bluetooth",
+    "cpu",
+    "memory",
+
+    "custom/wifi",
+
+    "temperature",
+    "battery",
+    "clock",
+    "custom/power"
+  ],
+
+  // ---- NEW: WiFi that works (NetworkManager) ----
+  "custom/wifi": {
+    "format": " {icon} ",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": true,
+    "exec": "~/.config/waybar/scripts/wifi-nmcli.sh",
+    "on-click": "~/.config/kitty/wifirun.sh"
+  },
+
+  "clock": {
+    "timezone": "UniitedStates/Michigan",
+    "format": "{:%I:%M %p}",
+    "tooltip": true,
+    "tooltip-format": "{:%a %d %b}",
+    "on-click": "swaync-client -t"
+  }
+
+  // (leave the rest of your config as-is)
+}
+
+,
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "   {icon} ",
+        "format-charging": "  {icon} ",
+        "format-plugged":  "  {icon} ",
+         "tooltip-format": "{capacity}%",
+          "format-icons": [
+        
+        "", "", "", "", ""
+    ]
+    },
+    
+  "temperature": {
+    "tooltip": true,
+    "format": "{icon} ",
+    "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+     "tooltip-format": "{temperatureC}°C"
+}
+,
+    "pulseaudio": {
+         "scroll-step": 10, // %, can be a float
+        "format": "  {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+        "▁",  // 0-16%
+        "▂",  // 17-32%
+        "▃",  // 33-48%
+        "▄",  // 49-64%
+        "▅",  // 65-80%
+        "▆",  // 81-96%
+        "▇"   // 97-100%
+    ]
+        },
+                "tooltip-format": "{volume}%",
+
+        "on-click": "~/.config/alacritty/audiotop.sh"
+    },
+   
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/power.sh",
+        "format": ""
+    },
+
+    "custom/menuApp": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/launcher.sh",
+        "format": "  "
+    },
+ 
+ "custom/switcher": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/switcher.sh",
+        "format": " 󰸱  "
+    },
+    "cpu": {
+         "interval": 1,
+         "format": "{icon} ",  // overall icon, not per-core
+         "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+         
+         "on-click": "~/.config/alacritty/btmrun.sh"
+       
+    },
+   "memory": {
+    "interval": 1,
+    "format": "{icon} ",
+    "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+    "tooltip": true,
+    "tooltip-format": "{}%",
+    "on-click": "~/.config/alacritty/btmrun.sh"
+}
+,
+   "network": {
+    "format-wifi": " {icon} ",
+    "interval": 1,
+    "format-ethernet": "Ethernet",
+    "tooltip-format": "{essid} {signalStrength}%",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+    "on-click": "~/.config/alacritty/wifirun.sh"
+}
+
+
+}

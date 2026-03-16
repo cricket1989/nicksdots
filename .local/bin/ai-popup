@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+AGENT="${AGENT:-$HOME/.local/bin/sys-agent}"
+
+# If we're not inside tmux, just run normally
+if [[ -z "${TMUX:-}" ]]; then
+  exec "$AGENT"
+fi
+
+# tmux 3.2+: display-popup exists
+if tmux display -p '#{version}' >/dev/null 2>&1; then
+  # Popup size: 90% width, 85% height
+  exec tmux display-popup -w 90% -h 85% -E "bash -lc '$AGENT'"
+fi
+
+# Fallback: split pane
+exec tmux split-window -v "bash -lc '$AGENT'"

@@ -1,36 +1,63 @@
 MenuBar=Disabled
 
+[CompactMode]
+UseSystemFont=false
+ViewFont=MesloLGL Nerd Font Propo,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[ContextMenu]
+ShowOpenTerminal=false
+
+[DetailsMode]
+PreviewSize=32
+RightPadding=0
+UseSystemFont=false
+ViewFont=MesloLGL Nerd Font Propo,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
 [General]
+BrowseThroughArchives=true
+DoubleClickViewAction=create_dir
+DynamicView=true
+EditableUrl=true
 OpenNewTabAfterLastTab=true
 ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowStatusBar=Disabled
+ShowToolTips=true
+TerminalApplication=kitty
+UseTabForSwitchingSplitView=true
 Version=202
-ViewPropsTimestamp=2026,1,18,20,58,14.604
+ViewPropsTimestamp=2026,2,18,19,21,59.473
 
 [IconsMode]
+IconSize=64
 PreviewSize=48
+UseSystemFont=false
+ViewFont=MesloLGL Nerd Font Propo,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[InformationPanel]
+dateFormat=ShortFormat
 
 [KFileDialog Settings]
-Places Icons Auto-resize=true
+Places Icons Auto-resize=false
 Places Icons Static Size=22
 
 [MainWindow]
 MenuBar=Disabled
 
 [MainWindow][Toolbar mainToolBar]
-IconSize=16
 ToolButtonStyle=IconOnly
 
-[PlacesPanel]
-IconSize=-1
+[Notification Messages]
+ConfirmRenameFileType=false
+warnAboutRisksBeforeActingAsAdmin=false
 
 [PreviewSettings]
-Plugins=ffmpegthumbnailer,appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,glycin-svg,svgthumbnail
+Plugins=ffmpegthumbnailer,appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,glycin-svg,svgthumbnail
 
 [Search]
 Location=Everywhere
 
 [Toolbar mainToolBar]
-IconSize=16
 ToolButtonStyle=IconOnly
 
 [UiSettings]

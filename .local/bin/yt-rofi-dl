@@ -7,7 +7,8 @@ mkdir -p "$MUSIC_DIR"
 # Ask for URL
 URL="$(
   rofi -dmenu -p "YouTube URL" -i \
-    -mesg "Paste a YouTube/playlist URL and press Enter"
+    -mesg "Paste a YouTube/playlist URL and press Enter" \
+    -theme "~/.local/share/rofi/themes/bonito/style.rasi"
 )"
 
 # Cancel if empty

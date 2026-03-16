@@ -1,0 +1,127 @@
+@import url("/home/nick/.config/waybar/colors/matugen-waybar.css");
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Symbols Nerd Font", "Noto Color Emoji", monospace;
+  font-size: 10pt;
+  min-height: 0;
+}
+
+
+
+window#waybar {
+  opacity: 0.92;
+  background: @surface_variantA;
+  color: @tertiary;
+}
+
+/* --- Tight pill baseline for EVERY module --- */
+#workspaces,
+#wlr-taskbar,
+#window,
+#idle_inhibitor,
+#mpris,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#tray,
+#language,
+#custom-weather,
+#clock,
+#custom-powermenu {
+  margin: 2px 2px;
+  padding: 0 8px;
+  border-radius: 8px;
+
+  background: alpha(@secondary, 0.75);
+  border: 2px solid alpha(@tertiary, 0.45);
+
+
+}
+
+/* Make icon-only modules less wide */
+#idle_inhibitor,
+#tray,
+#language,
+#custom-powermenu {
+  padding: 0 6px;
+  color: cornflowerblue;
+}
+
+/* ---- wlr/taskbar buttons ---- */
+/* ---- wlr/taskbar buttons ---- */
+#wlr-taskbar button {
+  margin: 0 2px;
+  padding: 0 6px;
+  border-radius: 7px;
+}
+
+
+#wlr-taskbar button.active {
+  background: alpha(@tertiary, 0.20);
+  box-shadow: inset 0 -2px 0 0 @secondary;
+}
+
+
+/* ---- workspaces ---- */
+#workspaces {
+  padding: 0 6px;
+  color: @secondary;
+}
+
+#workspaces button {
+  padding: 0 6px;
+  margin: 0 2px;
+  background: transparent;
+  color: alpha(@surface, 0.9);
+  border-radius: 7px;
+}
+
+#workspaces button:hover {
+  background: alpha(@on_background, 0.10);
+}
+
+#workspaces button.active {
+  background: alpha(@tertiary_container, 0.70);
+}
+
+/* underline without adding height */
+#workspaces button.focused {
+  background: alpha(@surface_variant, 0.70);
+  box-shadow: inset 0 -2px 0 0 @primary_fixed_dim;
+}
+
+#workspaces button.urgent {
+  background-image: linear-gradient(90deg, @red, @orange);
+  color: #14141b;
+}
+
+/* “Center title” */
+#window {
+  background: alpha(@surface, 0.70);
+  border: 1px solid alpha(@tertiary, 0.65);
+}
+
+/* Quick emphasis accents */
+#pulseaudio { border-color: @on_primary_fixed; }
+#network    { border-color: @on_primary_fixed; }
+#cpu        { border-color: @on_primary_fixed; }
+#memory     { border-color: @on_primary_fixed; }
+#temperature{ border-color: @on_primary_fixed; }
+
+/* Power button (single definition) */
+#custom-powermenu {
+  padding: 0 10px;
+  border-radius: 6px;
+  background-image: linear-gradient(90deg, @orange, @yellow);
+  color: @comment;
+  border: 1px solid @error;
+}
+
+#custom-powermenu:hover {
+  background-image: linear-gradient(90deg, @purple, @pink);
+  border-color: @error;
+}

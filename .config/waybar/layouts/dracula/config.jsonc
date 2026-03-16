@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "height": 24,
   "spacing": 4,
   "modules-left": [
@@ -11,10 +11,13 @@
     "hyprland/window"
   ],
   "modules-right": [
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "network",
     "tray",
-    "hyprland/language",
-    "custom/weather",
-    "clock"
+    "clock",
+    "custom/weather"
   ],
   "wlr/taskbar": {
     "on-click": "activate",
@@ -34,22 +37,42 @@
     "max-length": 128
   },
   "clock": {
-    "format": "{:%c}",
+    "format": " ( ͜.人 ͜. ） {:%c} ( ͜.人 ͜. ） ",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
+  "cpu": {
+    "format": " ( ͜.人 ͜. ） {usage}%",
+    "on-click": "~/.config/waybar/scripts/popup-cpu.sh",
+    "tooltip": false
+  },
+  "memory": {
+    "format": " 凸( •̀_•́ )凸 {percentage}%",
+    "on-click": "~/.config/waybar/scripts/popup-mem.sh",
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": " 凸( •̀_•́ )凸 {signalStrength}%",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-disconnected": "󰤭 down",
+    "on-click": "~/.config/waybar/scripts/popup-net.sh",
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "format": " ( ͜.人 ͜. ） {volume}%",
+    "format-muted": "󰝟",
+    "on-click": "~/.config/waybar/scripts/popup-audio.sh",
+    "tooltip": false
+  },
+
   "tray": {
-    "spacing": 4
+    "spacing": 8
   },
-  "custom/weather": {
-    "exec": "~/.config/waybar/wittr.sh",
-    "return-type": "json",
-    "format": "{}",
-    "tooltip": true,
-    "interval": 900
-  },
-  "hyprland/language": {
-    "format-pl": "[pl]",
-    "format-en": "[us]",
-    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
-  }
+  "custom/weather": { 
+    "format": "{text}°",  
+    "tooltip": true,  
+    "interval": 3600, 
+    "exec": "wttrbar --location \"Pontiac\" --fahrenheit --main-indicator FeelsLikeF",  
+    "return-type": "json"
+}
+ 
 }

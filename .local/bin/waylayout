@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+LAYOUT="$1"
+BASE="$HOME/.config/waybar/layouts/$LAYOUT"
+
+if [[ -z "$LAYOUT" || ! -d "$BASE" ]]; then
+  echo "Usage: waylayout <forest|kanagawa>"
+  exit 1
+fi
+
+ln -sf "$BASE/config.jsonc" "$HOME/.config/waybar/config.jsonc"
+ln -sf "$BASE/style.css"   "$HOME/.config/waybar/style.css"
+
+pkill waybar || true
+waybar &

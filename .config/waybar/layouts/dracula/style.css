@@ -1,6 +1,6 @@
-@import url("/home/nick/.config/waybar/layouts/dracula/colors.css");
+@import url("/home/nick/.config/waybar/colors/matugen-waybar.css");
 
-
+/* ===== Reset ===== */
 * {
     border: none;
     border-radius: 0;
@@ -8,33 +8,61 @@
     font-size: 11pt;
     min-height: 0;
 }
+
+/* ===== Bar ===== */
 window#waybar {
-    opacity: 0.9;
-    background: @background-darker;
-    color: @foreground;
-    border-bottom: 2px solid @background;
+    background-color: @background;
+    opacity: 0.8;
+    color: @primary;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
 }
+
+/* ===== Workspaces ===== */
 #workspaces button {
-    padding: 0 10px;
-    background: @background;
-    color: @foreground;
+  padding: 0 10px;
+  margin: 0 2px;
+  background: transparent;
+  color: alpha(@foreground, 0.6);
+
+  /* IMPORTANT: don't use border-bottom at all */
+  box-shadow: inset 0 -2px 0 0 transparent;
 }
+
 #workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background-image: linear-gradient(0deg, @selection, @background-darker);
+  color: alpha(@foreground, 0.9);
+  box-shadow: inset 0 -2px 0 0 alpha(@foreground, 0.25);
 }
-#workspaces button.focused,
+
 #workspaces button.active {
-    background-image: linear-gradient(0deg, @purple, @selection);
+  color: @foreground;
+  box-shadow: inset 0 -2px 0 0 @red;
 }
+
 #workspaces button.urgent {
-    background-image: linear-gradient(0deg, @red, @background-darker);
+  color: @foreground;
+  box-shadow: inset 0 -2px 0 0 @yellow;
 }
-#taskbar button.active {
-    background-image: linear-gradient(0deg, @selection, @background-darker);
+
+/* ===== Modules ===== */
+#clock,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray,
+#mpd,
+#battery {
+    padding: 0 8px;
 }
-#clock {
-    padding: 0 4px;
-    background: @background;
-}
+
+/* Subtle module colors */
+#clock { color: @cyan; }
+#network { color: @green; }
+#cpu.warning { color: @yellow; }
+#cpu.critical { color: @red; }
+#battery.warning { color: @yellow; }
+#battery.critical { color: @red; }

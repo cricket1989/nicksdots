@@ -1,0 +1,124 @@
+configuration {
+    icon-theme: "Zafiro-Nord-Black-Blue";
+    modi: "drun";
+    show-icons: true;
+    drun-display-format: "{name}";
+    display-drun: " ";    /* search icon instead of text */
+}
+
+* {
+ 
+        /* Catppuccin Mocha Colors */
+    background:        #1e1e2e;  /* Mocha dark background */
+    background-alt:    #313244;  /* Slightly lighter Mocha tone */
+    foreground:        #cdd6f4;  /* Mocha foreground */
+    selected:          #f38ba8;  /* Pink/Red accent */
+    active:            #a6e3a1;  /* Green accent */
+    urgent:            #f38ba8;  /* Red/pink urgent */
+
+    border-color:      #fab387;  /* Peach accent for borders */
+}
+
+window {
+    transparency: "real";
+    location: north;
+    anchor: center;
+    fullscreen: false;
+
+    width: 700px;
+    height: 400px;
+
+    margin: 0px;
+    padding: 20px;
+
+    border:1px;
+    border-color: #cacce0;
+    border-radius: 50px;
+       x-offset:0px;
+    y-offset:-10px;
+
+    background-color: @background;
+}
+
+mainbox {
+    spacing: 20px;
+    background-color: transparent;
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: @background-alt;
+    padding: 30px;
+    border-radius: 100px;
+    spacing: 10px;
+
+    children: [ "prompt", "entry" ];
+}
+
+prompt {
+    text-color: @foreground;
+    background-color: inherit;
+}
+
+entry {
+    text-color: @foreground;
+    background-color: inherit;
+    placeholder: "  ";
+}
+
+listview {
+    /* VERTICAL LIST */
+    layout: vertical;
+    lines: 15;
+    columns: 3;
+
+    spacing: 10px;
+    margin: 10px 0;
+    padding: 0px;
+
+    dynamic: true;
+    scrollbar: false;
+
+    background-color: transparent;
+}
+
+scrollbar {
+    handle-width: 5px;
+    handle-color: @selected;
+    background-color: @background-alt;
+}
+
+element {
+    padding: 12px;
+    border-radius: 100px;
+
+    background-color: transparent;
+    text-color: @foreground;
+    cursor: pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @background;
+}
+
+element-icon {
+    size: 47px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    font: "JetBrainsMono Nerd Font 11";
+      vertical-align:              0.5;
+    horizontal-align:            0.0;
+    padding: 0px 10px 0px 20px; /* top right bottom left */
+
+}
+

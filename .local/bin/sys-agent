@@ -1,0 +1,253 @@
+#!/usr/bin/env python3
+import json
+import subprocess
+import sys
+import shlex
+import requests
+
+MODEL = "qwen2.5-coder:14b"
+OLLAMA = "http://127.0.0.1:11434"
+
+SYSTEM = """You are a disciplined Linux debugging and system-maintenance assistant focused on Arch/CachyOS-style environments using systemd and Wayland.
+
+Your priorities:
+1) minimal change
+2) safety + rollback
+3) no bloat
+4) reproducible troubleshooting
+
+=== Core Debug Behavior ===
+- Reproduce-first: before fixes, request the exact error, command run, and relevant logs if missing.
+- One change at a time: propose a single minimal action and explain verification.
+- Smallest lever first: prefer config edits or targeted package fixes over reinstalling or migrations.
+- State assumptions: if distro/service/compositor is assumed, say so.
+- Do not hallucinate files, paths, or services.
+
+=== Safety Rules ===
+- Never propose destructive commands without warning + rollback steps.
+- Prefer user-level checks before sudo; explain what sudo changes.
+- Include rollback guidance when suggesting config/package changes.
+
+=== Linux Diagnostics Discipline ===
+When relevant, collect:
+- system info: uname -a, /etc/os-release
+- service state: systemctl status / --user
+- logs: journalctl -xeu / --user
+- packages: pacman -Qi / flatpak info
+
+For Wayland/graphics issues:
+- ask about compositor, GPU, scaling, environment variables.
+
+=== Cleanup Philosophy ===
+- Inventory first; show what will change.
+- Prefer dry-run or list commands.
+- Separate cleanup categories (orphans, cache, runtimes, logs).
+- Never touch user configs/data without explicit reason.
+
+=== Anti-Bloat Policy ===
+- Avoid installing tools unless necessary; justify each install.
+- Prefer built-in CLI tools.
+- Avoid duplicate package stacks.
+
+=== Output Format ===
+Always respond using STRICT JSON:
+
+{
+  "type": "command" | "web" | "explain",
+  "summary": "what is happening",
+  "content": "single command OR url OR explanation",
+  "risk": "low|medium|high",
+  "why": "reasoning",
+  "what_next": "what output or info to provide next"
+}
+
+Rules for commands:
+- single-line only
+- no chaining commands
+- diagnostics preferred first
+"""
+
+# Hard blocklist: refuse these entirely
+DANGEROUS = [
+    "rm -rf /", "mkfs", "dd if=", "wipefs", ">: /dev/", "sgdisk --zap-all",
+    ":(){", "forkbomb", "shutdown", "poweroff"
+]
+
+# Snapshot gate triggers (things that can change system state or brick boot)
+RISKY_NEEDS_SNAPSHOT = [
+    "pacman -R", "pacman -Syu", "pacman -Syyu", "mkinitcpio",
+    "grub-install", "grub-mkconfig", "bootctl", "dracut", "update-grub",
+    "btrfs check", "btrfs rescue", "fsck", "parted", "sgdisk",
+    "modprobe", "sysctl -w", "tee /etc/", "sed -i /etc/", "nano /etc/", "vim /etc/"
+]
+
+def have_cmd(name: str) -> bool:
+    return subprocess.run(f"command -v {shlex.quote(name)} >/dev/null 2>&1", shell=True).returncode == 0
+
+def tui_confirm(prompt: str) -> bool:
+    """Use gum if installed; fallback to YES prompt."""
+    if have_cmd("gum"):
+        # gum confirm returns 0 on yes
+        return subprocess.run(f"gum confirm {shlex.quote(prompt)}", shell=True).returncode == 0
+    ans = input(f"{prompt} (type YES) > ").strip()
+    return ans == "YES"
+
+def tui_input(prompt: str) -> str:
+    """Use gum input if installed; fallback to stdin."""
+    if have_cmd("gum"):
+        p = subprocess.run(
+            f"gum input --prompt {shlex.quote(prompt + ': ')}",
+            shell=True, text=True, capture_output=True
+        )
+        return (p.stdout or "").strip()
+    return input(prompt + ": ").strip()
+
+def looks_dangerous(cmd: str) -> bool:
+    c = cmd.strip().lower()
+    return any(x in c for x in DANGEROUS)
+
+def needs_snapshot(cmd: str) -> bool:
+    c = cmd.strip()
+    return any(x in c for x in RISKY_NEEDS_SNAPSHOT)
+
+def run_command(cmd: str) -> str:
+    proc = subprocess.run(cmd, shell=True, text=True, capture_output=True)
+    out = (proc.stdout or "") + (proc.stderr or "")
+    out += f"\n[exit code: {proc.returncode}]"
+    return out
+
+def fetch_url(url: str) -> str:
+    r = requests.get(url, timeout=20, headers={"User-Agent": "sys-agent/1.0"})
+    text = r.text
+    # Keep it small so you don’t flood the model
+    if len(text) > 12000:
+        text = text[:12000] + "\n...[truncated]..."
+    return text
+
+
+def ollama_chat(user_text: str) -> dict:
+    r = requests.post(
+        f"{OLLAMA}/api/chat",
+        json={
+            "model": MODEL,
+            "messages": [
+                {"role": "system", "content": SYSTEM},
+                {"role": "user", "content": user_text},
+            ],
+            "stream": False,
+            "format": "json",
+        },
+        timeout=120,
+    )
+    r.raise_for_status()
+    content = r.json()["message"]["content"]
+    return json.loads(content)
+
+def main():
+    print(f"sys-agent → {MODEL}")
+    print("Local only (127.0.0.1). One action at a time. Permission required.")
+    if have_cmd("gum"):
+        print("TUI: gum detected ✅")
+    else:
+        print("TUI: gum not installed (optional). Using plain prompts.")
+    print("Ctrl+C to quit.\n")
+
+    context = ""
+
+    while True:
+        try:
+            user = input("you> ").strip()
+        except KeyboardInterrupt:
+            print("\nbye")
+            return 0
+
+        if not user:
+            continue
+
+        prompt = user if not context else (context + "\n\nUSER:\n" + user)
+
+        try:
+            action = ollama_chat(prompt)
+        except Exception as e:
+            print(f"Error talking to Ollama: {e}\n")
+            continue
+
+        t = action.get("type", "").strip()
+        summary = action.get("summary", "").strip()
+        content = action.get("content", "").strip()
+        risk = action.get("risk", "").strip()
+        why = action.get("why", "").strip()
+        what_next = action.get("what_next", "").strip()
+
+        print("\nsummary :", summary)
+        print("why     :", why)
+        print("risk    :", risk)
+        print("proposed:", content)
+
+        if t == "explain":
+            # Explanation-only; store as context and continue
+            context = prompt + "\n\nASSISTANT_EXPLAINED:\n" + content
+            if what_next:
+                print("\nnext:", what_next)
+            print("")
+            continue
+
+        if t == "web":
+            if not content.startswith("http://") and not content.startswith("https://"):
+                print("\nRefusing: web action must be a URL starting with https://\n")
+                continue
+
+            if not tui_confirm("Fetch this URL and use it for the next step?"):
+                print("canceled.\n")
+                continue
+
+            try:
+                page = fetch_url(content)
+            except Exception as e:
+                print(f"Fetch error: {e}\n")
+                continue
+
+            print("\n--- fetched (preview) ---")
+            print(page[:2000])
+            print("--- end preview ---\n")
+
+            context = prompt + "\n\nFETCHED_URL:\n" + content + "\n\nPAGE_TEXT:\n" + page
+            if what_next:
+                print("next:", what_next, "\n")
+            continue
+
+        if t == "command":
+            if looks_dangerous(content):
+                print("\nRefusing to run: looks dangerous. Ask for a safer diagnostic step.\n")
+                continue
+
+            # Snapshot gate
+            if needs_snapshot(content):
+                print("\n⚠️  Snapshot reminder: this action can change system state.")
+                print("If you use BTRFS snapshots (Snapper/Timeshift/manual) take one BEFORE continuing.\n")
+
+
+                
+                # Require acknowledgment
+                ack = tui_input("Type I_HAVE_A_SNAPSHOT to proceed")
+                if ack != "I_HAVE_A_SNAPSHOT":
+                    print("canceled (no snapshot ack).\n")
+                    continue
+
+            # Final run approval
+            if not tui_confirm("Run the proposed command?"):
+                print("canceled.\n")
+                continue
+
+            result = run_command(content)
+            print("\n--- output ---\n" + result + "\n------------\n")
+
+            context = prompt + "\n\nCOMMAND:\n" + content + "\n\nOUTPUT:\n" + result
+            if what_next:
+                print("next:", what_next, "\n")
+            continue
+
+        print("\nAgent returned an unknown type. Try again.\n")
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,22 @@
+/* Kyoto Rain palette */
+
+/* Base */
+@define-color bar_bg #0f1517;     /* deep charcoal teal */
+@define-color fg     #d6e2de;     /* misty off-white */
+@define-color dim    #8fa9a1;     /* muted text */
+
+/* Segment backgrounds (polybar blocks) */
+@define-color segA #181F29;       /* launcher / cpu / clock */
+@define-color segB #162126;       /* workspaces / memory / tray */
+@define-color segC #1f2e33;       /* network / volume */
+@define-color segD #2e473b;       /* tray (moss) */
+
+/* Accents */
+@define-color accent  #e09a3f;    /* lantern glow */
+@define-color accent2 #c8752a;    /* deeper amber */
+@define-color moss    #3f5f4e;    /* active underline */
+@define-color steel   #4b6c73;    /* cool teal highlight */
+
+/* Active workspace */
+@define-color active_fg @fg;
+@define-color active_underline @moss;

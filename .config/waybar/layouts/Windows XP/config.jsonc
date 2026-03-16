@@ -14,6 +14,7 @@
     ],
     "modules-center": [],
     "modules-right": [
+        "custom/bar2",
         "custom/weather",
         "cpu",
         "temperature",
@@ -39,7 +40,7 @@
     },
     "custom/os_button": {
         "format": "",
-        "on-click": "wofi --show drun",
+        "on-click": "pkill rofi || /home/nick/.config/rofi/launchers/type-1/launcher.sh",
         "tooltip": false
     },
     "cpu": {
@@ -57,7 +58,7 @@
     },
     "disk": {
         "interval": 30,
-        "format": "󰋊 {percentage_used}%",
+        "format": "🖴 {percentage_used}%",
         "path": "/",
         "tooltip": true,
         "unit": "GB",
@@ -80,8 +81,8 @@
         "on-click": "activate"
     },
     "tray": {
-        "icon-size": 18,
-        "spacing": 3
+        "icon-size": 16,
+        "spacing": 10
     },
     "clock": {
         "format": "      {:%R\n %d.%m.%Y}",
@@ -120,30 +121,6 @@
             "󰤨 "
         ]
     },
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": [
-            "󰂎",
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            "󰁹"
-        ]
-    },
     "pulseaudio": {
         "max-volume": 150,
         "scroll-step": 10,
@@ -165,5 +142,18 @@
         "interval": 3600,
         "exec": "wttrbar --location Pontiac --fahrenheit --main-indicator FeelsLikeF",
         "return-type": "json"
-     }
+    },
+    "custom/bar2": {
+        "format": "󰑓",
+        "tooltip": "Toggle 2nd bar",
+        "on-click": "~/.config/waybar/scripts/2ndbar.sh"
+    },
+    "custom/cava": {
+        "exec": "~/.config/waybar/scripts/cava-waybar.sh",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": false
+    }
 }
+
+

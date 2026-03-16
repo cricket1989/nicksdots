@@ -1,0 +1,18 @@
+/* Base */
+@define-color bar_bg #1f1f28;
+@define-color fg     #dcd7ba;
+@define-color dim    #c8c093;
+
+/* Segment backgrounds */
+@define-color segA #16161d;  /* launcher / cpu / clock */
+@define-color segB #1f1f28;  /* workspaces / memory / tray */
+@define-color segC #223249;  /* network / volume */
+@define-color segD #2a2a37;  /* battery */
+
+/* Accents */
+@define-color accent  #7e9cd8; /* blue */
+@define-color accent2 #7fb4ca; /* cyan */
+
+/* Active workspace */
+@define-color active_fg @fg;
+@define-color active_underline @accent2;

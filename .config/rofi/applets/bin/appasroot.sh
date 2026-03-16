@@ -34,11 +34,11 @@ fi
 # Options
 layout=`cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2`
 if [[ "$layout" == 'NO' ]]; then
-	option_1=" Alacritty"
-	option_2=" Thunar"
-	option_3=" Geany"
-	option_4=" Ranger"
-	option_5=" Vim"
+	option_1=" Kitty"
+	option_2=" Dolphin"
+	option_3=" Nano"
+	option_4=" Yazi"
+	option_5=" Micro"
 else
 	option_1=""
 	option_2=""
@@ -68,15 +68,16 @@ run_rofi() {
 run_cmd() {
 	polkit_cmd="pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY"
 	if [[ "$1" == '--opt1' ]]; then
-		${polkit_cmd} alacritty
+		${polkit_cmd} kitty
 	elif [[ "$1" == '--opt2' ]]; then
-		${polkit_cmd} dbus-run-session thunar
+          dolphin admin:/
+    fi
 	elif [[ "$1" == '--opt3' ]]; then
-		${polkit_cmd} geany
+		${polkit_cmd} nano
 	elif [[ "$1" == '--opt4' ]]; then
-		${polkit_cmd} alacritty -e ranger
+		${polkit_cmd} yazi
 	elif [[ "$1" == '--opt5' ]]; then
-		${polkit_cmd} alacritty -e vim
+		${polkit_cmd} micro
 	fi
 }
 

@@ -30,7 +30,7 @@
 
   "custom/launcher": {
     "format": "",
-    "on-click": "bash /home/$USER/.config/waybar/scripts/app-launcher.sh",
+    "on-click": "bash /home/nick/.config/waybar/scripts/app-launcher.sh",
     "tooltip-format": "Launch your favorite apps"
   },
 
@@ -89,7 +89,7 @@
   },
 
   "network": {
-    "interface": "wlo1",
+    "interface": "wlan0",
     "format": "{ifname}",
     "format-wifi": "{icon}  {essid}",
     "format-ethernet": "󰈀  {ipaddr}/{cidr}",

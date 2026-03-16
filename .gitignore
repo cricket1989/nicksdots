@@ -1,8 +1,55 @@
+# Caches
 .cache/
 *.log
 *.db
 history
-secrets
-wal/
 
+# Secrets
+.secrets
+secrets
+
+# Wallpapers (too large for git)
+.config/hypr/modules/walls/
+.config/wal/
+
+# Browser/app data (not config)
+.config/chromium/
+.config/mozilla/
+.config/discord/
+.config/vesktop/
+.config/Code/
+.config/Claude/
+.config/spotify/
+
+# Crash backups
+.config/chromium-backup-crashrecovery*/
+.config/mozilla/firefox/*backup*
+
+# oh-my-zsh (managed separately)
 .oh-my-zsh/
+
+# Old/unused
+.config/alacritty/
+
+# MPD runtime files
+.config/mpd/database
+.config/mpd/state
+.config/mpd/pid
+.config/mpd/log
+.config/mpd/sticker.sql
+.config/mpd/playlists/
+
+# Compiled binaries in local/bin (add your actual script names to keep)
+.local/bin/nitch
+.local/bin/nitch1
+.local/bin/uv
+.local/bin/uvx
+.local/bin/eww
+.local/bin/webi
+.local/bin/__pycache__/
+
+# Backup/junk
+*.bak
+*.backup*
+*.save
+hyprland.conf.backup*

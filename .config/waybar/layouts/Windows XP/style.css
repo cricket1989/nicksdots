@@ -30,6 +30,24 @@
 	
 	
 }
+#custom-bar2 {
+  color: @acc_purple;
+  padding: 4px 12px;
+  margin: 0 4px;
+}
+
+
+
+#custom-cava {
+  color: #7aa2f7;   /* <<< CHANGE COLOR HERE */
+  font-family: monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 0 10px;
+}
+
+
+
 
 window#waybar {
   background:  @bg_main;
@@ -110,6 +128,13 @@ tooltip label{
 	border-bottom: 3px solid white;
   background: @bg_hover;
 	color: @content_main;
+}
+#custom-cava {
+  color: #7aa2f7;
+  font-family: monospace;
+  font-size: 14px;      /* bump up/down for chunkiness */
+  letter-spacing: 1px;  /* spacing between blocks */
+  padding: 0 10px;
 }
 #custom-weather {
 color: @onSurface;

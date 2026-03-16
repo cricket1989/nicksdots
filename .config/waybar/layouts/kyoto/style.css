@@ -1,0 +1,76 @@
+@import "/home/nick/.config/waybar/layouts/kyoto/colors.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  border: none;
+  min-height: 0;
+}
+
+/* Slight transparency but NOT clear */
+window#waybar {
+  background-color: rgba(15, 21, 23, 0.90);
+  margin: 0;
+  padding: 2px 6px;
+}
+
+/* Left segments */
+#custom-launcher { background-color: @segA; color: @accent; padding: 6px 10px; }
+#workspaces      { background-color: @segB; color: @fg;     padding: 2px 6px; }
+#network         { background-color: @segC; color: @fg;     padding: 6px 10px; }
+
+/* Center MPD */
+#custom-mpd {
+  background-color: rgba(15, 21, 23, 0.90);
+  color: @accent2;
+  padding: 6px 18px;
+  font-weight: 600;
+}
+
+/* Right segments */
+#cpu        { background-color: @segA; color: @fg; padding: 6px 10px; }
+#memory     { background-color: @segB; color: @fg; padding: 6px 10px; }
+#pulseaudio { background-color: @segC; color: @fg; padding: 6px 10px; }
+#battery    { background-color: @segD; color: @fg; padding: 6px 10px; }
+#tray       { background-color: @segB; color: @fg; padding: 6px 10px; }
+#clock      { background-color: @segA; color: @fg; padding: 6px 10px; }
+
+/* Workspaces */
+#workspaces button {
+  background: transparent;
+  color: @dim;
+  padding: 6px 10px;
+  margin: 0 2px;
+}
+
+#workspaces button.active {
+  color: @active_fg;
+  box-shadow: inset 0 -2px 0 0 @active_underline;
+}
+
+#workspaces button:hover {
+  color: @fg;
+}
+
+/* Powerline separators (color = NEXT segment) */
+#custom-sep_a_b   { background: transparent; color: @segB; padding: 0 2px; }
+#custom-sep_b_c   { background: transparent; color: @segC; padding: 0 2px; }
+
+#custom-sep_a_b_r { background: transparent; color: @segB; padding: 0 2px; }
+#custom-sep_b_c_r { background: transparent; color: @segC; padding: 0 2px; }
+#custom-sep_c_d_r { background: transparent; color: @segD; padding: 0 2px; }
+#custom-sep_d_b_r { background: transparent; color: @segB; padding: 0 2px; }
+#custom-sep_b_a_r { background: transparent; color: @segA; padding: 0 2px; }
+
+/* Hover: lantern-tinted wash (GTK-safe) */
+#custom-launcher:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#battery:hover,
+#tray:hover,
+#clock:hover,
+#custom-mpd:hover {
+  background-color: rgba(224,154,63,0.10);
+}

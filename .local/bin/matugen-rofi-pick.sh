@@ -3,8 +3,9 @@ set -euo pipefail
 
 # Where your wallpapers live (add more dirs if you want)
 WALL_DIRS=(
-  "$HOME/Pictures/Wallpapers"
-  "$HOME/Pictures/wallpapers"
+  "$HOME/Pictures/walls/"
+  "$HOME/Pictures/Wallpapers/"
+  "$HOME/Pictures/Wall/"
 )
 
 # File types to include
@@ -21,13 +22,15 @@ files="$(
   done | sort -u
 )"
 
-[[ -n "${files}" ]] || exit 0
+IFS=$'\n'
 
 # Show just the basename in rofi, but keep the full path via a delimiter
 choice="$(
   echo "$files" \
   | awk -v FS="/" '{print $NF " :: " $0}' \
-  | rofi -dmenu -i -p "Matugen (colors only)"
+  | rofi -dmenu -i -p "Matugen (colors only)" -theme "$HOME/.local/share/rofi/themes/wallpapers.rasi"
+  
+
 )"
 
 [[ -n "${choice}" ]] || exit 0

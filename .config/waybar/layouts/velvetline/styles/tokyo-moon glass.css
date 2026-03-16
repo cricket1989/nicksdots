@@ -1,0 +1,133 @@
+/* Tokyo Night Moon — Waybar (GTK-compatible, no backdrop-filter) */
+
+@define-color bg      rgba(22, 22, 30, 0.88);
+@define-color panel   rgba(26, 27, 38, 0.86);
+@define-color chip    rgba(31, 35, 53, 0.90);
+
+@define-color fg      rgba(192, 202, 245, 0.92);
+@define-color fg_hi   rgba(235, 238, 255, 0.92);
+@define-color muted   rgba(184, 191, 224, 0.65);
+
+@define-color border  rgba(59, 66, 97, 0.35);
+
+@define-color blue    rgba(122, 162, 247, 0.95);
+@define-color cyan    rgba(125, 207, 255, 0.95);
+@define-color purple  rgba(187, 154, 247, 0.95);
+@define-color green   rgba(158, 206, 106, 0.95);
+@define-color yellow  rgba(224, 175, 104, 0.95);
+@define-color red     rgba(247, 118, 142, 0.95);
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Nasalization", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+window#waybar {
+  background: alpha(@border, 0.60);
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  background: @panel;
+  color: @fg;
+  padding: 4px 12px;
+  margin: 0 4px;
+  border-radius: 12px;
+  border: 1px solid @border;
+}
+
+#hyprland-workspaces,
+#workspaces,
+#hyprland-workspaces button,
+#workspaces button {
+  font-family: "Noto Sans CJK JP", "Noto Sans Symbols2", "JetBrainsMono Nerd Font", sans-serif;
+}
+
+#hyprland-workspaces button,
+#workspaces button {
+  background: @chip;
+  color: @muted;
+  border-radius: 10px;
+  border: 1px solid @border;
+  padding: 4px 12px;
+  margin: 0 4px;
+  transition: 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: rgba(122, 162, 247, 0.12);
+  color: @fg_hi;
+  border: 1px solid rgba(122, 162, 247, 0.45);
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: @fg_hi;
+  border: 1px solid rgba(125, 207, 255, 0.25);
+}
+
+/* accents */
+#custom-os_button    { color: @purple; }
+#custom-notification { color: @yellow; }
+#custom-weather      { color: @cyan; }
+#cpu                 { color: @green; }
+#pulseaudio          { color: @blue; }
+#network             { color: @cyan; }
+#custom-pacman       { color: @purple; }
+#custom-hypridle     { color: @red; }
+
+#tray { letter-spacing: 0.5px; }
+#tray > .item { padding: 0 4px; }
+label.module { letter-spacing: 2px; }
+
+#clock {
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: @fg_hi;
+}
+
+#custom-mpd.on { color: @fg_hi; }
+#custom-mpd.off { color: @muted; }
+
+#custom-media.playing { color: @cyan; }
+#custom-media.paused  { color: @muted; }
+#custom-media.stopped { color: rgba(140, 150, 190, 0.60); }
+/* ───────── Selected module glow (Tokyo Night Moon) ───────── */
+
+/* Audio (TN blue) */
+#pulseaudio {
+  border: 1px solid rgba(122, 162, 247, 0.30);
+  box-shadow: 0 0 16px rgba(122, 162, 247, 0.12);
+}
+
+/* Network (TN cyan) */
+#network {
+  border: 1px solid rgba(125, 207, 255, 0.28);
+  box-shadow: 0 0 16px rgba(125, 207, 255, 0.12);
+}
+
+/* Clock (soft moon white) */
+#clock {
+  border: 1px solid rgba(235, 238, 255, 0.22);
+  box-shadow: 0 0 16px rgba(235, 238, 255, 0.10);
+}

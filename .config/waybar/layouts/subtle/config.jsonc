@@ -13,7 +13,7 @@
 
   // Individual islands
   "modules-left": ["clock", "group/expand"],
-  "modules-center": ["hyprland/workspaces"],
+  "modules-center": ["custom/media", "custom/media-separator", "hyprland/workspaces"],
   "modules-right": ["pulseaudio", "bluetooth", "network", "battery"],
 
   // Separator
@@ -106,9 +106,9 @@
 
   "network": {
     "interface": "wlo1",
-    "format-alt": "{essid} {icon}",
+    "format-alt": "{essid}  {icon}",
     "format-wifi": "{icon}",
-    "format-wifi-alt": "{icon}",
+    "format-wifi-alt": "{icon} lol",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "max-length": 50,
@@ -191,7 +191,7 @@
 
   "pulseaudio": {
     "format": "{icon}",
-    "format-alt": "{volume}% {icon}",
+    "format-alt": "{volume}%  {icon}",
     "format-muted": "󰖁",
     "scroll-step": 1,
     "on-click-right": "pavucontrol",

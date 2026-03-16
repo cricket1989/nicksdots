@@ -1,0 +1,97 @@
+$mainMod = SUPER
+$mod = ALT 
+$menu = /home/nick/.config/rofi/scripts/launcher_t1
+$menu1 = /home/nick/.config/rofi/applets/bin/apps.sh
+$menu2 = /home/nick/.config/rofi/applets/bin/quicklinks.sh
+$menu3 = /home/nick/.local/share/rofi/scripts/LauncherN1.sh
+# =====================================================================
+#  DMS CORE BINDS (merged from your first list; 2nd config takes precedence)
+# =====================================================================
+
+# NOTE:
+# - Kept your existing CTRL+ALT+DELETE = wlogout (so I did NOT map it to DMS processlist).
+# - Did NOT add SUPER+1..4 workspaces because you already use $mod(=SUPER) 1..4 for pypr scratchpads.
+# - Did NOT add SUPER+mouse_up/down workspace because you already use $mod mouse_up/down for cursor zoom.
+
+# ---------------------------------------------------------------------
+#  DMS / SYSTEM / UI
+# ---------------------------------------------------------------------
+$d = [$sys|DMS]
+
+# Lock (keep your hyprlock on $mainMod+SHIFT+L; add DMS lock on SUPER+ALT+L)
+bindd = $mod $mainMod, L, $d Lock (DMS),                 exec, dms ipc call lock lock
+
+# Process list (SUPER+M is free in your 2nd config)
+bindd = $mod, M,        $d Process list,                 exec, dms ipc call processlist focusOrToggle
+
+# Overview / clipboard / powermenu / wallpaper / settings / spotlight
+bindd = $mod, TAB,      $d Overview,                     exec, dms ipc call hypr toggleOverview
+bindd = $mod, V,        $d Clipboard,                    exec, dms ipc call clipboard toggle
+bindd = $mod, X,        $d Powermenu,                    exec, dms ipc call powermenu toggle
+bindd = $mod, Y,        $d Wallpaper,                    exec, dms ipc call dankdash wallpaper
+bindd = $mod, comma,    $d Settings,                     exec, dms ipc call settings focusOrToggle
+bindd = $mod, SPACE,    $d Spotlight,                    exec, dms ipc call spotlight toggle
+
+# Notifications + Notepad (you asked to add notepad once done)
+bindd = $mod SHIFT, N,  $d Notifications,                exec, dms ipc call notifications toggle
+bindd = $mod, N,        $d Notepad,                      exec, dms ipc call notepad toggle
+
+# Toggle helpers
+bindd = $mod SHIFT, Slash, $d Keybinds overlay,          exec, dms ipc call keybinds toggle hyprland
+bindd = $mod SHIFT, W,     $d Window rules overlay,      exec, dms ipc call window-rules toggle
+
+
+# ---------------------------------------------------------------------
+#  SCREENSHOTS (DMS PrintScreen set)
+#  (keeps your F12 grim binds intact)
+# ---------------------------------------------------------------------
+$d = [$misc|Screenshots (DMS)]
+bindd = , Print,            $d Screenshot (menu),        exec, dms screenshot
+bindd = CTRL, Print,        $d Screenshot (full),        exec, dms screenshot full
+bindd = ALT, Print,         $d Screenshot (window),      exec, dms screenshot window
+
+
+# ---------------------------------------------------------------------
+#  AUDIO / MEDIA KEYS (DMS)
+#  (keeps your playerctl F9/F10/F11 binds intact)
+# ---------------------------------------------------------------------
+$d = [$media|Media keys (DMS)]
+
+# Volume/mute (your config already has XF86AudioRaise/LowerVolume using DMS; keeping those)
+bindl  = , XF86AudioMute,    exec, dms ipc call audio mute
+bindl  = , XF86AudioMicMute, exec, dms ipc call audio micmute
+
+# Playback (use DMS mpris on media keys)
+bindl  = , XF86AudioPlay,  exec, dms ipc call mpris playPause
+bindl  = , XF86AudioPause, exec, dms ipc call mpris playPause
+bindl  = , XF86AudioNext,  exec, dms ipc call mpris next
+bindl  = , XF86AudioPrev,  exec, dms ipc call mpris previous
+
+# Fine mpris +/- on CTRL+volume keys (was in your first list; doesn’t conflict)
+bindel = CTRL, XF86AudioLowerVolume, exec, dms ipc call mpris decrement 3
+bindel = CTRL, XF86AudioRaiseVolume, exec, dms ipc call mpris increment 3
+
+
+# ---------------------------------------------------------------------
+#  BRIGHTNESS (DMS)
+# ---------------------------------------------------------------------
+$d = [$sys|Brightness (DMS)]
+bindel = , XF86MonBrightnessDown, $d Brightness -5,      exec, dms ipc call brightness decrement 5 ""
+bindel = , XF86MonBrightnessUp,   $d Brightness +5,      exec, dms ipc call brightness increment 5 ""
+
+
+# ---------------------------------------------------------------------
+#  WORKSPACE RENAME (DMS)
+# ---------------------------------------------------------------------
+$d = [$ws|DMS]
+bindd = CTRL SHIFT, R, $d Rename workspace,             exec, dms ipc call workspace-rename open
+
+
+# ---------------------------------------------------------------------
+#  WINDOW MGMT EXTRAS (safe additions)
+# ---------------------------------------------------------------------
+$d = [$wm|Extras]
+bindd = $mod, bracketleft,  $d Preselect left,          layoutmsg, preselect l
+bindd = $mod, bracketright, $d Preselect right,         layoutmsg, preselect r
+bindd = $mod, W,            $d Toggle group,            togglegroup
+bindd = $mod CTRL, F,       $d Resize exact 100%,       resizeactive, exact 100%

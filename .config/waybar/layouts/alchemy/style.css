@@ -1,91 +1,195 @@
-@import "colors/colors.css";
+@import url("/home/nick/.config/waybar/colors/matugen-waybar.css");
 
+/* --- Semantic aliases (your set) --- */
+@define-color panel       alpha(@surface_variant, 0.88);         /* pill slab */
+@define-color panel_text  @on_surface_variant;
+@define-color stroke      alpha(@outline, 0.70);
+@define-color border      alpha(@outline, 0.65);
+
+@define-color btn_bg      alpha(@surface, 0.70);
+@define-color btn_text    alpha(@on_surface, 0.90);
+
+@define-color accent      @primary;
+@define-color cyan        @tertiary;
+@define-color green       @secondary;
+@define-color yellow      @tertiary;
+@define-color purple      @primary;
+@define-color muted       alpha(@on_surface, 0.55);
+
+/* --- Global --- */
 * {
-  font-family: "DM Sans", "JetBrainsMono Nerd Font Propo", sans-serif;
-  font-size: 16px;
-  border-radius: 50px;
-  font-weight: bold;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+
+  /* keep your nerd-font vibe */
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Noto Color Emoji", monospace;
+  font-size: 12px;
+
+  /* subtle readability */
+  letter-spacing: 0.4px;
 }
 
+/* --- Bar slab --- */
 window#waybar {
-  background-color: transparent;
-  color: @fg;
+  background: transparent; /* you’re using pill groups, not a full bar slab */
+  color: @panel_text;
+  padding: 0;
+  margin: 0;
 }
 
+/* keep groups aligned nicely */
+.modules-left,
+.modules-center,
 .modules-right {
-  margin-right: 12px;
+  margin: 0 8px;
 }
 
-#workspaces {
-  background-color: @bg0;
-  padding: 2px 2px 2px 2px;
-  border-radius: 50px;
-  margin-left: 12px;
-}
-
-#workspaces button.active {
-  background-color: @blue;
-  color: @fg;
-  padding: 5px 24px;
-}
-
-#workspaces button.active:hover {
-  color: @blue;
-  background: inherit;
-}
-
-#workspaces button.empty {
-  color: @grey1;
-}
-
-#workspaces button {
-  background-color: transparent;
-  color: @grey2;
-  transition: margin 150ms ease-in-out, padding 150ms ease-in-out;
-  transition: background-color 0.3s ease, color 0.3s ease, padding 0.2s ease;
-}
-
-#workspaces button:hover {
-  background: @bg2;
-}
-
-#workspaces button.urgent {
-  background-color: @red;
-  color: @fg;
-}
-
-#battery,
-#pulseaudio,
-#backlight,
-#custom-pacman,
-#network,
+/* --- Shared “pill module” base --- */
+#custom-launcher,
 #clock,
-#custom-weather,
+#workspaces,
+#hyprland-workspaces,
+#custom-notification,
 #custom-media,
-#window,
-#cpu,
-#memory,
-#disk,
-#tray,
+#custom-pacman,
+#custom-weather,
+#pulseaudio,
+#battery,
+#network,
+#power-profiles-daemon {
+  background: @panel;
+  color: @panel_text;
+
+  margin: 2px 4px;
+  padding: 0 10px;
+  border-radius: 12px;
+
+  border: 2px solid @border;
+}
+
+/* Slightly tighter icons-only pills */
 #custom-launcher,
 #custom-notification,
 #power-profiles-daemon {
-  color: @blue;
-  background-color: @bg0;
-  padding: 0 15px 0 15px;
-  margin: 0 0 0 12px;
+  padding: 0 10px;
 }
 
-#window.hidden {
-    opacity: 0;
-    min-width: 0;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
-    border: none;
+/* Hover = lift */
+#custom-launcher:hover,
+#clock:hover,
+#workspaces:hover,
+#hyprland-workspaces:hover,
+#custom-notification:hover,
+#custom-media:hover,
+#custom-pacman:hover,
+#custom-weather:hover,
+#pulseaudio:hover,
+#battery:hover,
+#network:hover,
+#power-profiles-daemon:hover {
+  border-color: @stroke;
+  background: alpha(@surface_variant, 0.94);
 }
 
-window#waybar.empty #window {
-    background-color: transparent;
+/* --- Workspaces --- */
+#workspaces button,
+#hyprland-workspaces button {
+  background: transparent;
+  color: alpha(@panel_text, 0.65);
+  padding: 0 8px;
+  margin: 2px 2px;
+  border-radius: 10px;
 }
 
+#workspaces button:hover,
+#hyprland-workspaces button:hover {
+  background: alpha(@btn_bg, 0.55);
+  color: @btn_text;
+}
+
+#workspaces button.active,
+#hyprland-workspaces button.active {
+  background: @btn_bg;
+  color: @btn_text;
+  box-shadow: inset 0 -2px 0 0 @accent;
+}
+
+#workspaces button.urgent,
+#hyprland-workspaces button.urgent {
+  background: alpha(@btn_bg, 0.75);
+  color: @btn_text;
+  box-shadow: inset 0 -2px 0 0 @yellow;
+}
+
+/* --- Notification icon “dot” already handled in your module formatting --- */
+#custom-notification {
+  /* make it pop a hair without screaming */
+  border-color: alpha(@border, 0.85);
+}
+
+/* --- Media --- */
+#custom-media {
+  /* media is center: make it feel like “now playing” */
+  border-color: alpha(@border, 0.85);
+}
+
+/* --- Pacman updates --- */
+#custom-pacman {
+  /* keep neutral until hover; your tooltip handles meaning */
+  color: @panel_text;
+}
+
+/* --- Weather --- */
+#custom-weather {
+  color: @panel_text;
+}
+
+/* --- Audio --- */
+#pulseaudio.muted {
+  color: @muted;
+  border-color: alpha(@border, 0.55);
+}
+
+/* --- Network states (Waybar adds classes) --- */
+#network.disconnected {
+  color: @muted;
+  border-color: alpha(@border, 0.55);
+}
+
+/* --- Battery states (Waybar adds classes) --- */
+#battery.charging {
+  color: @green;
+  box-shadow: inset 0 -2px 0 0 alpha(@green, 0.85);
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+  box-shadow: inset 0 -2px 0 0 alpha(@yellow, 0.85);
+}
+
+#battery.critical:not(.charging) {
+  color: @error; /* from matugen */
+  box-shadow: inset 0 -2px 0 0 alpha(@error, 0.90);
+}
+
+/* --- Power Profiles --- */
+#power-profiles-daemon {
+  color: @panel_text;
+}
+
+/* --- Tooltips --- */
+tooltip {
+  background: alpha(@surface, 0.92);
+  color: @btn_text;
+  border: 2px solid @border;
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+tooltip label {
+  color: @btn_text;
+  letter-spacing: 0.3px;
+}

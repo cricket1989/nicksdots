@@ -1,0 +1,78 @@
+$bg: rgba(10, 14, 18, 0.92);
+$panel: rgba(16, 22, 28, 0.92);
+$stroke: rgba(120, 200, 255, 0.22);
+$glow: rgba(120, 200, 255, 0.12);
+$text: rgba(220, 240, 255, 0.95);
+$muted: rgba(220, 240, 255, 0.65);
+
+.cc-root {
+  background: $bg;
+  border: 1px solid $stroke;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 0 24px $glow;
+}
+
+.cc-header {
+  padding: 6px 8px;
+}
+
+.cc-title {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  font-weight: 800;
+  color: $text;
+  letter-spacing: 2px;
+}
+
+.cc-sub {
+  margin-left: 10px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 10px;
+  color: $muted;
+  letter-spacing: 2px;
+}
+
+.cc-panel {
+  background: $panel;
+  border: 1px solid $stroke;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.cc-panel-title {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 11px;
+  font-weight: 800;
+  color: $muted;
+  letter-spacing: 2px;
+}
+
+.cc-viz-frame {
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px dashed rgba(120, 200, 255, 0.22);
+}
+
+.cc-viz {
+  font-family: "JetBrainsMono Nerd Font Mono";
+  font-size: 14px;
+  color: $text;
+  letter-spacing: 1px;
+}
+
+.cc-btn {
+  background: rgba(20, 30, 38, 0.95);
+  border: 1px solid rgba(120, 200, 255, 0.28);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 11px;
+  font-weight: 800;
+  color: $text;
+  letter-spacing: 2px;
+}
+
+.cc-btn:hover {
+  background: rgba(30, 46, 58, 0.95);
+}

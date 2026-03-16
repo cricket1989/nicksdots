@@ -1,0 +1,97 @@
+/* City Skyline Steel — Waybar (GTK-compatible) */
+
+@define-color bg      rgba(10, 12, 16, 0.88);
+@define-color panel   rgba(20, 24, 32, 0.86);
+@define-color chip    rgba(18, 22, 30, 0.92);
+
+@define-color fg      rgba(220, 225, 235, 0.86);
+@define-color fg_hi   rgba(240, 245, 255, 0.92);
+@define-color muted   rgba(180, 190, 210, 0.60);
+
+@define-color border  rgba(120, 130, 150, 0.15);
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Nasalization", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+window#waybar {
+  background: alpha(@border, 0.60);
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  background: @panel;
+  color: @fg;
+  padding: 4px 12px;
+  margin: 0 4px;
+  border-radius: 12px;
+  border: 1px solid @border;
+}
+
+#hyprland-workspaces button,
+#workspaces button {
+  background: @chip;
+  color: @muted;
+  border-radius: 10px;
+  border: 1px solid @border;
+  padding: 4px 12px;
+  margin: 0 4px;
+  transition: 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: rgba(220, 230, 255, 0.08);
+  color: @fg_hi;
+  border: 1px solid rgba(200, 210, 230, 0.35);
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: @fg_hi;
+  border: 1px solid rgba(160, 170, 190, 0.25);
+}
+
+#clock { color: @fg_hi; font-weight: 600; letter-spacing: 0.8px; }
+label.module { letter-spacing: 2px; }
+#tray { letter-spacing: 0.5px; }
+#tray > .item { padding: 0 4px; }
+/* ───────── Selected module glow (City Mono) ───────── */
+
+/* Audio */
+#pulseaudio {
+  border: 1px solid rgba(210, 225, 255, 0.22);
+  box-shadow: 0 0 14px rgba(210, 225, 255, 0.10);
+}
+
+/* Network */
+#network {
+  border: 1px solid rgba(240, 245, 255, 0.18);
+  box-shadow: 0 0 14px rgba(240, 245, 255, 0.08);
+}
+
+/* Clock */
+#clock {
+  border: 1px solid rgba(240, 245, 255, 0.22);
+  box-shadow: 0 0 14px rgba(240, 245, 255, 0.10);
+}

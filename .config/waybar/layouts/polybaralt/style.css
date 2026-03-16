@@ -1,0 +1,96 @@
+@define-color bg0 #1a1b26;
+@define-color bg1 #1f2335;
+@define-color bg2 #24283b;
+
+@define-color fg0 #c0caf5;
+@define-color fg1 #a9b1d6;
+@define-color muted #565f89;
+
+@define-color accent #7aa2f7;
+@define-color cyan #7dcfff;
+@define-color purple #bb9af7;
+@define-color green #73daca;
+@define-color yellow #e0af68;
+@define-color red #f7768e;
+
+@define-color border #3b4261;
+
+
+
+
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  border: none;
+  min-height: 0;
+}
+
+/* Pure black bar */
+window#waybar {
+  background-color: transparent;
+  margin: 0;
+  padding: 2px 8px;
+}
+
+/* Neutral text */
+
+#workspaces {
+  background: transparent;
+  color:@fg1;
+  padding: 6px 10px;
+  margin: 0 2px;
+}
+#network,
+#cpu,
+#memory,
+#pulseaudio,
+#battery,
+#tray,
+#clock,
+#custom-launcher {
+  background: @bg2;
+  color:@accent;
+  padding: 6px 10px;
+  margin: 0 2px;
+}
+#custom-mpd {
+  background-color: @bg1;
+  color: @fg1;
+  padding: 6px 18px;
+  font-weight: 600;
+}
+
+/* Workspace buttons */
+#workspaces button {
+  background: @bg2;
+  color: @accent;
+  padding: 6px 10px;
+  margin: 0 2px;
+}
+
+#workspaces button.active {
+  color: @purple;
+  border-bottom: 2px solid @purple;
+}
+
+#workspaces button:hover {
+  color: @fg0;
+}
+
+/* MPD neutral */
+#mpd {
+  font-weight: 600;
+}
+
+/* Flat hover */
+#custom-launcher:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover,
+#mpd:hover {
+  background-color: @bg2;
+}

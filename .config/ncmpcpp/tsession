@@ -1,0 +1,26 @@
+neww
+set -g status off
+
+# Pane 0: album art
+send-keys "export PS1=''; clear; ~/.config/ncmpcpp/cover_kitty.sh" C-m
+
+# Pane 1: ncmpcpp main (below)
+split-window -v
+select-pane -t 1
+send-keys "ncmpcpp" C-m
+
+# Pane 2: visualizer (right of art)
+select-pane -t 0
+split-window -h
+send-keys "ncmpcpp" C-m
+send-keys 8
+send-keys u
+
+# Size tweaks (adjust to taste)
+resize-pane -t 0 -x 55 -y 22
+resize-pane -t 1 -y 22
+
+# Keep art pane size stable on resize
+set-hook client-resized 'resize-pane -t 0 -x 55 -y 22'
+
+select-pane -t 1

@@ -1,0 +1,4 @@
+$bar_bg = {{ colors.surface.default.hex }}
+$bar_border = {{ colors.primary.default.hex }}
+$bar_text = {{ colors.on_surface.default.hex }}
+$bar_accent = {{ colors.secondary.default.hex }}

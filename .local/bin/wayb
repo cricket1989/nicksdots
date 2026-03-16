@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+THEME_DIR="$HOME/.config/waybar/layouts/velvetline/styles"
+STYLE_LINK="$HOME/.config/waybar/style.css"
+
+themes=(
+    "city-mono.css"
+    "kanagawa-ink.css"
+    "tokyo-moon.css"
+    "style-eva-blue.css"
+    "style-sevastopol.css"
+)
+
+select_theme() {
+    printf "%s\n" "${themes[@]}" | rofi -dmenu -p "Waybar Theme"
+}
+
+# --- Argument Shortcuts ---
+if [ -z "$1" ]; then
+    choice=$(select_theme)
+else
+    case "$1" in
+        city) choice="city-mono.css" ;;
+        kana|kanagawa) choice="kanagawa-ink.css" ;;
+        tokyo|moon) choice="tokyo-moon.css" ;;
+        eva) choice="style-eva-blue.css" ;;
+        sev|sevastopol) choice="style-sevastopol.css" ;;
+        *)
+            echo "Usage: waytheme {city|kana|tokyo|eva|sev}"
+            exit 1
+            ;;
+    esac
+fi
+
+[ -z "$choice" ] && exit 0
+
+TARGET="$THEME_DIR/$choice"
+
+# --- Safety Check ---
+if [ ! -f "$TARGET" ]; then
+    notify-send "Waybar Theme Error" "File not found: $choice"
+    exit 1
+fi
+
+# --- Symlink ---
+ln -sf "$TARGET" "$STYLE_LINK"
+
+# --- Reload Waybar Cleanly ---
+if pgrep -x waybar >/dev/null; then
+    killall -SIGUSR2 waybar
+else
+    waybar &
+fi
+
+notify-send "Waybar Theme Switched" "$choice"
