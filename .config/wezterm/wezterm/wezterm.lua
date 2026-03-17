@@ -30,8 +30,8 @@ config.window_decorations          = "NONE"
 config.window_padding = {
   left   = 30,
   right  = 30,
-  top    = 20,
-  bottom = 20,
+  top    = 30,
+  bottom = 30,
 }
 
 -- Background wallpaper with tint (matches kitty background_tint 0.85)
