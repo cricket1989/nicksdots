@@ -20,7 +20,7 @@ else
 end
 
 -- ── Font ─────────────────────────────────────────────────
-config.font = wezterm.font("GeistMono Nerd Font Mono", { weight = "Regular" })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 14.0
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }  -- disable ligatures
 
