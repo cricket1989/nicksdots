@@ -1,140 +1,144 @@
-/* Nord — Thin Dense Line Bar (continuous glass sheet) */
-/* Palette: https://www.nordtheme.com/docs/colors-and-palettes */
-
-@define-color nord0  #2E3440;
-@define-color nord1  #3B4252;
-@define-color nord2  #434C5E;
-@define-color nord3  #4C566A;
-
-@define-color nord4  #D8DEE9;
-@define-color nord5  #E5E9F0;
-@define-color nord6  #ECEFF4;
-
-@define-color nord7  #8FBCBB;
-@define-color nord8  #88C0D0;
-@define-color nord9  #81A1C1;
-@define-color nord10 #5E81AC;
-
-@define-color nord11 #BF616A;
-@define-color nord12 #D08770;
-@define-color nord13 #EBCB8B;
-@define-color nord14 #A3BE8C;
-@define-color nord15 #B48EAD;
-
-/* “thin + mature” tokens */
-@define-color glass      rgba(46, 52, 64, 0.52);      /* nord0 @ ~52% */
-@define-color fg         rgba(236, 239, 244, 0.92);   /* nord6 */
-@define-color fg_hi      rgba(236, 239, 244, 0.96);
-@define-color muted      rgba(216, 222, 233, 0.68);   /* nord4 */
-@define-color divider    rgba(216, 222, 233, 0.22);
-
-@define-color acc_blue   @nord9;
-@define-color acc_cyan   @nord8;
-@define-color acc_green  @nord14;
-@define-color acc_yellow @nord13;
-@define-color acc_red    @nord11;
-@define-color acc_purple @nord15;
+/* Alternative pill-style theme (keeps existing style.css untouched) */
+/* ── Fallback Nord palette (replaces missing pywal cache) ── */
+@define-color foreground rgba(216, 222, 233, 0.92);  /* Nord4 */
+@define-color color5     #b48ead;                    /* Nord aurora purple */
 
 * {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+  font-weight: 500;
   border: none;
-  border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font", "Nasalization", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
   min-height: 0;
-  box-shadow: none;
 }
 
-/* ───── Single Continuous Glass Sheet ───── */
 window#waybar {
-  background-color: @glass;
-  color: @fg;
-  padding: 2px 0;
-  margin: 6px 10px 0 10px;
-  border: 1px solid @divider;
-}
-
-/* Modules: transparent containers, dense spacing */
-#hyprland-workspaces,
-#workspaces,
-#custom-launcher,
-#custom-os_button,
-#hyprland-submap,
-#submap,
-#window,
-#clock,
-#custom-weather,
-#custom-notification,
-#tray,
-#cpu,
-#memory,
-#temperature,
-#pulseaudio,
-#network,
-#bluetooth {
   background: transparent;
-  border: none;
-  box-shadow: none;
-
-  color: @fg;
-  padding: 0 8px;   /* dense + thin */
-  margin: 0 2px;
+  color: @foreground;
 }
 
-/* Workspace buttons: no boxes, underline only */
-#hyprland-workspaces button,
+.modules-center {
+  background: rgba(20, 20, 28, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 8px;
+}
+
+#workspaces,
+#window,
+#custom-mpris,
+#clock,
+#custom-pomo,
+#pulseaudio,
+#backlight,
+#custom-memorypie,
+#battery,
+#tray {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  margin: 0 5px;
+  padding: 2px 11px;
+  color: @foreground;
+}
+
+#workspaces {
+  padding: 1px 8px;
+}
+
+#window {
+  padding: 2px 12px;
+}
+
+#custom-separator {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 2px;
+  padding: 0 2px;
+}
+
 #workspaces button {
   background: transparent;
+  color: rgba(255, 255, 255, 0.42);
+  padding: 0 4px;
+  margin: 0;
+  border-radius: 999px;
   border: none;
   box-shadow: none;
-
-  color: @muted;
-  padding: 0 6px;
-  margin: 0 2px;
-  border-bottom: 2px solid transparent;
-  transition: 0.18s ease;
+  outline: none;
+  transition: color 140ms ease;
 }
 
-#hyprland-workspaces button.active,
 #workspaces button.active {
-  color: @fg_hi;
-  border-bottom: 2px solid @acc_cyan;
+  background: transparent;
+  border: none;
+  color: @color5;
+  box-shadow: none;
 }
 
-#hyprland-workspaces button.urgent,
-#workspaces button.urgent {
-  color: @fg_hi;
-  border-bottom: 2px solid @acc_red;
-}
-
-#hyprland-workspaces button:hover,
 #workspaces button:hover {
-  color: @fg_hi;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* ───── Accent mapping (dense but readable) ───── */
-#custom-launcher,
-#custom-os_button            { color: @acc_blue; }
-
-#custom-weather              { color: @acc_cyan; }
-#network                     { color: @acc_cyan; }
-
-#bluetooth                   { color: @acc_purple; }
-
-#pulseaudio                  { color: @acc_yellow; }
-
-#cpu                         { color: @acc_green; }
-#memory                      { color: @acc_green; }
-#temperature                 { color: @acc_yellow; }
-#temperature.critical        { color: @acc_red; }
-
-#window                      { color: @muted; }
-
-#clock {
-  color: @fg_hi;
-  letter-spacing: 0.8px;
-  padding-right: 12px;
+#tray {
+  padding: 2px 10px;
 }
 
-#tray { letter-spacing: 0.4px; }
-#tray > .item { padding: 0 4px; }
+#tray > .item image {
+  min-width: 16px;
+  min-height: 16px;
+}
+
+#custom-mpris {
+  padding: 2px 12px;
+}
+
+#custom-pomo {
+  font-weight: 700;
+}
+
+#custom-mpris:hover,
+#window:hover,
+#clock:hover,
+#custom-pomo:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#custom-memorypie:hover,
+#battery:hover,
+#tray:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+#backlight {
+  color: @foreground;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.18);
+}
+
+#backlight:hover {
+  animation: sunPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes sunPulse {
+  0% {
+    color: @foreground;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.12);
+  }
+  100% {
+    color: @foreground;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.34);
+  }
+}
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
+}

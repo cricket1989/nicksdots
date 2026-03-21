@@ -1,0 +1,182 @@
+/* Kanagawa Ink — deep ink bg, muted wabi-sabi tones */
+
+@define-color glass   rgba(26, 27, 38, 0.72);
+
+@define-color acc_purple #957fb8;
+@define-color acc_aqua   #7fb4ca;
+@define-color acc_orange #ffa066;
+@define-color acc_yellow #c0a36e;
+@define-color acc_red    #e46876;
+
+@define-color fg     rgba(220, 215, 186, 0.92);
+@define-color fg_hi  rgba(255, 255, 255, 0.96);
+@define-color muted  rgba(114, 113, 105, 0.72);
+
+/* ── Global reset ───────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Nasalization", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+/* ── Bar — single continuous glass sheet ──────────────── */
+window#waybar {
+  background-color: @glass;
+  padding: 2px 0;
+}
+
+/* ── All modules — transparent containers ─────────────── */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd,
+#custom-separator {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @fg;
+  padding: 4px 12px;
+  margin: 0 4px;
+}
+
+/* Separator — dimmer, less padding */
+#custom-separator {
+  color: @muted;
+  padding: 4px 2px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ── Workspaces ───────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @acc_purple;
+  padding: 4px 12px;
+  margin: 0 4px;
+  transition: color 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: transparent;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: transparent;
+  box-shadow: none;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  color: @acc_red;
+  animation: urgent-blink 0.5s steps(1) infinite;
+}
+
+@keyframes urgent-blink {
+  50% { color: @muted; }
+}
+
+/* ── Accent mapping ──────────────────────────────────── */
+
+/* Left */
+#custom-os_button  { color: @acc_purple; font-size: 14px; }
+#custom-media      { color: @fg;         font-weight: 400; }
+#custom-media.playing  { color: @acc_aqua; }
+#custom-media.paused   { color: @muted; }
+#custom-media.stopped  { color: @muted; opacity: 0.6; }
+
+/* Center */
+#custom-notification   { color: @acc_orange; }
+#clock                 { color: @acc_yellow; font-weight: 600; letter-spacing: 0.8px; }
+#custom-hypridle       { color: @acc_red; }
+#custom-hypridle.active { color: @acc_red; }
+#custom-hypridle.idle  { color: @muted; }
+
+/* Right */
+#tray              { padding: 0 8px; }
+#tray > .item      { padding: 0 4px; }
+
+#pulseaudio        { color: @acc_orange; }
+#pulseaudio.muted  { color: @muted; }
+
+#memory            { color: @fg; }
+#cpu               { color: @fg; }
+
+#network           { color: @acc_aqua; }
+#network.disconnected { color: @acc_red; }
+
+#custom-weather    { color: @acc_aqua; font-weight: 400; }
+
+#custom-mpd        { color: @fg; font-weight: 400; }
+#custom-mpd.on     { color: @fg_hi; }
+#custom-mpd.off    { color: @muted; }
+
+#custom-pacman     { color: @acc_purple; }
+#custom-pacman.updating { color: @acc_yellow; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  color: @acc_aqua;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-screenshot:hover {
+  color: @fg_hi;
+}
+
+#custom-power {
+  color: @acc_red;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-power:hover {
+  color: @fg_hi;
+}
+
+
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn { color: @muted; font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover { color: @fg_hi; }
+
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp { padding: 0 8px; transition: all 200ms ease; }
+
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden { min-width: 0; padding: 0; }
+
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }
+
+/* ── MPD toggle group ────────────────────────────────────── */
+#custom-mpd-btn                { padding: 0 8px; transition: all 200ms ease; }
+#custom-mpd-btn:hover          { opacity: 0.75; }
+
+#mpd                           { padding: 0 8px; transition: all 200ms ease; }
+#mpd.hidden                    { min-width: 0; padding: 0; }

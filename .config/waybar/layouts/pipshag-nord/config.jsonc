@@ -1,0 +1,268 @@
+{
+  // ─────────────────────────────────────────────
+  //  Waybar — Pipshag Nord Layout
+  //  Nord palette, traditional bar | nick@cachyos
+  //  Adapted from Pipshag/dotfiles_nord (Hyprland port)
+  // ─────────────────────────────────────────────
+
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 4,
+  "exclusive": true,
+  "passthrough": false,
+
+  "modules-left": [
+    "custom/os_button",
+    "clock",
+    "hyprland/language",
+    "custom/pacman",
+    "hyprland/submap",
+    "idle_inhibitor",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "custom/cpu_gov",
+    "cpu",
+    "temperature",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "custom/notification",
+    "tray"
+  ],
+
+  // ── Workspaces ────────────────────────────────
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+
+  "hyprland/submap": {
+    "format": "<span style=\"italic\">{}</span>",
+    "tooltip": false
+  },
+
+  "hyprland/language": {
+    "format": "  {}",
+    "max-length": 5,
+    "min-length": 5,
+    "tooltip": false
+  },
+
+  // ── Idle inhibitor ────────────────────────────
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Idle inhibited",
+    "tooltip-format-deactivated": "Idle active"
+  },
+
+  // ── Clock ─────────────────────────────────────
+
+  "clock": {
+    "format": "  {:%H:%M   %e %b}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":   "<span color='#EBCB8B'><b>{}</b></span>",
+        "days":     "<span color='#D8DEE9'><b>{}</b></span>",
+        "weeks":    "<span color='#88C0D0'><b>W{}</b></span>",
+        "weekdays": "<span color='#EBCB8B'><b>{}</b></span>",
+        "today":    "<span color='#BF616A'><b><u>{}</u></b></span>"
+      }
+    },
+    "today-format": "<b>{}</b>",
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  // ── Audio ─────────────────────────────────────
+
+  "pulseaudio": {
+    "scroll-step": 3,
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+  },
+
+  // ── CPU + Temp ────────────────────────────────
+
+  "cpu": {
+    "interval": 1,
+    "format": "  {max_frequency}GHz <span color=\"#4c566a\">| {usage}%</span>",
+    "max-length": 14,
+    "min-length": 14,
+    "on-click": "kitty -e btop",
+    "tooltip": false
+  },
+
+  "temperature": {
+    "interval": 4,
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format-critical": "  {temperatureC}°C",
+    "format": "{icon}  {temperatureC}°C",
+    "format-icons": ["", "", ""],
+    "max-length": 8,
+    "min-length": 8
+  },
+
+  // ── CPU Governor ──────────────────────────────
+
+  "custom/cpu_gov": {
+    "exec": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+    "interval": 10,
+    "format": "󰓅 {}",
+    "tooltip-format": "CPU Governor",
+    "max-length": 2,
+    "min-length": 2
+  },
+
+  // ── Network ───────────────────────────────────
+
+  "network": {
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-linked": "󰈀 (No IP)",
+    "format-disconnected": "󰤭",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "family": "ipv4",
+    "max-length": 18,
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
+    "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  // ── Bluetooth ─────────────────────────────────
+
+  "bluetooth": {
+    "interval": 30,
+    "format": "{icon}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format-icons": {
+      "enabled": "",
+      "disabled": ""
+    },
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{num_connections} connected\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  },
+
+  // ── Tray ─────────────────────────────────────
+
+  "tray": {
+    "spacing": 5,
+    "icon-size": 14
+  },
+
+  // ── Custom modules ────────────────────────────
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#BF616A'>󰂚</span>",
+      "none": "󰂜",
+      "dnd-notification": "<span foreground='#BF616A'>󰂛</span>",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "<span foreground='#BF616A'>󰂚</span>",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "<span foreground='#BF616A'>󰂚</span>",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "󰎆"
+    },
+    "escape": true,
+    "exec": "~/.config/waybar-clean/scripts/mediaplayer.py 2>/dev/null"
+  },
+
+  "custom/pacman": {
+    "format": "  {}",
+    "interval": 3600,
+    "exec": "checkupdates 2>/dev/null | wc -l",
+    "exec-if": "exit 0",
+    "on-click": "kitty -e bash -lc 'yay && read'",
+    "signal": 8,
+    "max-length": 5,
+    "min-length": 3
+  },
+
+  "custom/os_button": {
+    "format": "  ",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
+    "tooltip": false
+  }
+}

@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# ─────────────────────────────────────────────────────────────
+#  Waybar Layout + Style Switcher (rofi)
+#  Shows every layout/style combination in one flat menu.
+#  Marks the currently active entry with │.
+# ─────────────────────────────────────────────────────────────
 set -euo pipefail
 
 WAYBAR_DIR="$HOME/.config/waybar"
@@ -9,45 +14,97 @@ NOTIFY=${NOTIFY:-notify-send}
 
 mkdir -p "$STATE_DIR"
 
-if [[ ! -d "$LAYOUTS_DIR" ]]; then
-  echo "No layouts directory at $LAYOUTS_DIR" >&2
-  exit 1
-fi
+[[ -d "$LAYOUTS_DIR" ]] || { echo "No layouts directory at $LAYOUTS_DIR" >&2; exit 1; }
 
-mapfile -t LAYOUTS < <(find "$LAYOUTS_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort)
-((${#LAYOUTS[@]})) || { echo "No layouts found in $LAYOUTS_DIR"; exit 1; }
+# ── Detect current active layout/style ────────────────────
+current_layout=""
+current_style=""
 
-# Detect current layout
-current="(none)"
 if [[ -L "$WAYBAR_DIR/config.jsonc" ]]; then
-  tgt=$(readlink -f "$WAYBAR_DIR/config.jsonc" || true)
-  if [[ "$tgt" == "$LAYOUTS_DIR/"*"/config.jsonc" ]]; then
-    current=$(basename "$(dirname "$tgt")")
+  cfg_tgt=$(readlink -f "$WAYBAR_DIR/config.jsonc" 2>/dev/null || true)
+  if [[ "$cfg_tgt" == "$LAYOUTS_DIR/"*"/config.jsonc" ]]; then
+    current_layout=$(basename "$(dirname "$cfg_tgt")")
   fi
 fi
 
-# Build menu with star on current
-menu=$(printf "%s\n" "${LAYOUTS[@]}" | awk -v c="$current" '{print ($0==c?"| ":"  ")$0}')
-chosen=$(echo "$menu" | rofi -dmenu -i -p "Select Layout" -theme ~/.local/share/rofi/themes/minimal.rasi | sed 's/^| //; s/^  //')
+if [[ -L "$WAYBAR_DIR/style.css" ]]; then
+  css_tgt=$(readlink -f "$WAYBAR_DIR/style.css" 2>/dev/null || true)
+  if [[ "$css_tgt" == "$LAYOUTS_DIR/"* ]]; then
+    # Could be layouts/name/style.css or layouts/name/styles/foo.css
+    rel="${css_tgt#$LAYOUTS_DIR/}"
+    current_style=$(basename "$rel" .css)
+  fi
+fi
+
+# ── Build flat entry list ──────────────────────────────────
+# Format: "layout"  or  "layout / style"
+declare -a entries
+declare -A entry_cfg   # entry → config path
+declare -A entry_css   # entry → style path
+
+while IFS= read -r layout; do
+  cfg="$LAYOUTS_DIR/$layout/config.jsonc"
+  [[ -f "$cfg" ]] || continue
+
+  if [[ -d "$LAYOUTS_DIR/$layout/styles" ]]; then
+    # Multi-style layout: one entry per style file
+    while IFS= read -r css_file; do
+      style=$(basename "$css_file" .css)
+      entry="$layout / $style"
+      entries+=("$entry")
+      entry_cfg["$entry"]="$cfg"
+      entry_css["$entry"]="$css_file"
+    done < <(find "$LAYOUTS_DIR/$layout/styles" -name "*.css" | sort)
+  else
+    # Single-style layout
+    css="$LAYOUTS_DIR/$layout/style.css"
+    [[ -f "$css" ]] || continue
+    entry="$layout"
+    entries+=("$entry")
+    entry_cfg["$entry"]="$cfg"
+    entry_css["$entry"]="$css"
+  fi
+done < <(find "$LAYOUTS_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort)
+
+((${#entries[@]})) || { echo "No layout entries found" >&2; exit 1; }
+
+# ── Build menu string, mark active entry ──────────────────
+menu_lines=""
+for entry in "${entries[@]}"; do
+  if [[ "$entry" == "$current_layout / $current_style" ]] || \
+     [[ "$entry" == "$current_layout" && -z "$current_style" ]] || \
+     [[ "$entry" == "$current_layout" && "$current_style" == "style" ]]; then
+    menu_lines+="│ $entry"$'\n'
+  else
+    menu_lines+="  $entry"$'\n'
+  fi
+done
+
+# ── Show rofi menu ─────────────────────────────────────────
+chosen=$(echo "$menu_lines" | rofi -dmenu -i \
+  -p " Layout" \
+  -theme ~/.local/share/rofi/themes/minimal.rasi \
+  | sed 's/^│ //; s/^  //')
+
 [[ -z "${chosen:-}" ]] && exit 0
 
-cfg_src="$LAYOUTS_DIR/$chosen/config.jsonc"
-css_src="$LAYOUTS_DIR/$chosen/style.css"
+cfg_src="${entry_cfg[$chosen]:-}"
+css_src="${entry_css[$chosen]:-}"
 
-[[ -f "$cfg_src" ]] || { echo "Missing $cfg_src"; exit 1; }
-[[ -f "$css_src" ]] || { echo "Missing $css_src"; exit 1; }
+[[ -f "$cfg_src" ]] || { echo "Missing config: $cfg_src" >&2; exit 1; }
+[[ -f "$css_src" ]] || { echo "Missing style: $css_src"  >&2; exit 1; }
 
+# ── Apply symlinks ─────────────────────────────────────────
 ln -sf "$cfg_src" "$WAYBAR_DIR/config.jsonc"
-ln -sf "$css_src" "$WAYBAR_DIR/style.css"
+ln -sf "$css_src"  "$WAYBAR_DIR/style.css"
 
 echo "$chosen" > "$STATE_FILE"
 
-# Reload Waybar
+# ── Reload Waybar ──────────────────────────────────────────
 if pgrep -x waybar >/dev/null; then
   pkill -USR2 waybar || true
 else
   nohup waybar >/dev/null 2>&1 &
 fi
 
-[[ "$NOTIFY" = ":" ]] || $NOTIFY "Waybar" "Layout: $chosen"
-
+[[ "$NOTIFY" = ":" ]] || $NOTIFY "Waybar" "$chosen"

@@ -1,0 +1,132 @@
+{
+  "layer": "top",
+  "modules-left": ["custom/launcher", "hyprland/workspaces"],
+  "modules-center": ["custom/media"],
+  "modules-right": ["pulseaudio", "network", "battery", "clock", "custom/time",
+    "custom/screenshot",
+    "custom/power"
+  ],
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "bash $HOME/.config/waybar/scripts/app-launcher.sh",
+    "tooltip-format": "Launch your favorite apps"
+  },
+
+  "battery": {
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    // "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "Battery is at {capacity}%" 
+  },
+
+  "custom/time": {
+    "format": "{}",
+    "interval": 5,
+    "exec": "date +%H:%M",
+    "tooltip": false
+  },
+
+  "clock": {
+    "format": "{:%a %d %b}",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{class}",
+    "separate-outputs": true
+  },
+
+  "network": {
+    "interface": "wlo1",
+    "format": "{ifname}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "Connected to {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "󰂱",
+    "format-muted": "󰖁",
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "custom/media": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 1, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  }
+}

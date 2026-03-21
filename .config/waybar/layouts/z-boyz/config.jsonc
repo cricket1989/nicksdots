@@ -22,12 +22,14 @@
     "custom/mpd",
     "cpu",
     "custom/pacman",
-    "clock"
+    "clock",
+    "custom/screenshot",
+    "custom/power"
   ],
 
   "custom/os_button": {
     "format": "  APPS",
-    "on-click": "pkill rofi || /home/nick/.local/share/rofi/scripts/LauncherN1.sh",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
     "tooltip": false
   },
 
@@ -59,7 +61,7 @@
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
-    "on-click": "/home/nick/.local/bin/notifications-toggle.sh",
+    "on-click": "$HOME/.local/bin/notifications-toggle.sh",
     "on-click-middle": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
@@ -74,21 +76,22 @@
     "on-scroll-down": "hyprctl dispatch workspace e+1",
     "persistent-workspaces": {
       "DP-2": [1],
-      "DP-3": [2, 3, 4],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
       "DP-1": [9]
     },
     "format-icons": {
-      "1": "󰆍",
-      "2": "󰈹",
-      "3": "󰨞",
-      "4": "󰋩",
-      "5": "󰊠",
-      "6": "󰎄",
-      "7": "󱎓",
-      "8": "󰙯",
-      "9": "󰭹",
-      "urgent": "󰀦",
-      "default": "󰮯"
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
     }
   },
 
@@ -124,7 +127,7 @@
 
   "network": {
     "interface": "wlan0",
-    "format-wifi": "{icon}  {essid}",
+    "format-wifi": "{icon}",
     "format-ethernet": "󰈀  {ipaddr}/{cidr}",
     "format-linked": "󰈀  {ifname} (no ip)",
     "format-disconnected": "󰤭  Offline",
@@ -133,7 +136,7 @@
     "tooltip-format-wifi": "  {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}\nGW: {gwaddr}",
     "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}/{cidr}\nGW: {gwaddr}",
     "tooltip-format-disconnected": "Network disconnected",
-    "on-click": "/home/nick/.local/bin/matugen-rofi-pick.sh",
+    "on-click": "$HOME/.local/bin/matugen-rofi-pick.sh",
     "on-click-right": "nm-connection-editor",
     "on-click-middle": "nmcli device wifi rescan"
   },
@@ -205,5 +208,23 @@
   "tray": {
     "icon-size": 16,
     "spacing": 8
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
   }
 }

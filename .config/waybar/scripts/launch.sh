@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
+# Waybar launcher — called from Hyprland or session startup
+# To switch themes, use: ~/.config/waybar/switch-theme.sh <layout> [style]
 
-# Available themes: alchemy, subtle, ultra_minimal, velvetline
-
-waybar_config_dir="/home/$USER/.config/waybar"
-
-killall -9 waybar
-killall -9 swaync
+killall -9 waybar 2>/dev/null
+killall -9 swaync 2>/dev/null
 
 swaync &
 

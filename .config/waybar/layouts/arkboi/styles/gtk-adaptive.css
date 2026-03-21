@@ -1,0 +1,181 @@
+/* arkboi — GTK-adaptive style
+   Uses GTK theme named colors so the bar matches whatever
+   gtk-theme-name is set to in gtk-3.0/settings.ini.
+   Works with: Graphite-Dark-compact-nord, Nordic-darker,
+               Colloid-Dark-Teal, and most other dark themes.
+*/
+
+/* ── Global reset ────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Nasalization", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+/* ── Bar — glass pull from GTK bg ────────────────────────── */
+window#waybar {
+  background-color: alpha(@theme_bg_color, 0.88);
+  color: @theme_fg_color;
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+/* ── All modules ─────────────────────────────────────────── */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd,
+#mpd,
+#custom-separator,
+#custom-screenshot,
+#custom-power,
+#custom-sysinfo-btn,
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @theme_fg_color;
+  padding: 4px 12px;
+  margin: 0 4px;
+}
+
+/* ── Separator ───────────────────────────────────────────── */
+#custom-separator {
+  color: alpha(@theme_fg_color, 0.25);
+  padding: 4px 2px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ── Workspaces ──────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: alpha(@theme_fg_color, 0.40);
+  padding: 4px 10px;
+  margin: 0 2px;
+  transition: color 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: transparent;
+  color: @theme_selected_bg_color;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: transparent;
+  box-shadow: none;
+  color: @theme_fg_color;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  color: @error_color;
+  animation: urgent-blink 0.5s steps(1) infinite;
+}
+
+@keyframes urgent-blink {
+  50% { color: alpha(@theme_fg_color, 0.25); }
+}
+
+/* ── Left ────────────────────────────────────────────────── */
+#custom-os_button {
+  color: @theme_selected_bg_color;
+  font-size: 14px;
+}
+
+#custom-media,
+#mpd                       { color: @theme_fg_color; font-weight: 400; }
+#custom-media.playing,
+#mpd.playing               { color: @theme_selected_bg_color; }
+#custom-media.paused,
+#mpd.paused                { color: alpha(@theme_fg_color, 0.40); }
+#custom-media.stopped,
+#mpd.stopped               { color: alpha(@theme_fg_color, 0.25); }
+
+/* ── Center ──────────────────────────────────────────────── */
+#custom-notification        { color: @theme_selected_fg_color; }
+
+#clock {
+  color: @theme_selected_bg_color;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+#custom-hypridle            { color: @error_color; }
+#custom-hypridle.active     { color: @error_color; }
+#custom-hypridle.idle       { color: alpha(@theme_fg_color, 0.35); }
+
+/* ── Right ───────────────────────────────────────────────── */
+#tray                       { padding: 0 8px; }
+#tray > .item               { padding: 0 4px; }
+
+#pulseaudio                 { color: @theme_selected_fg_color; }
+#pulseaudio.muted           { color: alpha(@theme_fg_color, 0.35); }
+
+#memory,
+#cpu                        { color: @theme_fg_color; }
+
+#network                    { color: @theme_selected_bg_color; }
+#network.disconnected       { color: @error_color; }
+
+#custom-weather             { color: @theme_selected_fg_color; font-weight: 400; }
+
+#custom-pacman              { color: alpha(@theme_fg_color, 0.55); }
+#custom-pacman.updating     { color: @theme_selected_bg_color; }
+
+#custom-screenshot {
+  color: @theme_selected_bg_color;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+#custom-screenshot:hover    { color: @theme_fg_color; }
+
+#custom-power {
+  color: @error_color;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+#custom-power:hover         { color: @theme_fg_color; }
+
+/* ── Sysinfo group ───────────────────────────────────────── */
+#custom-sysinfo-btn         { color: alpha(@theme_fg_color, 0.35); font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover   { color: @theme_fg_color; }
+
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp        { padding: 0 8px; transition: all 200ms ease; }
+
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden { min-width: 0; padding: 0; }
+
+#custom-sysinfo-temp.critical { color: @error_color; }
+#custom-sysinfo-temp.warning  { color: @theme_selected_bg_color; }
+
+/* ── MPD toggle group ────────────────────────────────────── */
+#custom-mpd-btn                { padding: 0 8px; transition: all 200ms ease; }
+#custom-mpd-btn:hover          { opacity: 0.75; }
+
+#mpd                           { padding: 0 8px; transition: all 200ms ease; }
+#mpd.hidden                    { min-width: 0; padding: 0; }

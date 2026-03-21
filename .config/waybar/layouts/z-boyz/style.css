@@ -138,3 +138,14 @@ window#waybar {
 
 #tray { letter-spacing: 0.4px; }
 #tray > .item { padding: 0 4px; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
+}

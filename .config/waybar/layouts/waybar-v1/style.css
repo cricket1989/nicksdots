@@ -1,5 +1,7 @@
 /* Alternative pill-style theme (keeps existing style.css untouched) */
-@import "../../.cache/wal/colors-waybar.css";
+/* ── Fallback Nord palette (replaces missing pywal cache) ── */
+@define-color foreground rgba(216, 222, 233, 0.92);  /* Nord4 */
+@define-color color5     #b48ead;                    /* Nord aurora purple */
 
 * {
   font-family: "JetBrainsMono Nerd Font";
@@ -128,4 +130,15 @@ window#waybar {
     color: @foreground;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.34);
   }
+}
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
 }

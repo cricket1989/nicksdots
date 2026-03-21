@@ -1,0 +1,169 @@
+/* ─────────────────────────────────────────────────────────────
+   cjbassi — Dark Solarized / Spacemacs style
+   Solid dark bar, powerline-style arrows, monospace.
+   Adapted from cjbassi/config dotfiles.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette (Solarized Dark) ────────────────────────────── */
+@define-color base03  #002b36;
+@define-color base02  #073642;
+@define-color base01  #586e75;
+@define-color base00  #657b83;
+@define-color base0   #839496;
+@define-color base1   #93a1a1;
+@define-color base2   #eee8d5;
+@define-color base3   #fdf6e3;
+
+@define-color acc_yellow  #b58900;
+@define-color acc_orange  #cb4b16;
+@define-color acc_red     #dc322f;
+@define-color acc_magenta #d33682;
+@define-color acc_violet  #6c71c4;
+@define-color acc_blue    #268bd2;
+@define-color acc_cyan    #2aa198;
+@define-color acc_green   #859900;
+
+@define-color fg      @base0;
+@define-color fg_hi   @base3;
+@define-color muted   @base01;
+@define-color bg      @base03;
+@define-color bg_hi   @base02;
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  min-height: 0;
+  box-shadow: none;
+}
+
+/* ── Bar ─────────────────────────────────────────────────── */
+window#waybar {
+  background: @bg;
+  color: @fg;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+/* ── Module defaults ─────────────────────────────────────── */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#idle-inhibitor,
+#hyprland-workspaces,
+#workspaces,
+#hyprland-submap,
+#custom-notification,
+#custom-media,
+#custom-pacman,
+#custom-power {
+  padding: 0 10px;
+  background: transparent;
+  color: @fg;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: @bg_hi;
+  color: @muted;
+  padding: 2px 10px;
+  min-width: 20px;
+  transition: all 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: @acc_blue;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(38, 139, 210, 0.2);
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  background: @acc_red;
+  color: @fg_hi;
+}
+
+/* ── Powerline separators ─────────────────────────────────── */
+/* Right-pointing arrow (end of left group) */
+#custom-sep-right {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Left-pointing arrow (between right modules) */
+#custom-sep-left {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Center dividers */
+#custom-sep-mid {
+  color: @base01;
+  padding: 0 4px;
+  font-size: 12px;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#clock               { color: @acc_blue; font-weight: 700; background: @bg_hi; padding: 0 14px; }
+
+#cpu                 { color: @acc_violet; background: @bg_hi; }
+#memory              { color: @acc_cyan;   background: @bg_hi; }
+#temperature         { color: @fg; background: @bg_hi; }
+#temperature.critical { color: @acc_red; animation: blink-critical 1s infinite; }
+
+#network             { color: @acc_cyan; }
+#network.disconnected { color: @acc_red; }
+
+#pulseaudio          { color: @acc_blue; background: @bg_hi; }
+#pulseaudio.muted    { color: @muted; }
+
+#bluetooth           { color: @acc_blue; }
+#bluetooth.connected { color: @acc_cyan; }
+#bluetooth.disabled  { color: @muted; }
+
+#custom-notification { color: @acc_orange; }
+#custom-media        { color: @fg; font-weight: 300; }
+#custom-pacman       { color: @acc_violet; }
+#custom-power        { color: @acc_red; font-size: 15px; }
+#custom-power:hover  { color: @fg_hi; }
+
+#idle-inhibitor.activated   { color: @acc_yellow; }
+#idle-inhibitor.deactivated { color: @muted; }
+
+#hyprland-submap { color: @acc_orange; font-style: italic; }
+
+/* ── Tray ─────────────────────────────────────────────────── */
+#tray { padding: 0 6px; background: @bg_hi; }
+#tray > .item { padding: 0 3px; }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-critical {
+  0%   { background: transparent; color: @acc_red; }
+  50%  { background: @acc_red; color: @bg; }
+  100% { background: transparent; color: @acc_red; }
+}

@@ -1,0 +1,237 @@
+/* Tokyo Night Moon palette */
+@define-color tn_bg        #222436;
+@define-color tn_surface   #2f334d;  /* nice module fill */
+@define-color tn_surface2  #3b4261;  /* hover */
+@define-color tn_border    #444a73;
+
+@define-color tn_fg        #c8d3f5;
+@define-color tn_muted     #828bb8;
+
+@define-color tn_red       #ff757f;
+@define-color tn_green     #c3e88d;
+@define-color tn_yellow    #ffc777;
+@define-color tn_blue      #82aaff;
+@define-color tn_purple    #c099ff;
+@define-color tn_cyan      #86e1fc;
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 15px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @tn_fg;
+  margin: 5px 5px;
+}
+
+/* shared module styling */
+#bluetooth,
+#temperature,
+#custom-music,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#custom-wifi,
+#cpu,
+#memory,
+#custom-menuApp,
+#custom-power,
+#custom-switcher,
+#workspaces {
+  background-color: @tn_surface;
+  padding: 9px;
+  margin: 0px;
+  margin-top: 3px;
+  transition: all 0.4s ease;
+  border: 1px solid alpha(@tn_border, 0.55);
+}
+
+/* Left cluster */
+#custom-menuApp {
+  margin-left: 5px;
+  margin-right: 0px;
+  border-radius: 2rem 0.5rem 0.5rem 2rem;
+  color: @tn_red;
+  padding-right: 14px;
+}
+#custom-menuApp:hover {
+  border-radius: 1rem;
+  background-color: @tn_surface2;
+}
+
+#custom-music {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem 2rem 2rem 0.5rem;
+  color: @tn_purple;
+  padding-left: 17px;
+  padding-right: 17px;
+  font-size: 14px;
+}
+#custom-music:hover {
+  border-radius: 1rem;
+  background-color: @tn_surface2;
+}
+
+#custom-switcher {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_yellow;
+  padding-left: 10px;
+  padding-right: 7px;
+}
+#custom-switcher:hover {
+  border-radius: 1rem;
+  background-color: @tn_surface2;
+}
+
+/* Right cluster */
+#pulseaudio {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 2rem 0.5rem 0.5rem 2rem;
+  color: @tn_yellow;
+  padding-left: 10px;
+  padding-right: 17px;
+}
+
+#custom-wifi,
+#network {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_blue;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#cpu {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_green;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#memory {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_cyan;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#temperature {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_red;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#bluetooth {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_purple;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#battery {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_yellow;
+  padding-left: 0px;
+  padding-right: 15px;
+}
+#battery.charging { color: @tn_green; }
+#battery.warning:not(.charging) { color: @tn_red; }
+
+#clock {
+  margin-left: 0.1px;
+  margin-right: 0px;
+  border-radius: 0.5rem;
+  color: @tn_blue;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+#custom-power {
+  margin-left: 0.1px;
+  margin-right: 4px;
+  border-radius: 0.5rem 2rem 2rem 0.5rem;
+  color: @tn_red;
+  padding-left: 20px;
+  padding-right: 23px;
+}
+#custom-power:hover {
+  border-radius: 1rem;
+  background-color: @tn_surface2;
+}
+
+/* Hover glow behavior */
+#memory:hover,
+#network:hover,
+#custom-wifi:hover,
+#cpu:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#clock:hover,
+#temperature:hover,
+#battery:hover {
+  color: @tn_red;
+  border-radius: 1rem;
+  background-color: @tn_surface2;
+  border-color: alpha(@tn_blue, 0.55);
+}
+
+/* Workspaces */
+#workspaces {
+  background-color: @tn_surface;
+  border-radius: 2rem;
+  padding: 10px;
+  margin-left: 4px;
+  transition: all 0.5s ease-in-out;
+}
+
+#workspaces button {
+  background-color: alpha(@tn_fg, 0.18);
+  border-radius: 2rem;
+  padding: 0px;
+  margin-right: 5px;
+  transition: all 0.5s ease-out;
+  min-width: 22px;
+}
+
+#workspaces button.active {
+  min-width: 50px;
+  background-color: alpha(@tn_fg, 0.95);
+}
+
+#workspaces button:hover {
+  background-color: @tn_surface2;
+}
+
+/* ── Idle inhibitor ─────────────────────────────────── */
+#idle-inhibitor { color: @tn_muted; padding: 0 10px; }
+#idle-inhibitor.activated { color: @tn_yellow; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
+}

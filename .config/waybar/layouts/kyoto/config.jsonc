@@ -29,12 +29,15 @@
     "custom/sep_d_b_r",
     "tray",
     "custom/sep_b_a_r",
-    "clock"
+    "clock",
+    "idle_inhibitor",
+    "custom/screenshot",
+    "custom/power"
   ],
 
   "custom/launcher": {
     "format": "󰣇",
-    "on-click": "pkill rofi || rofi -show drun -theme /home/nick/.local/share/rofi/themes/futuristic/style.rasi",
+    "on-click": "pkill rofi || rofi -show drun -theme $HOME/.local/share/rofi/themes/futuristic/style.rasi",
     "tooltip": false
   },
 
@@ -47,14 +50,36 @@
   "custom/sep_b_a_r": { "format": "", "tooltip": false },
 
   "hyprland/workspaces": {
-    "format": "{name}",
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
     "on-click": "activate",
-    "persistent-workspaces": { "*": 10 }
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
   },
 
   "network": {
     "interface": "wlan0",
-    "format-wifi": "  {essid}",
+    "format-wifi": "{icon}",
     "format-disconnected": "󰖪  Offline",
     "interval": 5
   },
@@ -84,5 +109,34 @@
     "on-click-right": "kitty -e ncmpcpp",
     "on-scroll-up": "mpc volume +5",
     "on-scroll-down": "mpc volume -5"
+  },
+
+  // ── Idle inhibitor ──────────────────────────────────
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾫"
+    },
+    "tooltip-format-activated": "Idle inhibitor: ON",
+    "tooltip-format-deactivated": "Idle inhibitor: OFF"
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
   }
 }

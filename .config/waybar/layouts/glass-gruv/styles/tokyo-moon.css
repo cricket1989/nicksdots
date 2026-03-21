@@ -1,0 +1,140 @@
+/* Tokyo Night Moon — Waybar (GTK-compatible, no backdrop-filter) */
+
+@define-color bg      rgba(22, 22, 30, 0.88);
+@define-color panel   rgba(26, 27, 38, 0.86);
+@define-color chip    rgba(31, 35, 53, 0.90);
+
+@define-color fg      rgba(192, 202, 245, 0.92);
+@define-color fg_hi   rgba(235, 238, 255, 0.92);
+@define-color muted   rgba(184, 191, 224, 0.65);
+
+@define-color border  rgba(59, 66, 97, 0.35);
+
+@define-color blue    rgba(122, 162, 247, 0.95);
+@define-color cyan    rgba(125, 207, 255, 0.95);
+@define-color purple  rgba(187, 154, 247, 0.95);
+@define-color green   rgba(158, 206, 106, 0.95);
+@define-color yellow  rgba(224, 175, 104, 0.95);
+@define-color red     rgba(247, 118, 142, 0.95);
+
+/* ───── Continuous Glass Sheet (Tokyo Moon) ───── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Nasalization", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @panel; /* lighter surface glass */
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+/* Modules become transparent containers */
+
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: @fg;
+  padding: 4px 12px;
+  margin: 0 4px;
+}
+
+/* Workspace buttons */
+
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: @muted;
+  padding: 4px 12px;
+  margin: 0 4px;
+  transition: 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @fg_hi;
+}
+
+/* accents */
+#custom-os_button    { color: @purple; }
+#custom-notification { color: @yellow; }
+#custom-weather      { color: @cyan; }
+#cpu                 { color: @green; }
+#pulseaudio          { color: @blue; }
+#network             { color: @cyan; }
+#custom-pacman       { color: @purple; }
+#custom-hypridle     { color: @red; }
+
+#tray { letter-spacing: 0.5px; }
+#tray > .item { padding: 0 4px; }
+label.module { letter-spacing: 2px; }
+
+#clock {
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: @fg_hi;
+}
+
+#custom-mpd.on { color: @fg_hi; }
+#custom-mpd.off { color: @muted; }
+
+#custom-media.playing { color: @cyan; }
+#custom-media.paused  { color: @muted; }
+#custom-media.stopped { color: rgba(140, 150, 190, 0.60); }
+/* ───────── Selected module glow (Tokyo Night Moon) ───────── */
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  color: @acc_aqua;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-screenshot:hover {
+  color: @fg_hi;
+}
+
+#custom-power {
+  color: @acc_red;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-power:hover {
+  color: @fg_hi;
+}

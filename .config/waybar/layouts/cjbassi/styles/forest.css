@@ -1,0 +1,173 @@
+/* ─────────────────────────────────────────────────────────────
+   cjbassi — Forest Dark
+   Solid dark bar, powerline-style arrows, monospace.
+   Deep forest greens, warm accents.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette (Forest) ────────────────────────────────────── */
+@define-color bg      #131a13;
+@define-color bg_hi   #1e2b1e;
+@define-color fg      #c8ddb8;
+@define-color fg_hi   #e0f0d0;
+@define-color muted   #506850;
+
+@define-color green   #7ab870;
+@define-color teal    #4aa07a;
+@define-color lime    #a8c060;
+@define-color yellow  #c8b070;
+@define-color orange  #c87040;
+@define-color red     #b05040;
+@define-color blue    #5888a8;
+@define-color purple  #806898;
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  min-height: 0;
+  box-shadow: none;
+}
+
+/* ── Bar ─────────────────────────────────────────────────── */
+window#waybar {
+  background: @bg;
+  color: @fg;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+/* ── Module defaults ─────────────────────────────────────── */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#idle-inhibitor,
+#hyprland-workspaces,
+#workspaces,
+#hyprland-submap,
+#custom-notification,
+#custom-media,
+#custom-pacman,
+#custom-power,
+#mpd {
+  padding: 0 10px;
+  background: transparent;
+  color: @fg;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: @bg_hi;
+  color: @muted;
+  padding: 2px 10px;
+  min-width: 20px;
+  transition: all 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: @green;
+  color: @bg;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(122, 184, 112, 0.2);
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  background: @red;
+  color: @fg_hi;
+}
+
+/* ── Powerline separators ─────────────────────────────────── */
+#custom-sep-right {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-sep-left {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-sep-mid {
+  color: @muted;
+  padding: 0 4px;
+  font-size: 12px;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#clock               { color: @green; font-weight: 700; background: @bg_hi; padding: 0 14px; }
+
+#cpu                 { color: @teal;   background: @bg_hi; }
+#memory              { color: @lime;   background: @bg_hi; }
+#temperature         { color: @fg; background: @bg_hi; }
+#temperature.critical { color: @red; animation: blink-critical 1s infinite; }
+
+#network             { color: @teal; }
+#network.disconnected { color: @red; }
+
+#pulseaudio          { color: @blue; background: @bg_hi; }
+#pulseaudio.muted    { color: @muted; }
+
+#bluetooth           { color: @blue; }
+#bluetooth.connected { color: @teal; }
+#bluetooth.disabled  { color: @muted; }
+
+#custom-notification { color: @orange; }
+#mpd                 { color: @green; }
+#mpd.disconnected    { color: @muted; }
+#mpd.stopped         { color: @muted; }
+#custom-media        { color: @fg; font-weight: 300; }
+#custom-pacman       { color: @purple; }
+#custom-power        { color: @red; font-size: 15px; }
+#custom-power:hover  { color: @fg_hi; }
+
+#idle-inhibitor.activated   { color: @yellow; }
+#idle-inhibitor.deactivated { color: @muted; }
+
+#hyprland-submap { color: @orange; font-style: italic; }
+
+/* ── Tray ─────────────────────────────────────────────────── */
+#tray { padding: 0 6px; background: @bg_hi; }
+#tray > .item { padding: 0 3px; }
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn { color: @muted; font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover { color: @fg; }
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp { background: @bg_hi; padding: 0 8px; transition: all 200ms ease; }
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden { min-width: 0; padding: 0; }
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-critical {
+  0%   { background: transparent; color: @red; }
+  50%  { background: @red; color: @bg; }
+  100% { background: transparent; color: @red; }
+}

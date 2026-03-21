@@ -1,0 +1,180 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "mod": "dock",
+    "exclusive": true,
+    "gtk-layer-shell": true,
+    "margin-bottom": -1,
+    "passthrough": false,
+    "height": 41,
+    "modules-left": [
+        "custom/os_button",
+        "hyprland/workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/bar2",
+        "custom/weather",
+        "cpu",
+        "temperature",
+        "memory",
+        "disk",
+        "tray",
+        "pulseaudio",
+        "network",
+        "battery",
+        "hyprland/language",
+        "clock"
+    ],
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "ENG",
+        "format-ru": "РУС"
+    },
+    "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+    "custom/os_button": {
+        "format": "",
+        "on-click": "pkill rofi || $HOME/.config/rofi/launchers/type-1/launcher.sh",
+        "tooltip": false
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}%",
+        "max-length": 10
+    },
+    "temperature": {
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+        "input-filename": "temp2_input",
+        "critical-threshold": 75,
+        "tooltip": false,
+        "format-critical": "({temperatureC}°C)",
+        "format": "({temperatureC}°C)"
+    },
+    "disk": {
+        "interval": 30,
+        "format": "🖴 {percentage_used}%",
+        "path": "/",
+        "tooltip": true,
+        "unit": "GB",
+        "tooltip-format":  "Available {free} of {total}"
+    },
+    "memory": {
+        "interval": 10,
+        "format": "  {percentage}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM - {used:0.1f}GiB used"
+    },
+    "wlr/taskbar": {
+        "format": "{icon} {title:.17}",
+        "icon-size": 28,
+        "spacing": 3,
+        "on-click-middle": "close",
+        "tooltip-format": "{title}",
+        "ignore-list": [],
+        "on-click": "activate"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "      {:%R\n %d.%m.%Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": "  ",
+        "format-disconnected": "󰌙",
+        "format-icons": [
+            "󰤯 ",
+            "󰤟 ",
+            "󰤢 ",
+            "󰤢 ",
+            "󰤨 "
+        ]
+    },
+    "pulseaudio": {
+        "max-volume": 150,
+        "scroll-step": 10,
+        "format": "{icon}",
+        "tooltip-format": "{volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
+        "on-click": "pwvucontrol"
+    },
+    "custom/weather": {
+        "format": "{}°",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar --location Pontiac --fahrenheit --main-indicator FeelsLikeF",
+        "return-type": "json"
+    },
+    "custom/bar2": {
+        "format": "󰑓",
+        "tooltip": "Toggle 2nd bar",
+        "on-click": "~/.config/waybar/scripts/2ndbar.sh"
+    },
+    "custom/cava": {
+        "exec": "~/.config/waybar/scripts/cava-waybar.sh",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": false
+    }
+}
+
+

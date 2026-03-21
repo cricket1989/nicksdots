@@ -1,4 +1,4 @@
-@import "/home/nick/.config/waybar/layouts/kyoto/colors.css";
+@import "./colors.css";
 
 * {
   font-family: "JetBrainsMono Nerd Font";
@@ -73,4 +73,19 @@ window#waybar {
 #clock:hover,
 #custom-mpd:hover {
   background-color: rgba(224,154,63,0.10);
+}
+
+/* ── Idle inhibitor ─────────────────────────────────── */
+#idle-inhibitor { color: @dim; padding: 6px 10px; background-color: @segB; }
+#idle-inhibitor.activated { color: @accent; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
 }

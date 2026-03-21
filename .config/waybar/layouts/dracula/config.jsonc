@@ -1,78 +1,174 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24,
-  "spacing": 4,
+  "height": 28,
+  "spacing": 6,
+
   "modules-left": [
-    "wlr/workspaces",
+    "custom/os_button",
+    "hyprland/workspaces",
     "wlr/taskbar"
   ],
+
   "modules-center": [
     "hyprland/window"
   ],
+
   "modules-right": [
-    "cpu",
-    "memory",
+    "idle_inhibitor",
+    "mpris",
     "pulseaudio",
     "network",
+    "cpu",
+    "memory",
+    "temperature",
     "tray",
+    "hyprland/language",
+    "custom/weather",
     "clock",
-    "custom/weather"
+        "custom/screenshot",
+    "custom/powermenu"
   ],
+
   "wlr/taskbar": {
     "on-click": "activate",
     "on-click-middle": "close",
-    "ignore-list": [
-      "kitty",
-      "Alacritty",
-      "org.wezfurlong.wezterm"
-    ]
+    "ignore-list": ["kitty", "Alacritty", "org.wezfurlong.wezterm"]
   },
-  "wlr/workspaces": {
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
     "on-click": "activate",
     "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1"
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
   },
+
   "hyprland/window": {
-    "max-length": 128
+    "max-length": 96,
+    "separate-outputs": true
   },
-  "clock": {
-    "format": " ( ͜.人 ͜. ） {:%c} ( ͜.人 ͜. ） ",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "🌕",
+      "deactivated": "🌑"
+    },
+    "tooltip": true
   },
-  "cpu": {
-    "format": " ( ͜.人 ͜. ） {usage}%",
-    "on-click": "~/.config/waybar/scripts/popup-cpu.sh",
-    "tooltip": false
+
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "format-paused": "{player_icon} 󰏤 {title}",
+    "player-icons": {
+      "default": "󰎆",
+      "firefox": "󰈹",
+      "spotify": "󰓇"
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "max-length": 40,
+    "tooltip": true
   },
-  "memory": {
-    "format": " 凸( •̀_•́ )凸 {percentage}%",
-    "on-click": "~/.config/waybar/scripts/popup-mem.sh",
-    "tooltip": false
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol",
+    "tooltip": true
   },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip": true
+  },
+
   "network": {
-    "format-wifi": " 凸( •̀_•́ )凸 {signalStrength}%",
+    "format-wifi": "{icon}",
     "format-ethernet": "󰈀 {ipaddr}",
     "format-disconnected": "󰤭 down",
-    "on-click": "~/.config/waybar/scripts/popup-net.sh",
-    "tooltip": false
+    "tooltip": true
   },
-  "pulseaudio": {
-    "format": " ( ͜.人 ͜. ） {volume}%",
-    "format-muted": "󰝟",
-    "on-click": "~/.config/waybar/scripts/popup-audio.sh",
-    "tooltip": false
+
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "tooltip": true
+  },
+
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "tooltip": true
+  },
+
+  "temperature": {
+    "format": "󰔏 {temperatureC}°C",
+    "tooltip": true
   },
 
   "tray": {
-    "spacing": 8
+    "spacing": 6
   },
-  "custom/weather": { 
-    "format": "{text}°",  
-    "tooltip": true,  
-    "interval": 3600, 
-    "exec": "wttrbar --location \"Pontiac\" --fahrenheit --main-indicator FeelsLikeF",  
-    "return-type": "json"
-}
- 
+
+  "custom/weather": {
+    "exec": "~/.config/waybar/wittr.sh",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "interval": 900
+  },
+
+  "clock": {
+    "format": "󰥔 {:%a %b %d  %I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "custom/powermenu": {
+    "format": "",
+    "tooltip": "Power",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh"
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  "custom/os_button": {
+    "format": "  ",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
+    "tooltip": false
+  }
 }

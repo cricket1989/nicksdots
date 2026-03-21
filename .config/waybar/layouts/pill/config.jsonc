@@ -1,0 +1,357 @@
+{
+  // ─────────────────────────────────────────────
+  //  Waybar — Pill Layout
+  //  3 floating capsules | nick@cachyos
+  // ─────────────────────────────────────────────
+
+  "layer": "top",
+  "position": "top",
+  "height": 38,
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "spacing": 0,
+  "exclusive": true,
+  "passthrough": false,
+
+  "modules-left": [
+    "user",
+    "custom/separator",
+    "custom/os_button",
+    "custom/separator",
+    "hyprland/workspaces",
+    "custom/separator",
+    "image#album-art",
+    "custom/separator",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "custom/notification",
+    "custom/separator",
+    "clock",
+    "custom/separator",
+    "custom/hypridle"
+  ],
+
+  "modules-right": [
+    "tray",
+    "custom/separator",
+    "group/sysinfo",
+    "custom/separator",
+    "temperature",
+    "custom/separator",
+    "network",
+    "custom/separator",
+    "custom/weather",
+    "custom/separator",
+    "group/mpd",
+    "custom/separator",
+    "custom/pacman",
+    "custom/separator",
+    "custom/screenshot",
+    "custom/separator",
+    "custom/power"
+  ],
+
+  // ── Separators ──────────────────────────────
+
+  "custom/separator": {
+    "format": "│",
+    "tooltip": false,
+    "interval": "once"
+  },
+
+  // ── Left ────────────────────────────────────
+
+  "user": {
+    "format": "",
+    "interval": 60,
+    "height": 26,
+    "width": 26,
+    "icon": true,
+    "avatar": "/home/nick/Pictures/profile.png",
+    "tooltip-format": "nick@cachyos\nUp {work_H}h {work_M}m\nLeft: App Launcher",
+    "open-on-click": false,
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/arkboi-grid-launcher.sh"
+  },
+
+  "custom/os_button": {
+    "format": "  ",
+    "tooltip-format": "App Launcher",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh"
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+
+  "image#album-art": {
+    "exec": "~/.config/waybar-clean/scripts/album-art.sh",
+    "size": 26,
+    "interval": 3,
+    "signal": 9,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "tooltip": true,
+    "tooltip-format": "Left: Play/Pause  Right: Next  Mid: Prev"
+  },
+
+  "custom/media": {
+    "return-type": "json",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/mediaplayer.py --player spotify 2>/dev/null || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "max-length": 35,
+    "format": "󰎆  {}",
+    "tooltip": true
+  },
+
+  // ── Center ───────────────────────────────────
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#cd5a5a'>󰂚</span>",
+      "none": "󰂜",
+      "dnd-notification": "<span foreground='#cd5a5a'>󰂛</span>",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "<span foreground='#cd5a5a'>󰂚</span>",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "<span foreground='#cd5a5a'>󰂚</span>",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "clock": {
+    "format": "  {:%I:%M %p  %a %b %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":   "<span color='#ebcd96'><b>{}</b></span>",
+        "days":     "<span color='#dcdccc'><b>{}</b></span>",
+        "weeks":    "<span color='#91cddc'><b>W{}</b></span>",
+        "weekdays": "<span color='#ebcd96'><b>{}</b></span>",
+        "today":    "<span color='#cd5a5a'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "custom/hypridle": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 2,
+    "exec": "bash ~/.config/waybar/scripts/hypridle-status.sh",
+    "on-click": "bash ~/.config/waybar/scripts/hypridle-toggle.sh",
+    "on-click-right": "kitty -e systemctl --user status hypridle --no-pager -l",
+    "tooltip": true
+  },
+
+  // ── Right ────────────────────────────────────
+
+  "tray": {
+    "icon-size": 15,
+    "spacing": 6,
+    "show-passive-items": false
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰂱 {volume}%",
+    "format-muted": "󰖁 muted",
+    "scroll-step": 2,
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "󰋋",
+      "headset": "󰋎",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%\nDevice: {desc}"
+  },
+
+  "group/sysinfo": {
+    "orientation": "inherit",
+    "modules": ["custom/sysinfo-btn", "pulseaudio", "custom/sysinfo-cpu", "custom/sysinfo-mem", "custom/sysinfo-temp"]
+  },
+
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "interval": 3,
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+    "on-click": "kitty -e btop"
+  },
+
+  "cpu": {
+    "format": "󰐟 {usage}%",
+    "interval": 2,
+    "tooltip-format": "CPU: {usage}%\nFreq: {avg_frequency} GHz",
+    "on-click": "kitty -e btop"
+  },
+
+  "temperature": {
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format-critical": "  {temperatureC}°C",
+    "format": "  {temperatureC}°C",
+    "tooltip-format": "CPU Temp: {temperatureC}°C",
+    "tooltip": true,
+    "interval": 3,
+    "on-click": "kitty -e btop"
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-linked": "󰈀 no ip",
+    "format-disconnected": "󰤭 offline",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "max-length": 24,
+    "tooltip-format-wifi": "  {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}\nGW: {gwaddr}",
+    "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "~/.config/waybar/scripts/wifi-nmcli.sh",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --location Rochester_Hills --fahrenheit --main-indicator FeelsLikeF",
+    "return-type": "json",
+    "on-click": "kitty --title weather -e sh -lc 'curl -s wttr.in/Rochester_Hills?0; echo; echo Press any key...; read -n 1'",
+    "on-click-right": "pkill -SIGRTMIN+8 waybar"
+  },
+
+  "group/mpd": {
+    "orientation": "inherit",
+    "modules": ["custom/mpd-btn", "mpd"]
+  },
+
+  "custom/mpd-btn": {
+    "format": "󰚺",
+    "tooltip-format": "Toggle MPD display",
+    "on-click": "bash ~/.config/waybar/scripts/mpd-vis-toggle.sh",
+    "interval": "once"
+  },
+
+  "mpd": {
+    "return-type": "json",
+    "interval": 2,
+    "signal": 11,
+    "exec": "~/.config/waybar/scripts/mpd-status.sh",
+    "on-click": "~/.config/waybar/scripts/mpd-toggle.sh",
+    "on-click-right": "mpc -q toggle",
+    "on-scroll-up": "mpc -q next",
+    "on-scroll-down": "mpc -q prev",
+    "tooltip": true
+  },
+
+  "custom/pacman": {
+    "format": "󰮯 {}",
+    "interval": 900,
+    "exec": "bash -lc 'n=$(checkupdates 2>/dev/null | wc -l); echo $n'",
+    "on-click": "kitty -e bash -lc 'yay && read'",
+    "tooltip-format": "{} updates available",
+    "return-type": ""
+  },
+
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  "custom/sysinfo-btn": {
+    "format": "󰈸",
+    "tooltip-format": "Toggle CPU / RAM / Temp",
+    "on-click": "~/.config/waybar-clean/scripts/sysinfo-toggle.sh",
+    "interval": "once",
+    "signal": 10
+  },
+
+  "custom/sysinfo-cpu": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-cpu.sh",
+    "return-type": "json",
+    "interval": 3,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/sysinfo-mem": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-mem.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/sysinfo-temp": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-temp.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  }
+}

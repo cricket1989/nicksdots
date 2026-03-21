@@ -93,3 +93,14 @@ window#waybar {
 #custom-mpd:hover {
   box-shadow: 0 0 0 2px rgba(122, 184, 112, 0.30), 0 10px 24px rgba(0,0,0,0.35);
 }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
+}

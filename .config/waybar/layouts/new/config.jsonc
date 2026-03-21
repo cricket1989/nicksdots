@@ -20,7 +20,9 @@
     "pulseaudio",
     "battery",
     "network",
-    "power-profiles-daemon"
+    "power-profiles-daemon",
+    "custom/screenshot",
+    "custom/power"
   ],
   
   "custom/launcher": {
@@ -54,13 +56,31 @@
   },
 
   "hyprland/workspaces": {
-      "format": "{name}",
-      "on-click": "hyprctl dispatch workspace {name}",
-      "sort-by-number": true,
-      "active-only": false,
-      "persistent-workspaces": {
-          "*": 5
-      }
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
   },
 
 "power-profiles-daemon": {
@@ -151,7 +171,7 @@
   "network": {
       "interface": "wlp4s0",
       "format": "{ifname}",
-      "format-wifi": "{essid} ",
+      "format-wifi": "{icon}",
       "format-ethernet": "{ipaddr}/{cidr} 󰊗",
       "format-disconnected": "", //An empty format will hide the module.
       "tooltip-format": "{ifname} via {gwaddr} 󰊗",
@@ -159,6 +179,23 @@
       "tooltip-format-ethernet": "{ifname} ",
       "tooltip-format-disconnected": "Disconnected",
       "max-length": 50
-  }
+  },
 
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  }
 }

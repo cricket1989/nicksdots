@@ -1,0 +1,156 @@
+/* ─────────────────────────────────────────────────────────────
+   Arkboix — Everforest Dark
+   Traditional bar with bottom-border accent lines.
+   Adapted from arkboix/sway dotfiles.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette ─────────────────────────────────────────────── */
+@define-color base     #2d353b;
+@define-color base_hi  #343f44;
+@define-color border   #4a555b;
+@define-color fg       #d3c6aa;
+@define-color fg_hi    #e9dbb5;
+@define-color muted    #7a8478;
+
+@define-color acc_blue   #7fbbb3;
+@define-color acc_purple #d699b6;
+@define-color acc_cyan   #83c092;
+@define-color acc_green  #a7c080;
+@define-color acc_orange #e69875;
+@define-color acc_yellow #dbbc7f;
+@define-color acc_red    #e67e80;
+@define-color acc_teal   #7fbbb3;
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  font-weight: 400;
+  min-height: 0;
+  box-shadow: none;
+}
+
+/* ── Bar ─────────────────────────────────────────────────── */
+window#waybar {
+  background: @base;
+  color: @fg;
+  border-bottom: 2px solid @border;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+/* ── Module defaults ─────────────────────────────────────── */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#idle-inhibitor,
+#hyprland-workspaces,
+#workspaces,
+#hyprland-submap,
+#custom-notification,
+#custom-weather,
+#custom-media,
+#custom-pacman,
+#custom-power {
+  padding: 0 10px;
+  background: transparent;
+  color: @fg;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  color: @muted;
+  padding: 2px 8px;
+  min-width: 18px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  color: @acc_green;
+  border-bottom: 2px solid @acc_green;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  color: @fg_hi;
+  background: rgba(167, 192, 128, 0.08);
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  color: @acc_red;
+  border-bottom: 2px solid @acc_red;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#clock               { color: @acc_yellow; font-weight: 600; letter-spacing: 0.5px; }
+
+#cpu                 { color: @acc_green; }
+#memory              { color: @acc_teal; }
+#temperature         { color: @fg; }
+#temperature.critical { color: @acc_red; animation: blink-critical 1s infinite; }
+
+#network             { color: @acc_blue; }
+#network.disconnected { color: @acc_red; }
+
+#pulseaudio          { color: @acc_orange; }
+#pulseaudio.muted    { color: @muted; }
+
+#bluetooth           { color: @acc_blue; }
+#bluetooth.connected { color: @acc_cyan; }
+#bluetooth.disabled  { color: @muted; }
+
+#custom-notification { color: @acc_orange; }
+#custom-weather      { color: @acc_cyan; font-weight: 300; }
+#custom-media        { color: @fg; font-weight: 300; }
+#custom-pacman       { color: @acc_purple; }
+#custom-power        { color: @acc_red; }
+#custom-power:hover  { color: @fg_hi; }
+
+#idle-inhibitor.activated   { color: @acc_yellow; }
+#idle-inhibitor.deactivated { color: @muted; }
+
+#hyprland-submap { color: @acc_orange; font-style: italic; }
+
+/* ── Tray ─────────────────────────────────────────────────── */
+#tray { padding: 0 6px; }
+#tray > .item { padding: 0 3px; }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-critical {
+  0%   { background: transparent; color: @acc_red; }
+  50%  { background: @acc_red; color: @base; }
+  100% { background: transparent; color: @acc_red; }
+}
+
+
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn { color: @muted; font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover { color: @fg_hi; }
+
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp { padding: 0 8px; transition: all 200ms ease; }
+
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden { min-width: 0; padding: 0; }
+
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }

@@ -6,6 +6,10 @@
   "width": 1450,
   "reload_style_on_change": true,
 
+  "modules-left": [
+    "custom/os_button"
+  ],
+
   "modules-center": [
     "hyprland/window",
     "custom/separator",
@@ -19,20 +23,37 @@
     "backlight",
     "custom/memorypie",
     "battery",
-    "tray"
+    "tray",
+    "custom/screenshot",
+    "custom/power"
   ],
 
   "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
     "format": "{icon}",
-    "format-icons": {
-      "active": "",
-      "default": "",
-      "empty": ""
-    },
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5]
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
     },
-    "tooltip": false
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
   },
 
   "hyprland/window": {
@@ -115,6 +136,30 @@
 
   "tray": {
     "spacing": 8,
+    "tooltip": false
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  },
+
+  "custom/os_button": {
+    "format": "  ",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
     "tooltip": false
   }
 }

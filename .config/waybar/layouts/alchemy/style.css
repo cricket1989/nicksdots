@@ -1,4 +1,4 @@
-@import url("/home/nick/.config/waybar/colors/matugen-waybar.css");
+@import "../../colors.css";
 
 /* --- Semantic aliases (your set) --- */
 @define-color panel       alpha(@surface_variant, 0.88);         /* pill slab */
@@ -192,4 +192,19 @@ tooltip {
 tooltip label {
   color: @btn_text;
   letter-spacing: 0.3px;
+}
+
+/* ── Idle inhibitor ─────────────────────────────────── */
+#idle-inhibitor { color: @muted; padding: 0 10px; }
+#idle-inhibitor.activated { color: @yellow; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
 }

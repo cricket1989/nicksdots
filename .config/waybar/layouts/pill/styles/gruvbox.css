@@ -1,0 +1,255 @@
+/* ─────────────────────────────────────────────────────────────
+   Pill — Gruvbox Dark
+   Three floating capsules on a transparent bar.
+   Inspired by HyDE project pill/float layouts.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette ──────────────────────────────────────────────── */
+@define-color base    rgba(40, 40, 40, 0.92);    /* #282828 */
+@define-color base_hi rgba(60, 56, 54, 0.96);    /* #3c3836 */
+@define-color border  rgba(80, 73, 69, 0.55);    /* #504945 */
+
+@define-color fg      rgba(235, 219, 178, 0.92); /* #ebdbb2 */
+@define-color fg_hi   rgba(251, 241, 199, 1.0);  /* #fbf1c7 */
+@define-color muted   rgba(168, 153, 132, 0.60); /* #a89984 */
+
+@define-color acc_red     #cc241d;
+@define-color acc_green   #98971a;
+@define-color acc_yellow  #d79921;
+@define-color acc_blue    #458588;
+@define-color acc_purple  #b16286;
+@define-color acc_aqua    #689d6a;
+@define-color acc_orange  #d65d0e;
+
+@define-color acc_bright_red    #fb4934;
+@define-color acc_bright_yellow #fabd2f;
+@define-color acc_bright_aqua   #8ec07c;
+@define-color acc_bright_blue   #83a598;
+@define-color acc_bright_purple #d3869b;
+
+/* ── Global reset ─────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Nasalization", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+  box-shadow: none;
+}
+
+/* ── Window — fully transparent canvas ───────────────────── */
+window#waybar {
+  background: transparent;
+  padding: 0;
+}
+
+/* ── Pill sections ────────────────────────────────────────── */
+.modules-left {
+  background: @base;
+  border: 1px solid @border;
+  border-radius: 9999px;
+  margin: 8px 6px 8px 14px;
+  padding: 0 6px;
+}
+
+.modules-center {
+  background: @base;
+  border: 1px solid @border;
+  border-radius: 9999px;
+  margin: 8px 6px;
+  padding: 0 6px;
+}
+
+.modules-right {
+  background: @base;
+  border: 1px solid @border;
+  border-radius: 9999px;
+  margin: 8px 14px 8px 6px;
+  padding: 0 6px;
+}
+
+/* ── All modules ──────────────────────────────────────────── */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd,
+#custom-screenshot,
+#custom-power,
+#custom-separator {
+  background: transparent;
+  color: @fg;
+  padding: 4px 10px;
+  margin: 0 2px;
+}
+
+/* ── Separators ───────────────────────────────────────────── */
+#custom-separator {
+  color: @border;
+  padding: 4px 2px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  color: @acc_purple;
+  padding: 2px 10px;
+  margin: 2px 2px;
+  border-radius: 9999px;
+  transition: all 0.18s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: @base_hi;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(80, 73, 69, 0.45);
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  color: @acc_bright_red;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#custom-os_button    { color: @acc_bright_purple; font-size: 14px; }
+#custom-media        { color: @fg; font-weight: 400; }
+#custom-media.playing { color: @acc_bright_aqua; }
+#custom-media.paused  { color: @muted; }
+#custom-media.stopped { color: @muted; opacity: 0.6; }
+
+#custom-notification  { color: @acc_orange; }
+#clock                { color: @acc_bright_yellow; font-weight: 600; letter-spacing: 0.8px; }
+#custom-hypridle      { color: @acc_bright_red; }
+#custom-hypridle.idle { color: @muted; }
+
+#tray                 { padding: 0 8px; }
+#tray > .item         { padding: 0 4px; }
+
+#pulseaudio           { color: @acc_orange; }
+#pulseaudio.muted     { color: @muted; }
+
+#memory               { color: @acc_bright_blue; }
+#cpu                  { color: @acc_bright_aqua; }
+
+#network              { color: @acc_blue; }
+#network.disconnected { color: @acc_bright_red; }
+
+#custom-weather       { color: @acc_bright_blue; font-weight: 400; }
+
+#custom-mpd           { color: @fg; font-weight: 400; }
+#custom-mpd.on        { color: @fg_hi; }
+#custom-mpd.off       { color: @muted; }
+
+#custom-pacman        { color: @acc_bright_purple; }
+
+#custom-screenshot    { color: @acc_bright_aqua; font-size: 13px; }
+#custom-screenshot:hover { color: @fg_hi; }
+
+#custom-power         { color: @acc_bright_red; font-size: 13px; }
+#custom-power:hover   { color: @fg_hi; }
+
+/* ── New modules: user / album-art / mpd / hardware ──────── */
+#user,
+image#album-art,
+#mpd,
+#hardware {
+  background: transparent;
+  color: @fg;
+  padding: 4px 10px;
+  margin: 0 2px;
+}
+
+/* ── User ─────────────────────────────────────────────────── */
+#user                 { color: @acc_purple; font-weight: 600; }
+
+/* ── Album art ────────────────────────────────────────────── */
+image#album-art {
+  border-radius: 9999px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 2px;
+  margin: 2px 4px;
+}
+
+/* ── Native MPD ───────────────────────────────────────────── */
+#mpd              { color: @fg; font-weight: 400; }
+#mpd.playing      { color: @acc_aqua; }
+#mpd.paused       { color: @muted; }
+#mpd.stopped      { color: @muted; opacity: 0.6; }
+
+/* ── Hardware drawer ──────────────────────────────────────── */
+#hardware         { padding: 4px 8px; }
+.hardware-child {
+  background: transparent;
+  color: @fg;
+  padding: 4px 6px;
+  margin: 0 1px;
+}
+
+/* ── Temperature ──────────────────────────────────────────── */
+@keyframes blink-warning {
+  0%   { background: transparent; }
+  50%  { background: @acc_yellow; color: @base; }
+  100% { background: transparent; }
+}
+
+@keyframes blink-critical {
+  0%   { background: transparent; }
+  50%  { background: @acc_red; color: @base; }
+  100% { background: transparent; }
+}
+
+#temperature {
+  background: transparent;
+  color: @fg;
+  padding: 4px 10px;
+  margin: 0 2px;
+}
+
+#temperature.critical {
+  color: @acc_red;
+  animation: blink-critical 1s infinite;
+}
+
+/* ── CPU Governor ─────────────────────────────────────────── */
+#custom-cpu_gov {
+  background: transparent;
+  color: @acc_green;
+  padding: 4px 10px;
+  margin: 0 2px;
+}
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn { color: @muted; font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover { color: @fg; }
+#custom-sysinfo-cpu,#custom-sysinfo-mem,#custom-sysinfo-temp { padding: 0 8px; transition: all 200ms ease; }
+#custom-sysinfo-cpu.hidden,#custom-sysinfo-mem.hidden,#custom-sysinfo-temp.hidden { min-width:0; padding:0; }
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }
+
+/* ── MPD toggle group ────────────────────────────────────── */
+#custom-mpd-btn                { padding: 0 8px; transition: all 200ms ease; }
+#custom-mpd-btn:hover          { opacity: 0.75; }
+
+#mpd                           { padding: 0 8px; transition: all 200ms ease; }
+#mpd.hidden                    { min-width: 0; padding: 0; }

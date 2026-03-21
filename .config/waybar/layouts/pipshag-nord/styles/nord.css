@@ -1,0 +1,148 @@
+/* ─────────────────────────────────────────────────────────────
+   Pipshag Nord — Traditional bar, Nord palette
+   Adapted from Pipshag/dotfiles_nord (Hyprland port)
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette (Nord) ──────────────────────────────────────── */
+@define-color base     #2E3440;
+@define-color base_hi  #3B4252;
+@define-color base2    #434C5E;
+@define-color border   #4C566A;
+@define-color fg       #D8DEE9;
+@define-color fg_hi    #ECEFF4;
+@define-color muted    #4C566A;
+
+@define-color acc_frost1  #8FBCBB;
+@define-color acc_frost2  #88C0D0;
+@define-color acc_frost3  #81A1C1;
+@define-color acc_frost4  #5E81AC;
+@define-color acc_red     #BF616A;
+@define-color acc_orange  #D08770;
+@define-color acc_yellow  #EBCB8B;
+@define-color acc_green   #A3BE8C;
+@define-color acc_purple  #B48EAD;
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-warning {
+  to { color: @acc_orange; }
+}
+
+@keyframes blink-critical {
+  to { background-color: @acc_red; color: @base; }
+}
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Cantarell", "JetBrainsMono Nerd Font", "Iosevka Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  min-height: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Bar ─────────────────────────────────────────────────── */
+window#waybar {
+  background: @base;
+  color: @fg;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+/* ── Module defaults ─────────────────────────────────────── */
+#clock,
+#cpu,
+#temperature,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#idle-inhibitor,
+#hyprland-workspaces,
+#workspaces,
+#hyprland-submap,
+#hyprland-language,
+#custom-notification,
+#custom-media,
+#custom-pacman,
+#custom-cpu_gov {
+  padding: 0 8px;
+  background: @base_hi;
+  color: @fg;
+  margin: 2px 2px;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  color: @muted;
+  padding: 2px 8px;
+  min-width: 20px;
+  opacity: 0.5;
+  transition: all 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  color: @fg_hi;
+  background: @base2;
+  opacity: 1.0;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  color: @fg_hi;
+  background: rgba(136, 192, 208, 0.15);
+  opacity: 0.8;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  color: @acc_red;
+  opacity: 1.0;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#clock               { color: @fg_hi; font-weight: 500; }
+
+#cpu                 { color: @fg; }
+#cpu span            { color: @muted; }
+#temperature         { color: @fg; }
+#temperature.warning { animation: blink-warning 0.5s steps(5, end) alternate infinite; }
+#temperature.critical {
+  color: @acc_red;
+  animation: blink-critical 0.5s steps(5, end) alternate infinite;
+}
+
+#network             { color: @acc_frost2; }
+#network.disconnected { color: @acc_red; }
+
+#pulseaudio          { color: @fg; }
+#pulseaudio.muted    { color: @muted; }
+
+#bluetooth           { color: @acc_frost3; }
+#bluetooth.connected { color: @acc_frost2; }
+#bluetooth.disabled  { color: @muted; }
+
+#custom-notification { color: @fg; padding: 0 8px; }
+#custom-media        { color: @fg; font-weight: 300; padding: 0 8px; }
+#custom-pacman       { color: @acc_yellow; }
+#custom-cpu_gov      { color: @acc_green; font-size: 10px; }
+
+#idle-inhibitor.activated   { color: @acc_yellow; }
+#idle-inhibitor.deactivated { color: @muted; }
+
+#hyprland-submap  { color: @acc_orange; font-style: italic; }
+#hyprland-language { color: @fg; background: @base2; }
+
+/* ── Tray ─────────────────────────────────────────────────── */
+#tray { padding: 0 6px; background: @base_hi; margin: 2px 2px; }
+#tray > .item { padding: 0 3px; }

@@ -1,0 +1,186 @@
+/* ─────────────────────────────────────────────────────────────
+   cjbassi — Miasma
+   Solid dark bar, powerline-style arrows, monospace.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette (Miasma) ────────────────────────────────────── */
+@define-color bg      #1c1e26;
+@define-color bg_hi   #242630;
+@define-color fg      #c9c7cd;
+@define-color fg_hi   #e4e3e6;
+@define-color muted   #5b5a65;
+
+@define-color red     #ff8080;
+@define-color orange  #e49b5d;
+@define-color yellow  #e4c180;
+@define-color green   #8fb573;
+@define-color teal    #7eb8b1;
+@define-color blue    #7da6d8;
+@define-color purple  #b48dd3;
+@define-color pink    #c88aaa;
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  min-height: 0;
+  box-shadow: none;
+}
+
+/* ── Bar ─────────────────────────────────────────────────── */
+window#waybar {
+  background: @bg;
+  color: @fg;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+/* ── Module defaults ─────────────────────────────────────── */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#idle-inhibitor,
+#hyprland-workspaces,
+#workspaces,
+#hyprland-submap,
+#custom-notification,
+#custom-media,
+#custom-pacman,
+#custom-power {
+  padding: 0 10px;
+  background: transparent;
+  color: @fg;
+}
+
+/* ── Workspaces ───────────────────────────────────────────── */
+#hyprland-workspaces button,
+#workspaces button {
+  background: @bg_hi;
+  color: @muted;
+  padding: 2px 10px;
+  min-width: 20px;
+  transition: all 0.15s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: @blue;
+  color: @bg;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: rgba(125, 166, 216, 0.2);
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button.urgent,
+#workspaces button.urgent {
+  background: @red;
+  color: @bg;
+}
+
+/* ── Powerline separators ─────────────────────────────────── */
+#custom-sep-right {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-sep-left {
+  color: @bg_hi;
+  background: transparent;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-sep-mid {
+  color: @muted;
+  padding: 0 4px;
+  font-size: 12px;
+}
+
+/* ── Accent mapping ───────────────────────────────────────── */
+#clock               { color: @teal; font-weight: 700; background: @bg_hi; padding: 0 14px; }
+
+#cpu                 { color: @purple; background: @bg_hi; }
+#memory              { color: @teal;   background: @bg_hi; }
+#temperature         { color: @fg; background: @bg_hi; }
+#temperature.critical { color: @red; animation: blink-critical 1s infinite; }
+
+#network             { color: @blue; }
+#network.disconnected { color: @red; }
+
+#pulseaudio          { color: @blue; background: @bg_hi; }
+#pulseaudio.muted    { color: @muted; }
+
+#bluetooth           { color: @blue; }
+#bluetooth.connected { color: @teal; }
+#bluetooth.disabled  { color: @muted; }
+
+#custom-notification { color: @orange; }
+#custom-media        { color: @fg; font-weight: 300; }
+#custom-pacman       { color: @purple; }
+#custom-power        { color: @red; font-size: 15px; }
+#custom-power:hover  { color: @fg_hi; }
+
+#idle-inhibitor.activated   { color: @yellow; }
+#idle-inhibitor.deactivated { color: @muted; }
+
+#hyprland-submap { color: @orange; font-style: italic; }
+
+/* ── Tray ─────────────────────────────────────────────────── */
+#tray { padding: 0 6px; background: @bg_hi; }
+#tray > .item { padding: 0 3px; }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-critical {
+  0%   { background: transparent; color: @red; }
+  50%  { background: @red; color: @bg; }
+  100% { background: transparent; color: @red; }
+}
+
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn {
+  color: @muted;
+  font-size: 13px;
+  padding: 0 6px;
+  transition: color 150ms ease;
+}
+
+#custom-sysinfo-btn:hover { color: @fg; }
+
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp {
+  background: @bg_hi;
+  min-width: 0;
+  padding: 0 8px;
+  transition: all 200ms ease;
+}
+
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden {
+  min-width: 0;
+  padding: 0;
+}
+
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }

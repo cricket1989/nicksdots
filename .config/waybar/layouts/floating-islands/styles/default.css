@@ -1,0 +1,156 @@
+/* Tokyo Night Moon — Continuous Glass (#282828 + Gruvbox Accents) */
+
+@define-color glass rgba(40, 40, 40, 0.60); /* #282828 @ 60% */
+
+/* Accents (use ALL provided) */
+@define-color acc_purple #b16286;
+@define-color acc_aqua   #458588;
+@define-color acc_orange #d65d0e;
+@define-color acc_yellow #d79921;
+@define-color acc_red    #cc241d;
+
+/* Text (keep readable on glass) */
+@define-color fg      rgba(235, 238, 255, 0.92);
+@define-color fg_hi   rgba(255, 255, 255, 0.95);
+@define-color muted   rgba(200, 205, 220, 0.70);
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Nasalization", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 0;
+}
+
+/* ───── Single Continuous Glass Sheet ───── */
+window#waybar {
+  background-color: @glass; /* already alpha()'d */
+  padding: 2px 0;
+  margin: 4px 0 0 0;
+}
+
+/* Modules are transparent containers (keep spacing) */
+#hyprland-workspaces,
+#workspaces,
+#custom-os_button,
+#clock,
+#custom-weather,
+#custom-notification,
+#custom-hypridle,
+#tray,
+#cpu,
+#pulseaudio,
+#network,
+#custom-pacman,
+#custom-media,
+#custom-mpd {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: @fg;
+  padding: 4px 12px;
+  margin: 0 4px;
+}
+
+/* Workspace buttons (no boxes, just text states) */
+#hyprland-workspaces button,
+#workspaces button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: @acc_purple;
+  padding: 4px 12px;
+  margin: 0 4px;
+  transition: 0.2s ease;
+}
+
+#hyprland-workspaces button.active,
+#workspaces button.active {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @fg_hi;
+}
+
+#hyprland-workspaces button:hover,
+#workspaces button:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @fg_hi;
+}
+
+/* ───── Accent mapping (uses all 5) ───── */
+#custom-os_button    { color: @acc_purple; } /* #b16286 */
+#custom-pacman       { color: @acc_purple; } /* keep same family */
+
+#custom-weather      { color: @acc_aqua; }   /* #458588 */
+#network             { color: @acc_aqua; }
+#custom-media.playing { color: @acc_aqua; }
+
+#pulseaudio          { color: @acc_orange; } /* #d65d0e */
+
+#clock               { color: @acc_yellow; font-weight: 600; letter-spacing: 0.9px; } /* #d79921 */
+
+#custom-notification { color: @acc_orange; }    /* #d65d0e */
+#custom-hypridle     { color: @acc_red; }
+
+/* Misc typography */
+#tray { letter-spacing: 0.5px; }
+#tray > .item { padding: 0 4px; }
+label.module { letter-spacing: 2px; }
+
+#custom-mpd.on  { color: @fg_hi; }
+#custom-mpd.off { color: @acc_aqua; }
+
+#custom-media.paused  { color: @muted; }
+#custom-media.stopped { color: rgba(200, 205, 220, 0.55); }
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  color: @acc_aqua;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-screenshot:hover {
+  color: @fg_hi;
+}
+
+#custom-power {
+  color: @acc_red;
+  padding: 4px 10px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+
+#custom-power:hover {
+  color: @fg_hi;
+}
+
+
+
+/* ── Sysinfo toggle group ─────────────────────────────────── */
+#custom-sysinfo-btn { color: @muted; font-size: 13px; padding: 0 6px; }
+#custom-sysinfo-btn:hover { color: @fg_hi; }
+
+#custom-sysinfo-cpu,
+#custom-sysinfo-mem,
+#custom-sysinfo-temp { padding: 0 8px; transition: all 200ms ease; }
+
+#custom-sysinfo-cpu.hidden,
+#custom-sysinfo-mem.hidden,
+#custom-sysinfo-temp.hidden { min-width: 0; padding: 0; }
+
+#custom-sysinfo-temp.critical { color: @red; }
+#custom-sysinfo-temp.warning  { color: @yellow; }
+
+/* ── MPD toggle group ────────────────────────────────────── */
+#custom-mpd-btn                { padding: 0 8px; transition: all 200ms ease; }
+#custom-mpd-btn:hover          { opacity: 0.75; }
+
+#mpd                           { padding: 0 8px; transition: all 200ms ease; }
+#mpd.hidden                    { min-width: 0; padding: 0; }

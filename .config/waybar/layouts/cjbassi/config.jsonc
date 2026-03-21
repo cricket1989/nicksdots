@@ -1,0 +1,318 @@
+{
+  // ─────────────────────────────────────────────
+  //  Waybar — cjbassi Layout
+  //  Dark spacemacs-style | nick@cachyos
+  //  Adapted from cjbassi/config dotfiles
+  // ─────────────────────────────────────────────
+
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 0,
+  "exclusive": true,
+  "passthrough": false,
+
+  "modules-left": [
+    "custom/os_button",
+    "hyprland/workspaces",
+    "custom/sep-right",
+    "hyprland/submap",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock#day",
+    "custom/sep-mid",
+    "clock",
+    "custom/sep-mid",
+    "clock#date"
+  ],
+
+  "modules-right": ["custom/notification", "custom/sep-left", "idle_inhibitor", "custom/sep-left", "group/sysinfo", "network", "bluetooth", "custom/sep-left", "custom/pacman", "custom/sep-left", "tray", "custom/power"],
+
+  // ── Decorative separators ─────────────────────
+  // Powerline-style arrows using text modules
+
+  "custom/sep-right": {
+    "format": "",
+    "tooltip": false,
+    "interval": "once"
+  },
+
+  "custom/sep-left": {
+    "format": "",
+    "tooltip": false,
+    "interval": "once"
+  },
+
+  "custom/sep-mid": {
+    "format": "│",
+    "tooltip": false,
+    "interval": "once"
+  },
+
+  // ── Workspaces ────────────────────────────────
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+
+  "hyprland/submap": {
+    "format": "<span style=\"italic\">{}</span>",
+    "tooltip": false
+  },
+
+  // ── Center clocks ─────────────────────────────
+
+  "clock#day": {
+    "format": "{:%A}",
+    "tooltip": false
+  },
+
+  "clock": {
+    "format": "  {:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":   "<span color='#268bd2'><b>{}</b></span>",
+        "days":     "<span color='#fdf6e3'><b>{}</b></span>",
+        "weeks":    "<span color='#2aa198'><b>W{}</b></span>",
+        "weekdays": "<span color='#268bd2'><b>{}</b></span>",
+        "today":    "<span color='#dc322f'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "clock#date": {
+    "format": "{:%e %b %Y}",
+    "tooltip": false
+  },
+
+  // ── Idle inhibitor ────────────────────────────
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Idle inhibited",
+    "tooltip-format-deactivated": "Idle active"
+  },
+
+  // ── Tray ─────────────────────────────────────
+
+  "tray": {
+    "spacing": 5,
+    "icon-size": 14
+  },
+
+  // ── Audio ─────────────────────────────────────
+
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰂱 {volume}%",
+    "format-muted": " muted",
+    "format-icons": {
+      "headphone": "",
+      "headset": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "tooltip-format": "Volume: {volume}%\nDevice: {desc}"
+  },
+  "group/sysinfo": {
+    "orientation": "inherit",
+    "modules": ["custom/sysinfo-btn", "pulseaudio", "custom/sysinfo-cpu", "custom/sysinfo-mem", "custom/sysinfo-temp"]
+  },
+
+  // ── Hardware ──────────────────────────────────
+
+  "cpu": {
+    "interval": 2,
+    "format": "  {usage}%",
+    "max-length": 10,
+    "min-length": 10,
+    "on-click": "kitty -e btop",
+    "tooltip-format": "CPU: {usage}%\nFreq: {avg_frequency} GHz"
+  },
+
+  "memory": {
+    "interval": 3,
+    "format": "  {percentage}%",
+    "max-length": 10,
+    "min-length": 10,
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G",
+    "on-click": "kitty -e btop"
+  },
+
+  "temperature": {
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format-critical": "  {temperatureC}°C",
+    "format": "{icon}  {temperatureC}°C",
+    "format-icons": ["", "", ""],
+    "interval": 4,
+    "max-length": 9,
+    "min-length": 9
+  },
+
+  // ── Network ───────────────────────────────────
+
+  "network": {
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-linked": "󰈀 no ip",
+    "format-disconnected": "󰤭",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "max-length": 18,
+    "tooltip-format-wifi": "  {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%",
+    "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}/{cidr}",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  // ── Bluetooth ─────────────────────────────────
+
+  "bluetooth": {
+    "interval": 30,
+    "format": "{icon}",
+    "format-connected": " {device_alias}",
+    "format-icons": {
+      "enabled": "",
+      "disabled": ""
+    },
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{num_connections} connected\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}"
+  },
+
+  // ── Custom modules ────────────────────────────
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#dc322f'>󰂚</span>",
+      "none": "󰂜",
+      "dnd-notification": "<span foreground='#dc322f'>󰂛</span>",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "<span foreground='#dc322f'>󰂚</span>",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "<span foreground='#dc322f'>󰂚</span>",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 35,
+    "format-icons": {
+      "spotify": "",
+      "default": "󰎆"
+    },
+    "escape": true,
+    "exec": "~/.config/waybar-clean/scripts/mediaplayer.py 2>/dev/null"
+  },
+
+  "custom/pacman": {
+    "format": "  {}",
+    "interval": 3600,
+    "exec": "checkupdates 2>/dev/null | wc -l",
+    "exec-if": "exit 0",
+    "on-click": "kitty -e bash -lc 'yay && read'",
+    "signal": 8,
+    "max-length": 5,
+    "min-length": 3
+  },
+
+  "custom/sysinfo-btn": {
+    "format": "󰈸",
+    "tooltip-format": "Toggle CPU / RAM / Temp",
+    "on-click": "~/.config/waybar-clean/scripts/sysinfo-toggle.sh",
+    "interval": "once",
+    "signal": 10
+  },
+
+  "custom/sysinfo-cpu": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-cpu.sh",
+    "return-type": "json",
+    "interval": 3,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/sysinfo-mem": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-mem.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/sysinfo-temp": {
+    "exec": "~/.config/waybar-clean/scripts/sysinfo-temp.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 10,
+    "tooltip": true
+  },
+
+  "custom/power": {
+    "format": " 󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  },
+
+  "custom/os_button": {
+    "format": "  ",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
+    "tooltip": false
+  }
+}

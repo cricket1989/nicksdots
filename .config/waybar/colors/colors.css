@@ -1,2 +1,14 @@
-@import "custom/catppuccin-mocha.css";
+/* Forest palette — edit these */
+@define-color bar_bg    #000000;
+@define-color fg        #e5e5e5;
+@define-color fg_dim    #8a8a8a;
 
+/* Accent colors (use for icons/text bits) */
+@define-color accent    #7ab870; /* forest green */
+@define-color accent2   #4aa07a; /* teal-green */
+@define-color warn      #e6c384;
+@define-color bad       #e46876;
+
+/* Active workspace */
+@define-color active_fg @accent;
+@define-color active_underline @accent;

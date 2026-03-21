@@ -1,0 +1,156 @@
+{
+  "layer": "top",
+  "position": "top",
+
+  "modules-left": [
+    "custom/menuApp",
+    "custom/walls",
+    "custom/switcher",
+    "custom/music",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "bluetooth",
+    "cpu",
+    "memory",
+
+    "custom/wifi",
+
+    "temperature",
+    "battery",
+    "clock",
+    "idle_inhibitor",
+    "custom/screenshot",
+    "custom/power"
+  ],
+
+  
+  "custom/wifi": {
+    "format": " {icon} ",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": true,
+    "exec": "~/.config/waybar/scripts/wifi-nmcli.sh",
+    "on-click": "~/.config/kitty/wifirun.sh"
+  },
+
+  "clock": {
+    "timezone": "America/Detroit",
+    "format": "{:%I:%M %p}",
+    "tooltip": true,
+    "tooltip-format": "{:%a %d %b}",
+    "on-click": "swaync-client -t"
+  }
+
+  
+,
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "   {icon} ",
+        "format-charging": "  {icon} ",
+        "format-plugged":  "  {icon} ",
+         "tooltip-format": "{capacity}%",
+          "format-icons": [
+        
+        "", "", "", "", ""
+    ]
+    },
+    
+  "temperature": {
+    "tooltip": true,
+    "format": "{icon} ",
+    "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+     "tooltip-format": "{temperatureC}°C"
+}
+,
+    "pulseaudio": {
+         "scroll-step": 10, 
+        "format": "  {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+        "▁",  
+        "▂",  
+        "▃",  
+        "▄",  
+        "▅",  
+        "▆",  
+        "▇"   
+    ]
+        },
+                "tooltip-format": "{volume}%",
+
+        "on-click": "pavucontrol"
+    },
+   
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/power.sh",
+        "format": ""
+    },
+
+    "custom/menuApp": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/launcher.sh",
+        "format": "  "
+    },
+ 
+ "custom/switcher": {
+        "tooltip": false,
+        "on-click": "~/.config/rofi/switcher.sh",
+        "format": " 󰸱  "
+    },
+    "cpu": {
+         "interval": 1,
+         "format": "{icon} ",  
+         "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+         
+         "on-click": "~/.config/alacritty/btmrun.sh"
+       
+    },
+   "memory": {
+    "interval": 1,
+    "format": "{icon} ",
+    "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+    "tooltip": true,
+    "tooltip-format": "{}%",
+    "on-click": "~/.config/alacritty/btmrun.sh"
+}
+,
+   "network": {
+    "format-wifi": "{icon}",
+    "interval": 1,
+    "format-ethernet": "Ethernet",
+    "tooltip-format": "{essid} {signalStrength}%",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+    "on-click": "~/.config/alacritty/wifirun.sh"
+},
+
+  // ── Idle inhibitor ──────────────────────────────────
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾫"
+    },
+    "tooltip-format-activated": "Idle inhibitor: ON",
+    "tooltip-format-deactivated": "Idle inhibitor: OFF"
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  }
+}

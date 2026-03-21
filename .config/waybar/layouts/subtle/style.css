@@ -6,7 +6,7 @@
 */
 
 /* --- Import Material-You colors --- */
-@import "/home/nick/.config/waybar/colors/matugen-waybar.css";
+@import "../../colors.css";
 
 /* --- Global settings --- */
 * {
@@ -187,4 +187,19 @@ tooltip-label {
 #tray menu separator {
   padding: 0px 5px;
   transition: all 0.3s ease;
+}
+
+/* ── Idle inhibitor ─────────────────────────────────── */
+#idle-inhibitor { color: alpha(@primary, 0.4); padding: 0 10px; }
+#idle-inhibitor.activated { color: @primary; }
+
+/* ── Screenshot & Power ─────────────────────────────── */
+#custom-screenshot {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#custom-power {
+  padding: 0 10px;
+  font-size: 13px;
 }

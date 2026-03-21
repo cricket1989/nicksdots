@@ -1,0 +1,218 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 4,
+
+  "modules-left": [
+    "custom/os_button",
+    "network",
+    "custom/weather",
+    "custom/media"
+  ],
+  
+  "modules-center": [
+    "custom/notification",
+    "hyprland/workspaces",
+    "custom/hypridle"
+  ],
+  
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "custom/mpd",
+    "cpu",
+    "custom/pacman",
+    "clock",
+    "custom/screenshot",
+    "custom/power"
+  ],
+
+  "custom/os_button": {
+    "format": "  ",
+    "on-click": "pkill rofi || $HOME/.local/share/rofi/scripts/nord-grid-launcher.sh",
+    "tooltip": false
+  },
+
+  "clock": {
+    "format": "  {:%I:%M %p  %a %b %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+      "on-click": "shift_up"
+    }
+  },
+
+  "custom/weather": {
+    "format": "󰖐  {}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar --location Pontiac --fahrenheit --main-indicator FeelsLikeF",
+    "return-type": "json"
+  },
+
+
+ "custom/mpd": {
+    "format": "󰎆  {}",
+   "return-type": "json",
+   "interval": 2,
+   "exec": "~/.config/waybar/scripts/mpd-status.sh",
+   "on-click": "~/.config/waybar/scripts/mpd-toggle.sh",
+   "on-click-right": "mpc -q toggle",
+   "on-scroll-up": "mpc -q next",
+   "on-scroll-down": "mpc -q prev",
+   "tooltip": true
+ },
+
+"custom/media": {
+  "return-type": "json",
+  "interval": 1,
+  "exec": "~/.config/waybar/scripts/media.sh",
+  "on-click": "playerctl play-pause",
+  "on-click-right": "playerctl next",
+  "on-click-middle": "playerctl previous",
+  "on-scroll-up": "playerctl next",
+  "on-scroll-down": "playerctl previous",
+  "tooltip": true
+},
+
+  "custom/notification": {
+    "tooltip": true,
+    "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#fb4934'>󰂚</span>",
+      "none": "󰂜",
+      "dnd-notification": "<span foreground='#fb4934'>󰂛</span>",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "<span foreground='#fb4934'>󰂚</span>",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "<span foreground='#fb4934'>󰂚</span>",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "DP-2": [1],
+      "DP-3": [2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9]
+    },
+    "format-icons": {
+      "1": "\udb80\udc4d",
+      "2": "\udb80\udeb9",
+      "3": "\udb82\ude1e",
+      "4": "\udb80\udee9",
+      "5": "\udb80\udea0",
+      "6": "\udb80\udf84",
+      "7": "\udb84\udf93",
+      "8": "\udb82\udf79",
+      "9": "\udb82\udf79",
+      "urgent": "\udb80\udc26",
+      "default": "\udb82\udfaf",
+      "active": "\udb82\udfaf"
+    }
+  },
+
+  "custom/hypridle": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 2,
+    "exec": "bash ~/.config/waybar/scripts/hypridle-status.sh",
+    "on-click": "bash ~/.config/waybar/scripts/hypridle-toggle.sh",
+    "on-click-right": "kitty -e systemctl --user status hypridle --no-pager -l",
+    "tooltip": true
+  },
+
+  "custom/pacman": {
+    "format": "󰮯  {}",
+    "interval": 900,
+    "exec": "bash -lc 'checkupdates 2>/dev/null | wc -l || echo 0'",
+    "on-click": "update-system",
+    "tooltip-format": "{} updates available"
+  },
+
+  "cpu": {
+    "format": "󰐟  {usage}%",
+    "interval": 2,
+    "tooltip": true
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "󰂱 {volume}%",
+    "format-muted": "󰖁",
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "network": {
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀  {ipaddr}",
+    "format-disconnected": "󰤭  offline",
+    "format-icons": [" 󰤯 ", " 󰤟 ", " 󰤢 ", " 󰤢 ", " 󰤨 "]
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+
+  // ── Screenshot ──────────────────────────────────────
+  "custom/screenshot": {
+    "format": "󰹑",
+    "tooltip-format": "Screenshot\nLeft: Region  Right: Fullscreen  Mid: Window",
+    "on-click": "~/.config/waybar-clean/scripts/screenshot.sh region",
+    "on-click-right": "~/.config/waybar-clean/scripts/screenshot.sh full",
+    "on-click-middle": "~/.config/waybar-clean/scripts/screenshot.sh window",
+    "interval": "once"
+  },
+
+  // ── Power menu ───────────────────────────────────────
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.config/waybar-clean/scripts/wlogout-power.sh",
+    "interval": "once"
+  }
+}
