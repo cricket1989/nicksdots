@@ -1,0 +1,40 @@
+/* wlogout — waybar-matched theme
+   Colors come from colors/waybar/active.css (symlink set by wlogout-power.sh)
+   Buttons come from styles/buttons.css (icon images) */
+
+@import 'styles/buttons.css';
+@import 'colors/waybar/active.css';
+
+window {
+    font-family: "Adwaita Sans", "GeistMono Nerd Font Propo";
+    font-size: 1.2em;
+    color: @foreground;
+    background-color: alpha(@surface, 0.88);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: transparent;
+    transition: all 0.3s cubic-bezier(0.15, 0, 0.1, 1);
+    box-shadow: 0 0 10px 2px transparent;
+    border-radius: 36px;
+    margin: 10px;
+    border: 1px solid alpha(@foreground, 0.1);
+}
+
+button:focus {
+    box-shadow: none;
+    outline-style: none;
+    background-size: 20%;
+}
+
+button:hover {
+    background-size: 50%;
+    outline-style: none;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.4);
+    background-color: alpha(@primary, 0.85);
+    color: transparent;
+    border-color: @primary;
+}

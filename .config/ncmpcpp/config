@@ -63,45 +63,60 @@ visualizer_look = "▮▮"
 visualizer_fps = "30"
 system_encoding = "UTF-8"
 
-# --- Colors ---
+# ── Nord palette ──────────────────────────────────────────────────────────────
+#
+#  Polar Night  (dark backgrounds)
+#    Nord0  #2E3440 → 236   Nord1  #3B4252 → 237
+#    Nord2  #434C5E → 238   Nord3  #4C566A → 60
+#
+#  Snow Storm  (text / foreground)
+#    Nord4  #D8DEE9 → 253   Nord5  #E5E9F0 → 255
+#
+#  Frost  (primary accents)
+#    Nord7  #8FBCBB → 73    Nord8  #88C0D0 → 110
+#    Nord9  #81A1C1 → 109   Nord10 #5E81AC → 67
+#
+#  Aurora  (highlights)
+#    Nord11 #BF616A → 131   Nord12 #D08770 → 173
+#    Nord13 #EBCB8B → 222   Nord14 #A3BE8C → 150
+#    Nord15 #B48EAD → 139
+# ──────────────────────────────────────────────────────────────────────────────
+
+colors_enabled               = "yes"
 discard_colors_if_item_is_selected = "yes"
 
-header_window_color = "blue"
-volume_color = "red"
-state_line_color = "blue"
-state_flags_color = "red"
-main_window_color = "blue"
+# ── Main UI ───────────────────────────────────────────────────────────────────
+main_window_color            = "253"   # Nord4  snow storm — list text
+header_window_color          = "110"   # Nord8  frost blue — header
+state_line_color             = "60"    # Nord3  polar night — separator line
+state_flags_color            = "73"    # Nord7  frost teal — flags (shuffle/repeat)
+statusbar_color              = "253"   # Nord4  snow storm — statusbar text
 
-# visualizer bars
-color1 = "blue"
-color2 = "cyan"
+# ── Player state & time ───────────────────────────────────────────────────────
+player_state_color           = "110:b" # Nord8  bold — PLAYING / PAUSED / STOPPED
+statusbar_time_color         = "73:b"  # Nord7  bold — elapsed/total time
+volume_color                 = "150"   # Nord14 green — volume
 
-progressbar_color = "white"
-progressbar_elapsed_color = "blue"
-statusbar_color = "cyan"
+# ── Progress bar ──────────────────────────────────────────────────────────────
+progressbar_color            = "238"   # Nord2  dim — empty track
+progressbar_elapsed_color    = "110:b" # Nord8  bold — played portion
+progressbar_look             = "▃▃▃"
 
-# --- Current item highlight ---
-#current_item_color = "red"
-##current_item_prefix = " "
-#urrent_item_suffix = " "
+# ── Borders ───────────────────────────────────────────────────────────────────
+window_border_color          = "67"    # Nord10 dark frost — inactive border
+active_window_border         = "110"   # Nord8  frost blue — active border
+alternative_ui_separator_color = "238" # Nord2  — subtle separators
 
-# --- Bar / Song line ---
-song_status_format = "{%a - }{%t - }{%b}"
-progressbar_look = "▃▃▃"
+# ── Visualizer (Nord7 teal → Nord8 frost) ────────────────────────────────────
+color1                       = "110"   # Nord8
+color2                       = "73"    # Nord7
 
-# --- Generql ---
-header_visibility = "no"
-statusbar_visibility = "yes"
-statusbar_time_color = "blue:b"
-#
-player_state_color = "red:b"
-#
-alternative_ui_separator_color = "black:b"
-#
-window_border_color = "white"
-#
-active_window_border = "blue"
+# ── Song / status format ──────────────────────────────────────────────────────
+song_status_format           = "{%a — }{%t}{ (%b)}"
 
+# ── Visibility ────────────────────────────────────────────────────────────────
+header_visibility            = "no"
+statusbar_visibility         = "yes"
 
 # Stereo ON
 #visualizer_in_stereo = yes

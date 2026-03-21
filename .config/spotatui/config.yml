@@ -33,7 +33,7 @@ keybindings:
 behavior:
   seek_milliseconds: 5000
   volume_increment: 10
-  volume_percent: 100
+  volume_percent: 50
   tick_rate_milliseconds: 16
   enable_text_emphasis: true
   show_loading_indicator: true
@@ -66,19 +66,19 @@ behavior:
   draw_cover_art: true
   draw_cover_art_forced: false
 theme:
-  active: 163, 190, 140
-  banner: 136, 192, 208
-  error_border: 191, 97, 106
-  error_text: 191, 97, 106
-  hint: 235, 203, 139
-  hovered: 180, 142, 173
-  inactive: 76, 86, 106
+  active: 133, 153, 0
+  banner: 38, 139, 210
+  error_border: 220, 50, 47
+  error_text: 220, 50, 47
+  hint: 181, 137, 0
+  hovered: 211, 54, 130
+  inactive: 88, 110, 117
   playbar_background: Reset
-  playbar_progress: 136, 192, 208
-  playbar_progress_text: 236, 239, 244
-  playbar_text: 236, 239, 244
-  selected: 129, 161, 193
-  text: 236, 239, 244
+  playbar_progress: 42, 161, 152
+  playbar_progress_text: 253, 246, 227
+  playbar_text: 147, 161, 161
+  selected: 42, 161, 152
+  text: 147, 161, 161
   background: Reset
-  header: 136, 192, 208
-  highlighted_lyrics: 136, 192, 208
+  header: 38, 139, 210
+  highlighted_lyrics: 38, 139, 210

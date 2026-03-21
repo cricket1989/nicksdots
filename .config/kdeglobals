@@ -1,0 +1,16 @@
+[General]
+TerminalService=org.kde.kitty.desktop
+
+[Icons]
+Theme=Papirus-Dark-nordic-folders
+
+[KDE]
+ShowDeleteCommand=false
+widgetStyle=qt6ct-style
+
+[KShortcutsDialog Settings]
+Dialog Size=900,700
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0

@@ -1,0 +1,73 @@
+# arkboi — Tsugumori cold-teal | matugen tonal-spot dark
+# Source color: #3f6e78
+
+# Main background (empty = terminal default / transparent)
+theme[main_bg]=""
+
+# Main text
+theme[main_fg]="#dce4e6"
+
+# Box title color
+theme[title]="#7dd4de"
+
+# Keyboard shortcut highlights
+theme[hi_fg]="#b0cbce"
+
+# Selected process row
+theme[selected_bg]="#7dd4de"
+theme[selected_fg]="#003740"
+
+# Inactive/disabled text
+theme[inactive_fg]="#bcc8ca"
+
+# Proc box misc (mini cpu graphs, mem graph, status text)
+theme[proc_misc]="#b8cfe8"
+
+# Box outlines
+theme[cpu_box]="#869295"
+theme[mem_box]="#869295"
+theme[net_box]="#869295"
+theme[proc_box]="#869295"
+
+# Divider lines
+theme[div_line]="#3c4748"
+
+# Temperature graph: cool → warm
+theme[temp_start]="#b0cbce"
+theme[temp_mid]="#7dd4de"
+theme[temp_end]="#ffb4ab"
+
+# CPU graph
+theme[cpu_start]="#b0cbce"
+theme[cpu_mid]="#7dd4de"
+theme[cpu_end]="#e8b84b"
+
+# Mem/Disk free meter
+theme[free_start]="#b0cbce"
+theme[free_mid]=""
+theme[free_end]="#324b4e"
+
+# Mem/Disk cached meter
+theme[cached_start]="#b8cfe8"
+theme[cached_mid]=""
+theme[cached_end]="#394d62"
+
+# Mem/Disk available meter
+theme[available_start]="#7dd4de"
+theme[available_mid]=""
+theme[available_end]="#004e5a"
+
+# Mem/Disk used meter
+theme[used_start]="#e8b84b"
+theme[used_mid]=""
+theme[used_end]="#e06c6c"
+
+# Network download graph
+theme[download_start]="#b0cbce"
+theme[download_mid]="#7dd4de"
+theme[download_end]="#b8cfe8"
+
+# Network upload graph
+theme[upload_start]="#b8cfe8"
+theme[upload_mid]="#7dd4de"
+theme[upload_end]="#b0cbce"

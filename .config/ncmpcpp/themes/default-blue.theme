@@ -1,0 +1,24 @@
+# Original color scheme (saved before Nord theme applied)
+# To restore, copy these values into the "--- Colors ---" section of config
+
+discard_colors_if_item_is_selected = "yes"
+
+header_window_color = "blue"
+volume_color = "red"
+state_line_color = "blue"
+state_flags_color = "red"
+main_window_color = "blue"
+
+# visualizer bars
+color1 = "blue"
+color2 = "cyan"
+
+progressbar_color = "white"
+progressbar_elapsed_color = "blue"
+statusbar_color = "cyan"
+
+statusbar_time_color = "blue:b"
+player_state_color = "red:b"
+alternative_ui_separator_color = "black:b"
+window_border_color = "white"
+active_window_border = "blue"

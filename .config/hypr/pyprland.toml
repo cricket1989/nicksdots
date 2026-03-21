@@ -33,8 +33,6 @@
     animation = "fromTop"
     max_size = "90% 100%"
     size = "75% 60%"
-    position = "70% 55%"
-
     lazy = true
 
 [scratchpads.neovim]

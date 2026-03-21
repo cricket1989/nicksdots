@@ -6,7 +6,7 @@
   "description": "Material version of the popular Gruvbox theme with retro groove colors",
   "dark": {
     "primary": "#a8b665",
-    "primaryContainer": "#a8b665",
+    "primaryContainer": "#555c34",
     "secondary": "#d7a657",
     "surfaceText": "#ddc7a1",
     "surfaceVariantText": "#d4be98",
@@ -18,7 +18,7 @@
   },
   "light": {
     "primary": "#6b782e",
-    "primaryContainer": "#6b782e",
+    "primaryContainer": "#6f8352",
     "secondary": "#b37109",
     "surfaceText": "#4e3829",
     "surfaceVariantText": "#644735",

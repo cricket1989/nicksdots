@@ -1,0 +1,261 @@
+/* ─────────────────────────────────────────────────────────────
+   SwayNC — Arkboix Everforest
+   Matches waybar arkboix/styles/everforest.css
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette ─────────────────────────────────────────────── */
+@define-color bg0    rgba(45, 53, 59, 0.88);
+@define-color bg1    rgba(52, 63, 68, 0.90);
+@define-color bg2    rgba(57, 68, 75, 0.92);
+@define-color border rgba(74, 85, 91, 0.65);
+@define-color shadow rgba(0, 0, 0, 0.40);
+
+@define-color fg     #d3c6aa;
+@define-color muted  #7a8478;
+
+@define-color blue   #7fbbb3;
+@define-color cyan   #83c092;
+@define-color purple #d699b6;
+@define-color green  #a7c080;
+@define-color teal   #7fbbb3;
+@define-color orange #e69875;
+@define-color yellow #dbbc7f;
+@define-color red    #e67e80;
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  font-weight: 400;
+  transition: 150ms ease;
+}
+
+.blank-window { background: transparent; }
+
+.control-center {
+  background: @bg0;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 0;
+  border-bottom-left-radius: 8px;
+  padding: 10px;
+  box-shadow: -4px 4px 20px 0 @shadow;
+  margin: 0;
+}
+
+.control-center > box { spacing: 8px; }
+
+.control-center .notification-row .notification-background {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 8px;
+  margin: 6px 0;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  border: 1px solid @red;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 8px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 2em;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: @bg2;
+  color: @fg;
+  border-radius: 6px;
+  margin: 4px;
+  border: 1px solid @border;
+  padding: 4px 8px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @green;
+  color: @bg0;
+}
+
+.control-center .notification-row .notification-background .close-button {
+  background: transparent;
+  color: transparent;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+.floating-notifications.background .notification-row .notification-background {
+  background: @bg0;
+  border: 1px solid @border;
+  border-radius: 8px;
+  margin: 10px 15px 6px 10px;
+  box-shadow: 0 4px 16px 0 @shadow;
+  padding: 0;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification {
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification.critical {
+  border: 1px solid @red;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification .notification-content {
+  margin: 10px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 1.4em;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: @bg2;
+  color: @fg;
+  border-radius: 6px;
+  margin: 4px;
+  border: 1px solid @border;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @green;
+  color: @bg0;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button {
+  background: transparent;
+  color: transparent;
+  margin: 6px;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button:hover {
+  background: @red;
+  color: @bg0;
+}
+
+.summary { color: @fg; font-weight: 700; font-size: 1em; }
+.body    { color: @muted; font-size: 0.9em; }
+.time    { color: @muted; font-size: 0.8em; }
+
+.notification-group-headers { color: @fg; margin: 10px 0 0 0; }
+.notification-group-icon    { color: @fg; }
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @muted;
+  margin: 10px 0 0 0;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover { background: @red; color: @bg0; }
+
+.notification.critical progress { background-color: @red; }
+.notification.low progress,
+.notification.normal progress   { background-color: @green; }
+
+.widget-title {
+  color: @fg;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 4px;
+}
+
+.widget-title button {
+  background: @bg2;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+
+.widget-title button:hover { background: @green; color: @bg0; }
+
+.widget-label {
+  margin: 4px;
+  color: @purple;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+.widget-dnd {
+  color: @fg;
+  margin: 6px;
+  font-size: 1.1em;
+}
+
+.widget-dnd > switch {
+  background: @bg2;
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: none;
+  border: 1px solid @border;
+}
+
+.widget-dnd > switch:hover   { background: @bg1; }
+.widget-dnd > switch:checked { background: @green; border-color: @green; }
+.widget-dnd > switch:checked:hover { background: @teal; }
+
+.widget-dnd > switch slider {
+  background: @fg;
+  border-radius: 6px;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.widget-buttons-grid {
+  font-size: 1.2em;
+  padding: 6px;
+  border-radius: 10px;
+  background: @bg1;
+  border: 1px solid @border;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: 8px;
+  margin: 3px;
+  padding: 8px 12px;
+  color: @fg;
+  transition: 140ms ease;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: rgba(167, 192, 128, 0.22);
+  border-color: @green;
+  color: @green;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @green;
+  border-color: @green;
+  color: @bg0;
+}
+
+progressbar, progress, trough { border-radius: 20px; background: transparent; }
+trough highlight { padding: 4px; background: @green; border-radius: 20px; }
+trough highlight:hover { background: @teal; }
+trough slider { background: transparent; min-height: 6px; min-width: 14px; }
+
+.widget-volume,
+.widget-backlight {
+  background: transparent;
+  color: @fg;
+  border-radius: 6px;
+  margin: 6px 4px;
+}
+
+scale { color: @fg; }

@@ -1,0 +1,4 @@
+/* Gruvbox Dark — wlogout colors matching waybar gruvbox theme */
+@define-color surface    #282828;
+@define-color foreground #ebdbb2;
+@define-color primary    #fabd2f;

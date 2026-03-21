@@ -1,1 +1,463 @@
-/home/nick/.config/swaync/layouts/kanagawa/style.css
+/* ─────────────────────────────────────────────────────────────
+   SwayNC — arkboi
+   Matugen dynamic theme | Tsugumori cold-teal
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Matugen dynamic palette ─────────────────────────────── */
+@import "matugen/colors.css";
+
+/* Semantic aliases from matugen tokens */
+@define-color bg0    alpha(@surface, 0.75);
+@define-color bg1    alpha(@surface_container, 0.78);
+@define-color bg2    alpha(@surface_container_high, 0.78);
+@define-color border alpha(@outline_variant, 0.55);
+@define-color shadow rgba(0, 0, 0, 0.50);
+
+@define-color fg     @on_surface;
+@define-color fg_hi  @on_background;
+@define-color muted  @on_surface_variant;
+
+@define-color cyan   @primary;
+@define-color steel  @secondary;
+@define-color red    @error;
+@define-color amber  @tertiary;
+@define-color dim    @surface_variant;
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes blink-critical {
+  to { background-color: @red; color: @fg_hi; }
+}
+
+@keyframes blink-warning {
+  to { background-color: @amber; color: @fg_hi; }
+}
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  all: unset;
+  color: @fg;
+  font-family: "JetBrainsMono Nerd Font", "Cantarell", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.blank-window { background: transparent; }
+
+/* ── Control center ──────────────────────────────────────── */
+.control-center {
+  background: @bg0;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 20px;
+  padding: 0;
+  margin: 0;
+  box-shadow:
+    0 10px 40px @shadow,
+    0 0 1px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 alpha(@cyan, 0.04);
+}
+
+.control-center > box { spacing: 0; }
+
+/* ── Notifications in control center ─────────────────────── */
+.control-center .notification-row {
+  animation: slide-in 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  margin: 0;
+  padding: 4px 12px;
+}
+
+.control-center .notification-row .notification-background {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 14px;
+  margin: 4px 0;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.control-center .notification-row .notification-background:hover {
+  background: @bg2;
+  border-color: alpha(@cyan, 0.3);
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  border-left: 3px solid @red;
+  border-radius: 14px;
+  animation-name: blink-critical;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 0;
+  padding: 12px 14px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: auto;
+  padding: 6px 10px 10px 10px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: alpha(@cyan, 0.12);
+  color: @cyan;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 14px;
+  border: 1px solid alpha(@cyan, 0.2);
+  font-weight: 500;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: alpha(@cyan, 0.22);
+  border-color: alpha(@cyan, 0.35);
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+  background: @cyan;
+  color: @bg0;
+}
+
+.control-center .notification-row .notification-background .close-button {
+  background: transparent;
+  color: transparent;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ── Floating notifications ──────────────────────────────── */
+.floating-notifications.background .notification-row {
+  animation: slide-in 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.floating-notifications.background .notification-row .notification-background {
+  background: alpha(@bg0, 0.75);
+  border: 1px solid @border;
+  border-radius: 18px;
+  margin: 14px 16px 6px 12px;
+  padding: 0;
+  box-shadow: 0 0 14px 0 @shadow;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification {
+  padding: 6px;
+  border-radius: 16px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification.critical {
+  border: 2px solid @red;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification .notification-content {
+  margin: 12px 14px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 3em;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: @bg2;
+  color: @fg;
+  border-radius: 10px;
+  margin: 6px;
+  border: 1px solid transparent;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @cyan;
+  color: @bg0;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+  background: @steel;
+  color: @bg0;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button {
+  margin: 8px;
+  padding: 2px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button:hover {
+  background: alpha(@red, 0.2);
+  color: @red;
+}
+
+/* ── Text ────────────────────────────────────────────────── */
+.image   { margin: 10px 16px 10px 0; }
+.summary { color: @fg_hi; font-weight: 800; font-size: 1rem; }
+.body    { color: @fg;    font-size: 0.8rem; opacity: 0.85; }
+.time    { color: @muted; font-size: 0.75rem; }
+
+/* ── Progress bars ───────────────────────────────────────── */
+.notification.critical progress {
+  background-color: @red;
+  animation-name: blink-critical;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.notification.warning progress {
+  background-color: @amber;
+  animation-name: blink-warning;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.notification.low progress,
+.notification.normal progress { background-color: @cyan; }
+
+/* ── Notification groups ─────────────────────────────────── */
+.notification-group-headers { color: @fg; margin: 12px 0 0 0; }
+.notification-group-icon    { color: @muted; }
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @fg;
+  margin: 12px 0 0 0;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover { background: alpha(@red, 0.2); color: @red; }
+
+/* ── Widget title ────────────────────────────────────────── */
+.widget-title {
+  color: @fg_hi;
+  font-size: 1.1em;
+  font-weight: 700;
+  padding: 18px 18px 10px 18px;
+  margin: 0;
+  border-bottom: 1px solid @border;
+  letter-spacing: 0.5px;
+}
+
+.widget-title button {
+  background: @bg2;
+  border-radius: 10px;
+  padding: 5px 14px;
+  color: @fg;
+  border: 1px solid @border;
+  font-weight: 500;
+}
+
+.widget-title button:hover  { background: alpha(@cyan, 0.15); border-color: alpha(@cyan, 0.3); }
+.widget-title button:active { background: @cyan; color: @bg0; }
+
+/* ── Quick settings buttons ──────────────────────────────── */
+.widget-buttons-grid {
+  padding: 14px 12px;
+  margin: 0;
+  background: transparent;
+  border-bottom: 1px solid @border;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @bg1;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 14px;
+  margin: 5px;
+  padding: 14px 10px;
+  min-height: 54px;
+  min-width: 72px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 18px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: alpha(@cyan, 0.12);
+  border-color: alpha(@cyan, 0.35);
+  color: @cyan;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active {
+  background: alpha(@cyan, 0.22);
+  border-color: @cyan;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: alpha(@cyan, 0.18);
+  border-color: alpha(@cyan, 0.5);
+  color: @cyan;
+}
+
+/* ── Volume slider ───────────────────────────────────────── */
+.widget-volume {
+  background: transparent;
+  padding: 14px 18px 8px 18px;
+  margin: 0;
+  border-bottom: 1px solid @border;
+}
+
+.widget-volume label {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 22px;
+  color: @muted;
+  margin-right: 14px;
+}
+
+progressbar, progress, trough { border-radius: 20px; background: transparent; }
+
+.widget-volume trough {
+  background: alpha(@fg, 0.08);
+  border-radius: 12px;
+  min-height: 8px;
+}
+
+.widget-volume highlight {
+  background: @cyan;
+  border-radius: 12px;
+  box-shadow: 0 0 6px alpha(@cyan, 0.35);
+}
+
+.widget-volume slider {
+  background: @fg_hi;
+  border-radius: 50%;
+  min-height: 16px;
+  min-width: 16px;
+  margin: -4px 0;
+  box-shadow: 0 2px 5px @shadow, 0 0 0 2px @cyan;
+}
+
+.widget-volume slider:hover {
+  min-height: 18px;
+  min-width: 18px;
+  box-shadow: 0 2px 8px @shadow, 0 0 0 2px @steel;
+}
+
+trough highlight {
+  padding: 4px;
+  background: @cyan;
+  border-radius: 20px;
+}
+
+trough highlight:hover { background: @steel; }
+
+trough slider {
+  background: transparent;
+  min-height: 6px;
+  min-width: 14px;
+}
+
+/* ── Do not disturb ──────────────────────────────────────── */
+.widget-dnd {
+  color: @fg;
+  padding: 12px 18px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid @border;
+}
+
+.widget-dnd > switch {
+  background: @bg2;
+  border-radius: 24px;
+  border: 1px solid @border;
+  padding: 3px;
+  min-width: 46px;
+  min-height: 26px;
+}
+
+.widget-dnd > switch:hover { background: alpha(@cyan, 0.1); border-color: alpha(@cyan, 0.3); }
+.widget-dnd > switch:checked { background: @cyan; border-color: @cyan; box-shadow: 0 0 8px alpha(@cyan, 0.4); }
+.widget-dnd > switch:checked:hover { background: @steel; border-color: @steel; }
+
+.widget-dnd > switch slider {
+  background: @fg_hi;
+  border-radius: 50%;
+  min-width: 20px;
+  min-height: 20px;
+  box-shadow: 0 2px 4px @shadow;
+}
+
+/* ── MPRIS media player ──────────────────────────────────── */
+.widget-mpris {
+  background: transparent;
+  padding: 12px 12px 0 12px;
+  margin: 0;
+  border-bottom: 1px solid @border;
+}
+
+.widget-mpris-player {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: 16px;
+  padding: 14px;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.widget-mpris-album-art {
+  border-radius: 10px;
+  border: 1px solid @border;
+  margin: 0 12px 0 0;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.widget-mpris-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: @fg_hi;
+  margin-bottom: 4px;
+}
+
+.widget-mpris-subtitle {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: @muted;
+}
+
+.widget-mpris button {
+  color: @fg;
+  margin: 10px 4px 0 4px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: alpha(@fg, 0.06);
+  border: 1px solid @border;
+}
+
+.widget-mpris button:hover {
+  background: alpha(@cyan, 0.15);
+  border-color: alpha(@cyan, 0.3);
+  color: @cyan;
+}
+
+.widget-mpris button:active { background: alpha(@cyan, 0.25); }
+
+.widget-mpris button:nth-child(3) {
+  min-width: 46px;
+  min-height: 46px;
+  background: alpha(@cyan, 0.12);
+  border-color: alpha(@cyan, 0.3);
+  color: @cyan;
+}
+
+.widget-mpris button:nth-child(3):hover {
+  background: alpha(@cyan, 0.22);
+  box-shadow: 0 0 12px alpha(@cyan, 0.3);
+}

@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<comp:component-backend-db xmlns:comp="http://openoffice.org/extensionmanager/component-registry/2010"><comp:component url="vnd.sun.star.expand:$UNO_USER_PACKAGES_CACHE/uno_packages/lu32516670rvs.tmp_/LibreThinker.oxt/src/LibreThinker.py"><comp:java-type-library>false</comp:java-type-library><comp:implementation-names><comp:name>org.librethinker.ProtocolHandler</comp:name><comp:name>org.librethinker.LibreThinkerExtension</comp:name></comp:implementation-names></comp:component></comp:component-backend-db>

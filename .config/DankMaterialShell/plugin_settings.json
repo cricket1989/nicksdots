@@ -9,9 +9,6 @@
   "displaySettings": {
     "enabled": true
   },
-  "lyricsOnPanel": {
-    "enabled": true
-  },
   "sessionPower": {
     "enabled": true
   },
@@ -25,9 +22,64 @@
   "wallpaperDiscovery": {
     "enabled": true,
     "lastWallpaperUsed": "wallhaven.cc",
-    "api_unsplash": "sIkw7hbdWHwwHzcETE-Avv7_3bM49lKo5IHdTKRgobw",
-    "api_wallhavencc": "OqcUl2S4byEQhdCGYCbQ2uU0SQYWY7wJ",
-    "api_pexels": "HQnhD5ooU2q3NWLKkum65dBbjB2yzGmi2m1pskP1v1m8nDgL9m8u6Ony",
+    "api_unsplash": "",
+    "api_wallhavencc": "",
+    "api_pexels": "",
     "downloadLocation": "/home/nick/Pictures/Wallpapers2"
+  },
+  "desktopCommand": {
+    "enabled": true
+  },
+  "sathiAi": {
+    "enabled": true,
+    "openaiApiKey": "",
+    "windowWidth": 745.2578125,
+    "windowHeight": 400
+  },
+  "lyricsOnPanel": {
+    "enabled": true
+  },
+  "dankKDEConnect": {
+    "enabled": true
+  },
+  "wallpaperBing": {
+    "enabled": true,
+    "enableDailyRefresh": true,
+    "dailyRefreshTime": "21:00"
+  },
+  "customRunningApps": {
+    "enabled": true,
+    "itemPercentage": 64,
+    "spaceBetweenItems": 5,
+    "showIconBackground": true,
+    "showAdditionalIndicator": true,
+    "iconBackgroundSize": 131,
+    "indicatorLocation": "bottom",
+    "indicatorSize": 7,
+    "indicatorBarSpan": 41,
+    "overrideBackground": "default"
+  },
+  "mediaPlayer": {
+    "enabled": true
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "noTrigger": true,
+    "trigger": ""
+  },
+  "vscodeLauncher": {
+    "enabled": true,
+    "editorMode": "VSCode",
+    "noTrigger": true,
+    "trigger": ""
+  },
+  "dankNotepadModule": {
+    "enabled": true
+  },
+  "amdGpuMonitor": {
+    "enabled": true
+  },
+  "grimblast": {
+    "enabled": true
   }
 }

@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+import json, subprocess, sys, textwrap
+import requests
+
+MODEL = "qwen2.5-coder:14b"
+OLLAMA = "http://127.0.0.1:11434"
+
+SYSTEM = """You are a disciplined Linux debugging and system-maintenance assistant focused on Arch/CachyOS-style environments using systemd and Wayland.
+
+Your priorities:
+1) minimal change
+2) safety + rollback
+3) no bloat
+4) reproducible troubleshooting
+
+=== Core Debug Behavior ===
+- Reproduce-first: before fixes, request the exact error, command run, and relevant logs if missing.
+- One change at a time: propose a single minimal action and explain verification.
+- Smallest lever first: prefer config edits or targeted package fixes over reinstalling or migrations.
+- State assumptions: if distro/service/compositor is assumed, say so.
+- Do not hallucinate files, paths, or services.
+
+=== Safety Rules ===
+- Never propose destructive commands without warning + rollback steps.
+- Prefer user-level checks before sudo; explain what sudo changes.
+- Include rollback guidance when suggesting config/package changes.
+
+=== Linux Diagnostics Discipline ===
+When relevant, collect:
+- system info: uname -a, /etc/os-release
+- service state: systemctl status / --user
+- logs: journalctl -xeu / --user
+- packages: pacman -Qi / flatpak info
+
+For Wayland/graphics issues:
+- ask about compositor, GPU, scaling, environment variables.
+
+=== Cleanup Philosophy ===
+- Inventory first; show what will change.
+- Prefer dry-run or list commands.
+- Separate cleanup categories (orphans, cache, runtimes, logs).
+- Never touch user configs/data without explicit reason.
+
+=== Anti-Bloat Policy ===
+- Avoid installing tools unless necessary; justify each install.
+- Prefer built-in CLI tools.
+- Avoid duplicate package stacks.
+
+=== Output Format ===
+Always respond using STRICT JSON:
+
+{
+  "type": "command" | "web" | "explain",
+  "summary": "what is happening",
+  "content": "single command OR url OR explanation",
+  "risk": "low|medium|high",
+  "why": "reasoning",
+  "what_next": "what output or info to provide next"
+}
+
+Rules for commands:
+- single-line only
+- no chaining commands
+- diagnostics preferred first
+"""
+
+
+DANGEROUS = [
+    "rm -rf /", "mkfs", "dd if=", "wipefs", "parted", "sgdisk",
+    ":(){", "shutdown", "reboot", "poweroff"
+]
+
+def ollama_chat(user_text: str) -> dict:
+    r = requests.post(
+        f"{OLLAMA}/api/chat",
+        json={
+            "model": MODEL,
+            "messages": [
+                {"role": "system", "content": SYSTEM},
+                {"role": "user", "content": user_text},
+            ],
+            "stream": False,
+            "format": "json",
+        },
+        timeout=120,
+    )
+    r.raise_for_status()
+    return json.loads(r.json()["message"]["content"])
+
+def run_command(cmd: str) -> str:
+    proc = subprocess.run(cmd, shell=True, text=True, capture_output=True)
+    out = (proc.stdout or "") + (proc.stderr or "")
+    out += f"\n[exit code: {proc.returncode}]"
+    return out
+
+def fetch_url(url: str) -> str:
+    r = requests.get(url, timeout=20, headers={"User-Agent": "sys-agent/1.0"})
+    text = r.text
+    # keep it small so you don't flood the model
+    if len(text) > 12000:
+        text = text[:12000] + "\n...[truncated]..."
+    return text
+
+def looks_dangerous(cmd: str) -> bool:
+    c = cmd.strip().lower()
+    return any(x in c for x in DANGEROUS)
+
+def main():
+    print(f"sys-agent → {MODEL}")
+    print("Type your issue. Ctrl+C to quit.")
+    print("Tip: paste logs/configs; the agent will propose 1 step at a time.\n")
+
+    context = ""
+
+    while True:
+        try:
+            user = input("you> ").strip()
+        except KeyboardInterrupt:
+            print("\nbye")
+            return 0
+        if not user:
+            continue
+
+        prompt = user if not context else (context + "\n\nUSER:\n" + user)
+
+        try:
+            action = ollama_chat(prompt)
+        except Exception as e:
+            print(f"Error: {e}")
+            continue
+
+        t = action.get("type", "")
+        summary = action.get("summary", "")
+        content = action.get("content", "")
+        risk = action.get("risk", "")
+        why = action.get("why", "")
+        what_next = action.get("what_next", "")
+
+        print("\nsummary:", summary)
+        print("why    :", why)
+        print("risk   :", risk)
+        print("proposed:", content)
+
+        if t == "explain":
+            print("\n" + content + "\nnext:", what_next)
+            context = prompt + "\n\nASSISTANT_EXPLAINED:\n" + content
+            continue
+
+        if t == "command":
+            if looks_dangerous(content):
+                print("\nRefusing to run that (looks dangerous). Ask for a safer diagnostic step.\n")
+                continue
+            ok = input("\nRun this command? type YES > ").strip()
+            if ok != "YES":
+                print("canceled.\n")
+                continue
+            result = run_command(content)
+            print("\n--- output ---\n" + result + "\n------------")
+            context = prompt + "\n\nCOMMAND:\n" + content + "\n\nOUTPUT:\n" + result
+            print("\nnext:", what_next, "\n")
+            continue
+
+        if t == "web":
+            ok = input("\nFetch this URL? type YES > ").strip()
+            if ok != "YES":
+                print("canceled.\n")
+                continue
+            try:
+                page = fetch_url(content)
+            except Exception as e:
+                print(f"Fetch error: {e}\n")
+                continue
+            print("\n--- fetched (truncated) ---\n" + page[:2000] + "\n--------------------------")
+            context = prompt + "\n\nFETCHED_URL:\n" + content + "\n\nPAGE_TEXT:\n" + page
+            print("\nnext:", what_next, "\n")
+            continue
+
+        print("\nAgent returned an unknown type. Try again.\n")
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+

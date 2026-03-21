@@ -1,0 +1,61 @@
+# Matugen — WezTerm color scheme template
+# Output: ~/.config/wezterm/colors/matugen.toml
+# Activated in wezterm.lua by setting USE_MATUGEN = true
+
+[metadata]
+name        = "matugen"
+author      = "matugen"
+
+[colors]
+foreground  = "#dee3e5"
+background  = "#0e1416"
+
+cursor_bg     = "#83d2e4"
+cursor_fg     = "#00363f"
+cursor_border = "#83d2e4"
+
+selection_bg  = "#b2cbd1"
+selection_fg  = "#1c3439"
+
+# ANSI 0-7
+ansi = [
+  "#262626",
+  "#ffb4ab",
+  "#bcc5eb",
+  "#b2cbd1",
+  "#83d2e4",
+  "#3d4665",
+  "#004e5a",
+  "#dee3e5"
+]
+
+# Bright 8-15
+brights = [
+  "#4c4c4c",
+  "#ffdad6",
+  "#dce1ff",
+  "#cde7ed",
+  "#83d2e4",
+  "#bcc5eb",
+  "#a3eeff",
+  "#f0f0f0"
+]
+
+[colors.tab_bar]
+background = "#0e1416"
+
+[colors.tab_bar.active_tab]
+bg_color = "#83d2e4"
+fg_color = "#00363f"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#0e1416"
+fg_color = "#bfc8cb"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#3f484b"
+fg_color = "#dee3e5"
+
+[colors.tab_bar.new_tab]
+bg_color = "#0e1416"
+fg_color = "#bfc8cb"

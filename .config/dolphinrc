@@ -17,12 +17,10 @@ ViewFont=MesloLGL Nerd Font Propo,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 BrowseThroughArchives=true
 DoubleClickViewAction=create_dir
 DynamicView=true
-EditableUrl=true
 OpenNewTabAfterLastTab=true
 ShowFullPath=true
 ShowFullPathInTitlebar=true
 ShowStatusBar=Disabled
-ShowToolTips=true
 TerminalApplication=kitty
 UseTabForSwitchingSplitView=true
 Version=202
@@ -30,7 +28,8 @@ ViewPropsTimestamp=2026,2,18,19,21,59.473
 
 [IconsMode]
 IconSize=64
-PreviewSize=48
+MaximumTextLines=4
+PreviewSize=96
 UseSystemFont=false
 ViewFont=MesloLGL Nerd Font Propo,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
@@ -61,4 +60,4 @@ Location=Everywhere
 ToolButtonStyle=IconOnly
 
 [UiSettings]
-ColorScheme=DankMatugen
+ColorScheme=KvantumAlt

@@ -1,0 +1,4 @@
+[Unit]
+Description=Alias for graphical-session.target (compat for uwsm)
+Wants=graphical-session.target
+After=graphical-session.target

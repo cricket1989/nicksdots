@@ -1,0 +1,37 @@
+/**
+ * Nord Color Palette — Full
+ * nick@cachyos | rofi nord-grid
+ */
+
+* {
+    /* ── Polar Night ── */
+    nord0:  #2E3440;   /* deepest bg */
+    nord1:  #3B4252;   /* card bg */
+    nord2:  #434C5E;   /* hover / subtle */
+    nord3:  #4C566A;   /* muted / placeholder */
+
+    /* ── Snow Storm ── */
+    nord4:  #D8DEE9;   /* primary text */
+    nord5:  #E5E9F0;
+    nord6:  #ECEFF4;   /* bright text */
+
+    /* ── Frost ── */
+    nord7:  #8FBCBB;   /* teal */
+    nord8:  #88C0D0;   /* sky blue — primary accent */
+    nord9:  #81A1C1;   /* slate blue */
+    nord10: #5E81AC;   /* dark blue */
+
+    /* ── Aurora ── */
+    nord11: #BF616A;   /* red */
+    nord12: #D08770;   /* orange */
+    nord13: #EBCB8B;   /* yellow */
+    nord14: #A3BE8C;   /* green */
+    nord15: #B48EAD;   /* purple */
+
+    /* ── Transparent tints ── */
+    nord0t:  #2E344000;
+    nord8t:  #88C0D020;
+    nord9t:  #81A1C120;
+    nord10t: #5E81AC18;
+    nord1t:  #3B425290;
+}

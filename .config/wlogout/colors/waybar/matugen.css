@@ -1,0 +1,4 @@
+/* Matugen — wraps matugen-generated colors for wlogout
+   The matugen template (templates/wlogout) already writes to styles/colors.css.
+   This file imports it so wlogout-power.sh can use one consistent path. */
+@import "../../styles/colors.css";

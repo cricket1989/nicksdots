@@ -48,6 +48,39 @@ secrets
 .local/bin/webi
 .local/bin/__pycache__/
 
+# DankMaterialShell — plugins are managed by the shell, not hand-crafted
+.config/DankMaterialShell/plugins/
+
+# Runtime / app data (not hand-crafted config)
+.config/go/
+.config/heroic/
+.config/libreoffice/
+.config/pulse/
+.config/psd/
+.config/pypoetry/
+.config/session/
+.config/unity3d/
+.config/uv/
+.config/zoom.conf
+.config/zoomus.conf
+
+# KDE runtime state (not hand-crafted config)
+.config/kactivitymanagerdrc
+.config/kconf_updaterc
+.config/kdeglobals
+.config/kiorc
+.config/konsole.kmessagebox
+.config/konsolerc
+.config/konsolesshconfig
+.config/kservicemenurc
+.config/ktrashrc
+.config/plasma-localerc
+.config/plasmarc
+.config/trashrc
+.config/baloofileinformationrc
+.config/baloofilerc
+.config/filetypesrc
+
 # Backup/junk
 *.bak
 *.backup*

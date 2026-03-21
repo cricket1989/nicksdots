@@ -1,0 +1,321 @@
+/* ─────────────────────────────────────────────────────────────
+   SwayNC — Pipshag Nord
+   Matches waybar pipshag-nord/styles/nord.css
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Palette (Nord) ──────────────────────────────────────── */
+@define-color bg0    rgba(46, 52, 64, 0.90);
+@define-color bg1    rgba(59, 66, 82, 0.92);
+@define-color bg2    rgba(67, 76, 94, 0.92);
+@define-color border rgba(76, 86, 106, 0.60);
+@define-color shadow rgba(0, 0, 0, 0.40);
+
+@define-color fg     #D8DEE9;
+@define-color fg_hi  #ECEFF4;
+@define-color muted  #4C566A;
+
+@define-color blue    #5E81AC;
+@define-color cyan    #88C0D0;
+@define-color teal    #8FBCBB;
+@define-color green   #A3BE8C;
+@define-color yellow  #EBCB8B;
+@define-color orange  #D08770;
+@define-color red     #BF616A;
+@define-color purple  #B48EAD;
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes blink-warning {
+  to { color: @fg_hi; background-color: @yellow; }
+}
+
+@keyframes blink-critical {
+  to { color: @fg_hi; background-color: @red; }
+}
+
+/* ── Global ──────────────────────────────────────────────── */
+* {
+  border: none;
+  border-radius: 3px;
+  font-family: "Cantarell", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  min-height: 0;
+  margin: 0.2em 0.3em;
+  transition: 200ms ease;
+}
+
+.blank-window { background: transparent; }
+
+.control-center {
+  background: @bg0;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 3px;
+  border-bottom-left-radius: 6px;
+  padding: 10px;
+  box-shadow: -4px 4px 20px 0 @shadow;
+  margin: 0;
+}
+
+.control-center > box { spacing: 8px; }
+
+.control-center .notification-row .notification-background {
+  background: @bg1;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 3px;
+  margin: 6px 0;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  color: @red;
+  border: 1px solid @red;
+  animation-name: blink-critical;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 6px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 2.4em;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: rgba(59, 66, 82, 0.60);
+  color: @fg;
+  border-radius: 3px;
+  margin: 4px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @cyan;
+  color: @bg0;
+}
+
+.control-center .notification-row .notification-background .close-button {
+  background: transparent;
+  color: transparent;
+  display: none;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.floating-notifications.background .notification-row .notification-background {
+  background: alpha(@bg0, 0.80);
+  border: 1px solid @border;
+  border-radius: 3px;
+  margin: 12px 18px 8px 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.55);
+  padding: 0;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification {
+  padding: 6px;
+  border-radius: 3px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification.critical {
+  border: 2px solid @red;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification .notification-content {
+  margin: 12px;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 1.4em;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: @bg2;
+  color: @fg;
+  border-radius: 3px;
+  margin: 6px;
+  border: 1px solid transparent;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background-color: @red;
+  color: @fg_hi;
+}
+
+.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+  background-color: @cyan;
+  color: @bg0;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button {
+  margin: 8px;
+  padding: 2px;
+  color: transparent;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.floating-notifications.background .notification-row .notification-background .close-button:hover {
+  background-color: transparent;
+  color: transparent;
+}
+
+.image  { margin: 10px 18px 10px 0; }
+.summary { color: @fg_hi; font-weight: 800; font-size: 1rem; }
+.body    { color: @fg;    font-size: 0.8rem; }
+.time    { color: @muted; font-size: 0.75rem; }
+
+.notification.critical progress {
+  background-color: @cyan;
+  animation-name: blink-critical;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.notification.warning progress {
+  background-color: @yellow;
+  animation-name: blink-warning;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.notification.low progress,
+.notification.normal progress { background-color: @cyan; }
+
+.notification-group-headers { color: @fg; margin: 12px 0 0 0; }
+.notification-group-icon    { color: @fg; }
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @fg;
+  margin: 12px 0 0 0;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover { background: @red; color: @fg_hi; }
+
+/* Widgets */
+.widget-title {
+  color: @fg;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 6px;
+}
+
+.widget-title button {
+  background: @bg2;
+  border-radius: 6px;
+  padding: 4px 16px;
+  color: @fg;
+  border: 1px solid @border;
+}
+
+.widget-title button:hover  { background: @border; }
+.widget-title button:active { background: @bg2; }
+
+.widget-label {
+  margin: 6px;
+  color: @fg;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.widget-dnd {
+  color: @fg;
+  margin: 6px;
+  font-size: 1.2rem;
+}
+
+.widget-dnd > switch {
+  background: @bg2;
+  font-size: initial;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 3px;
+  border: 1px solid @border;
+}
+
+.widget-dnd > switch:hover   { background: @border; }
+.widget-dnd > switch:checked { background: @cyan; border-color: @cyan; }
+.widget-dnd > switch:checked:hover { background: @purple; }
+
+.widget-dnd > switch slider {
+  background: @bg1;
+  border-radius: 6px;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.widget-buttons-grid {
+  font-size: 1.2em;
+  padding: 6px 2px;
+  margin: 6px;
+  border-radius: 3px;
+  background: rgba(67, 76, 94, 0.40);
+  color: @fg;
+  border: 1px solid @border;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @bg2;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 3px;
+  margin: 4px 8px;
+  padding: 6px 12px;
+  transition: 140ms ease;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: @border;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @cyan;
+  border-color: @cyan;
+  color: @bg0;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked label {
+  color: @bg0;
+}
+
+progressbar, progress, trough { border-radius: 20px; background: transparent; }
+
+trough highlight {
+  padding: 4px;
+  background: @cyan;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+trough highlight:hover { background: @purple; }
+
+trough slider {
+  background: transparent;
+  min-height: 6px;
+  min-width: 14px;
+}
+
+.widget-volume,
+.widget-backlight {
+  background: transparent;
+  color: @fg;
+  border-radius: 6px;
+  margin: 8px 6px;
+}
+
+scale { color: @fg; }

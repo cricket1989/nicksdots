@@ -1,0 +1,232 @@
+/**
+ * Nord Grid App Launcher
+ * nick@cachyos — full icon grid, bells and whistles
+ *
+ * Usage: rofi -show drun -theme ~/.local/share/rofi/themes/nord-grid/style.rasi
+ */
+
+@import "colors.rasi"
+
+/* ── Global ────────────────────────────────────── */
+* {
+    font:               "JetBrainsMono Nerd Font 10";
+    background-color:   transparent;
+    text-color:         @nord4;
+    cursor:             "default";
+    border:             0px;
+    margin:             0px;
+    padding:            0px;
+    spacing:            0px;
+}
+
+/* ── Window ─────────────────────────────────────── */
+window {
+    background-color:   @nord0;
+    border:             2px solid;
+    border-color:       @nord10;
+    border-radius:      18px;
+    width:              980px;
+    height:             680px;
+    location:           center;
+    transparency:       "real";
+    x-offset:           0px;
+    y-offset:           0px;
+}
+
+/* ── Configuration (embedded) ───────────────────── */
+configuration {
+    modi:                   "drun";
+    show-icons:             true;
+    icon-theme:             "Papirus-Nord";
+    drun-display-format:    "{name}";
+    hide-scrollbar:         true;
+    display-drun:           " Apps";
+    font:                   "JetBrainsMono Nerd Font 10";
+}
+
+/* ── Mainbox ─────────────────────────────────────── */
+mainbox {
+    background-color:   transparent;
+    padding:            24px;
+    spacing:            0px;
+    children:           [inputbar, message, listview];
+}
+
+/* ── Search bar ──────────────────────────────────── */
+inputbar {
+    background-color:   @nord1;
+    border-radius:      12px;
+    padding:            12px 18px;
+    spacing:            10px;
+    margin:             0px 0px 20px 0px;
+    children:           [icon-search, entry, num-filtered-rows, textbox-num-sep, num-rows];
+    border:             1px solid;
+    border-color:       @nord9t;
+}
+
+icon-search {
+    expand:             false;
+    filename:           "search";
+    size:               18px;
+    vertical-align:     0.5;
+    background-color:   transparent;
+    text-color:         @nord8;
+}
+
+entry {
+    background-color:   transparent;
+    text-color:         @nord4;
+    placeholder:        "Search applications…";
+    placeholder-color:  @nord3;
+    cursor:             text;
+    vertical-align:     0.5;
+    expand:             true;
+}
+
+num-filtered-rows {
+    expand:             false;
+    background-color:   transparent;
+    text-color:         @nord3;
+    font:               "JetBrainsMono Nerd Font 9";
+    vertical-align:     0.5;
+}
+
+textbox-num-sep {
+    expand:             false;
+    str:                "/";
+    background-color:   transparent;
+    text-color:         @nord3;
+    vertical-align:     0.5;
+    font:               "JetBrainsMono Nerd Font 9";
+}
+
+num-rows {
+    expand:             false;
+    background-color:   transparent;
+    text-color:         @nord3;
+    font:               "JetBrainsMono Nerd Font 9";
+    vertical-align:     0.5;
+}
+
+/* ── Message (no results) ─────────────────────────── */
+message {
+    background-color:   transparent;
+    margin:             0px 0px 8px 0px;
+}
+
+textbox {
+    background-color:   @nord1;
+    text-color:         @nord4;
+    border-radius:      8px;
+    padding:            8px 16px;
+    horizontal-align:   0.5;
+}
+
+/* ── Grid list ───────────────────────────────────── */
+listview {
+    background-color:   transparent;
+    spacing:            12px;
+    columns:            5;
+    lines:              3;
+    fixed-columns:      true;
+    fixed-height:       false;
+    flow:               horizontal;
+    scrollbar:          false;
+    cycle:              true;
+    dynamic:            true;
+}
+
+/* ── Grid card ───────────────────────────────────── */
+element {
+    background-color:   @nord1;
+    border-radius:      14px;
+    padding:            18px 8px 14px 8px;
+    orientation:        vertical;
+    cursor:             pointer;
+    border:             1px solid;
+    border-color:       @nord0t;
+}
+
+/* Normal states */
+element normal.normal {
+    background-color:   @nord1;
+    text-color:         @nord4;
+    border-color:       @nord0t;
+}
+
+element normal.urgent {
+    background-color:   @nord1;
+    text-color:         @nord11;
+    border-color:       @nord11;
+}
+
+element normal.active {
+    background-color:   @nord8t;
+    text-color:         @nord8;
+    border-color:       @nord8;
+}
+
+/* Selected states */
+element selected.normal {
+    background-color:   @nord10;
+    text-color:         @nord6;
+    border-color:       @nord8;
+    border:             1px solid;
+}
+
+element selected.urgent {
+    background-color:   @nord11;
+    text-color:         @nord6;
+    border-color:       @nord11;
+}
+
+element selected.active {
+    background-color:   @nord8;
+    text-color:         @nord0;
+    border-color:       @nord8;
+}
+
+/* Hover / alternate */
+element alternate.normal {
+    background-color:   @nord1;
+    text-color:         @nord4;
+    border-color:       @nord0t;
+}
+
+element alternate.selected {
+    background-color:   @nord2;
+    text-color:         @nord5;
+    border-color:       @nord9;
+    border:             1px solid;
+}
+
+/* ── Icon ─────────────────────────────────────────── */
+element-icon {
+    background-color:   transparent;
+    size:               64px;
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    cursor:             inherit;
+    margin:             0px 0px 10px 0px;
+}
+
+/* ── Label ─────────────────────────────────────────── */
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    cursor:             inherit;
+    font:               "JetBrainsMono Nerd Font 9";
+    expand:             true;
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+scrollbar {
+    width:              4px;
+    border:             0px;
+    handle-color:       @nord9;
+    handle-width:       4px;
+    padding:            0px;
+    background-color:   @nord1;
+}

@@ -1,0 +1,12 @@
+[EmbedSettings]
+embed-application/json=false
+embed-application/octet-stream=false
+embed-application/vnd.sqlite3=false
+embed-application/x-shellscript=false
+embed-application/x-xz-compressed-tar=false
+embed-application/x-zerosize=false
+embed-application/zip=false
+embed-image/jpeg=false
+embed-image/png=false
+embed-text/plain=false
+embed-text/x-lua=false
